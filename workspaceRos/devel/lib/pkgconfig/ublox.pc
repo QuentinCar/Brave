@@ -1,0 +1,8 @@
+prefix=/home/quentin/Documents/Brave/workspaceRos/devel
+
+Name: ublox
+Description: Description of ublox
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

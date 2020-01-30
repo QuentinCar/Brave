@@ -1,0 +1,5 @@
+<launch> 
+
+	<node pkg="ublox" type="ublox_node" name="ublox_node" output='screen'/>
+
+</launch>

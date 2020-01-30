@@ -1,0 +1,8 @@
+prefix=/home/quentin/Documents/Brave/workspaceRos/install
+
+Name: gopro_node
+Description: Description of gopro_node
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,4 @@
+<launch>
+  <rosparam command="load" file="$(find maestro_node)/maestro2.yaml" ns="maestro_node" />
+  <node name="maestro_node" pkg="maestro_node" type="maestro_node" args="/dev/ttyACM0" />
+</launch>
