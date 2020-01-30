@@ -1,0 +1,1353 @@
+
+Invalid configuration file.\\n\"\);\s?\r?\n\s\sif \(sscanf\(line, (?<paramformat>.*), &(?<paramname>.*)\) != 1\) printf\(\"Invalid configuration file
+
+Error reading parameter : ${paramname}.\\n");\r\n\t\tif (sscanf(line, ${paramformat}, &${paramname}) != 1) printf("Invalid parameter : ${paramname}
+
+
+Invalid configuration file.\\n\"\);\s?\r?\n\s?if \(fprintf\(fileout, (?<paramformat>.*), (?<paramname>.*)\) < 0\) printf\(\"Error writing configuration file
+
+Invalid parameter : ${paramname}.\\n");\r\n\tif (fprintf(fileout, ${paramformat}, ${paramname}) < 0) printf("Error writing parameter : ${paramname}
+
+
+voir plus précisément où désactiver -Wno-deprecated-copy (gcc9) -Wno-class-memaccess (gcc8)
+
+ErrorCount dans les threads de Commands.cpp, voir aussi d'autres éventuels threads oubliés...
+
+add param defaultthreadperiod for threads...
+rajouter un nloop%((1000/threadperiod)*2) pour les printf de threadperiod
+mettre char line[1024] pour les fichiers de config des devices (s'ils ne sont pas lus trop souvent)...
+
+Pouvoir passer gstreamer command UxVCtrl, rajouter param supplémentaire pour passer CAP_GSTREAMER ou variable avec un code pour dire d'utiliser v4l2, voir aussi update ./gopro vlc.sdp
+Comment dire à libavformat d'utiliser omxh264dec?->omxcv?
+UxVCtrl : rajouter support de v4l2 en h264 ou autre et l'envoi en UDP, TCP ou un pipe de ce qui vient de la caméra, besoin d'avoir une var imgcompressed en parallèle de img pour qu'elle puisse être utilisée par VideoInterface
+mettre dans extensions les éventuels fichiers de l'omx
+Éviter les png UxVCtrl sur rpi, sauvegarder en brut en option, option ppm, bmp, png, jpg pour chaque type de données?
+VideoInterface : pouvoir envoyer les données brutes compressées sans requêtes http, notamment via UDP
+nouvelle fonction spécifique handleudp() qui fait que des send(), ou rajouter options correspondantes...?
+Pour MAVLinkInterface il faudrait que ce soit similaire et mieux regarder les ack...
+inithandlemavlinkinterface pas appelé dans le cas server TCP?
+voir comment harmoniser les connectinterface, initinterface, handleinterface pour que ça marche avec RS232Port et multiclisrv, voir aussi rapport avec les device...
+Manque peut-être des mSleep() dans LaunchTCPSrv/LaunchUDPSrv?
+
+Mission Planner MJPEG marche plus?->problème avec version 1.3.68, OK avec 1.3.63 et précédents mais seulement pour remotewebcam... Résolution trop importante?
+
+Creer fichier CurLbl.txt, supprimé si mission stop ou abort, ne pas supprimer si le programme quitte suite à une erreur, mis à jour de manière atomique a chaque commande label, lu à chaque démarrage, rajouter param pour l'ignorer
+
+ExitCode à utiliser plus souvent pour retourner un code d'erreur plus précis...
+
+UxVCtrl prend trop de processeur pi0w (10%) même avec observer, controller ralentis, pas de GUI, pas de device, peut-être à cause des threads inutilisés de détection...
+Tester options de compilation -O3 UXVCtrl...
+params max nb ball lancés au démarrage, err msg please increase dans command correspondante
+rajouter params/commands pour CorrectImageBordersRawBGR de Ball...
+
+convert v4log to update for sbp
+enable 2 seanet...
+
+Ontrak in VAIMOS folder...
+
+param pour le calcul vent vrai, apparent, etc., voir plus bas...
+
+Line following control PID
+
+Faire programme de récupération des données SBP
+
+VAIMOS avec juste vent apparent si station capte pas GPS...->MWV, rajouter prise en compte de sog si dispo
+
+utc, date, sog, cog might be incorrect if the rmc or vtg are incomplete...?
+before setting x,y_gps and maybe other variables (e.g. sog, cog), should check if we are more accurate than the other potential providers...
+For all GNSSqualityublox[], if (GNSSquality[i] > GNSSqualityublox[deviceid]) check if i has already set some variables...
+SOG, COG GPS vs DVL? Ideally, should use GPS when its GNSSquality > MED, otherwise DVL...
+cog_gps maybe should be renamed to cog_gps to avoid misleading difference between heading from a dual antenna GPS (probably from GPHDT message) and COG, see also psi_source param, add also param cog_source to choose between GPS, DVL, or other estimation...
+psi_source param : rajouter un cas pour COG et un cas pour cap GPS dual antenna...
+il y a aussi un coghat calculé dans observer...
+psi_dvl bizarre aussi...
+GPS_min_sat_signal not used?
+
+Script powershell d'update ou pour commandes : appelé par schtasks pour updates ou par script 4G/Iridium UxVCtrl, doit vérifier si fichier avec nom du PC et vérifier l'ID de l'update pour pas la faire plusieurs fois
+
+If read timeout retry until sentence timeout, add var timeleft if the timeout needs to be checked in several parts...
+Dans RS232Port.h dans le cas TCP, on devrait appeler setsocktimeout lors du setrs232options()...?
+RS232Port.h : add non-blocking support...
+
+add GPHDT to NMEAInterface
+ublox : add param UBX-CFG-RATE measurement period to set to e.g. to 200-500 ms, check bandwidth...
+Nouveau driver ublox : faut sans doute attendre avant de faire read()...?->problème seulement sur P70?
+
+Simulate cog and sog like UxVSim
+
+Opencvgui : Rajouter horizon artificielle sur bord de boussole
+
+Replace mSleep() by uSleep() in remotecam, for short delays...
+
+quitte pas toujours sans taper ENTER si ESC sur opencvgui?->en debug OK, pas en release?->Terminate commands thread in the end after some time in release, or change some timings...?
+https://stackoverflow.com/questions/21123499/how-to-break-out-of-fgets
+
+SBG (check, continue interface...)->SDK TCP blocking or non-blocking does not work, but works with ellipseMinimal...->problably because never returns SBG_NOT_READY...->disconnects not handled correctly in Serial and TCP (sbgEComHandleOneLog() returns SBG_NOT_READY, as usual...)...
+update rate SBG?->compare with and without SDK...
+Add sleep at end connect sbg and try in serial with condition on not_ready and prev errcode error to try to be able to detect disconnect in tcp
+Tcp non block sample SBG
+Check more errcode recv sdk tcp
+
+update rate OpenCVGUI thread?
+
+Kinect : freenect2 (Windows aussi?), cleye, P:\Personal data\Work\TD-cours\2018-2019\UV 4.1\TD4\KinectWebcamOpenCV410
+class VideoCapture {grab();retrieve();read(){grab();retrieve();}}
+class VideoCaptureKinect : VideoCapture {grab();retrieve();}
+VideoCaptureKinect::read() ???
+
+if ENABLE_SHARED_WAITKEY_OPENCVGUI, the other highgui functions probably need to be called from the main thread, suggest setopencvguikeytargetid...
+should display message if nbopencvgui > 0 with cv disabled...
+
+set cmake var OpenCV_VERSION even when not using find, use vars set to 2413, 2.4.13 to simplify for vs libs...?
+find_package for windows and libmodbus (maybe not for SBG since it is modified, or should change version number of the modified version to be able to disable TCP automatically if needed...)...
+
+Check set_attitude_target guided mode absolute heading...
+
+Rajouter params code sonar et csv2v4log pour gérer sbp, regarder fichiers de données et capture de la com...
+commande pour calibration de voile VAIMOS, afficher bSailCalibrated dans GUI?
+si pas bCalibrateSail, le couple n'est pas réglé...
+
+$PHTRH,x.xx,a,y.yy,b,z.zz,c*kk<cr><lf> where x.xx is pitch in degrees, a is 'M' for bow up, 'P' for bow down, y.yy is roll in degres b is 'B' for port down, 'T' for port up, z.zz is heave acceleration in ms-2, c is 'U' if going up, 'O' if going down
+
+angles et pillonement à envoyer à Seanet Pro, seule SBG renvoie heave, surge, sway, peut-être le récupérer quand même, rajouter colonnes correspondantes dans log SBG, $PHTRH...
+
+Commande ais qui met dans reg direction et vitesse du plus proche bateau pour pouvoir lancer procedure à un cap relatif pour éviter
+
+Params pour pouvoir changer config sbg
+Mieux retransmettre certaines info GPS dans NMEAInterface, true north vs mag north, latence...
+pouvoir avoir plusieurs nmeainterface?
+
+RDIInterface PD6 RDI DVL (SYSTEM ATTITUDE DATA), Rdiinterface dans nmea->peut-être séparer quand même
+Aisinterface, rapport avec swarmondevice, followme...
+MESInterface
+SeanetInterface pour voir aussi données de LIDAR dans Seanet...
+voilier : pouvoir laisser la possibilité de contrôler la voile manuellement pendant un suivi de ligne (e.g. pour tester la stabilisation en roulis)...
+threshold servos : quand on est proche des valeurs neutres, min, max, mettre ces valeurs?
+params et commandes pour régler individuellement période des thread des devices
+option pour définir sockets des serveurs comme non blocantes?
+param pour lancer un waypointslist au démarrage (vérifier que tous les params de waypointslist sont déjà dans UxVCtrl.txt) et pouvoir lancer des commandes ou missions en parallèle...->nécessite peut-être un thread spécifique
+Format fichier wp mp, surveiller s'il est changé (e.g. via FTP), voir pour home, renommer quand fini, minimiser le risque qu'un crash a l'écriture d'un fichier pose problème
+ais
+Faire un .h hook pour sbg pour appeler RS232Port?
+Tcp sdk sbg, qu'est-ce qui manque? simuler une sbg->faudrait aussi TCP server SBG dans l'idéal...
+Send DISTANCE_MEASUREMENTS to px (add param to disable in config file and/or through a command), http://ardupilot.org/dev/docs/code-overview-object-avoidance.html et aussi pour altitude https://github.com/ArduPilot/ardupilot/blob/master/libraries/AP_RangeFinder/AP_RangeFinder_MAVLink.cpp et tester avec SITL
+Support px4f en i2c via pi0w...
+envoyer et recevoir des DISTANCE_MEASUREMENTS via MAVLinkInterface aussi
+MAVLinkInterface : put something in heartbeat.custom_mode, NAV_CONTROLLER_OUTPUT, LOCAL_POSITION_NED, GLOBAL_POSITION_INT...?
+missions avec mavlink : vérifier si ThresholdPW explique la zone morte de thrust constatée pour SPIKY...
+
+faire en sorte que externalvisuallocalization utilise la position d'un ballid...
+
+détection de forme ronde du groupe voilier...
+
+Fast Global Registration (FGR), ICP (Iterative Closest Point) pour localisation LIDAR...
+
+les d_max_err devraient pas être les mêmes selon les lidar...
+
+gérer très longs commentaires dans les commandes
+
+Update Hardware-CPP, MATLAB, Python (check structures), in particular mavlink messages...
+
+Improve excludedpixelarea to draw polygons, do similar for lidars with angles intervals and distances...?
+
+rc mode, réguler course au lieu de heading...
+Set_global_pos_int?
+Parfois thrust et goto de mission.txt pas pris pour drone?->mission planner qui envoie 4 fois commandes, confirmation...
+
+Robid stabilized copter simulator, ou option pour choisir si on simule tout ou 2.5D
+Inject rtk via uxvctrl
+
+gestion u_obs, ul_obs...?
+
+pouvoir utiliser indépendamment bHeadingControl et bHeadingAndLateralControl pour se déplacer latéralement avec un autre cap, que l'on peut faire varier au cours du déplacement latéral, séparer wpsi_obs en plusieurs...?
+
+walldetection est bizarre
+
+rajouter actions de logmission dans le KML
+
+simu de LIDAR ne marche qu'à l'intérieur des rectangles?
+sonar simulé avec SITL...?
+reset des termes intégral PID : utiliser fabs(différence) comme c'est des double?
+
+distances SRF02 dont la longueur de l'intervalle est parfois courte...?
+Données LIDAR qui apparaissent à d=0?
+pouvoir désactiver juste texte de l'OSD->on peut le faire avec les couleurs
+Vérifier interprétation out of range pour les télémètres...
+
+pour chaque lidar prévoir comme excluded_area_points dans video...
+
+Gotoopi opiid
+
+CorrectImageBordersRawBGR() : param nbpixborder devrait pas être hardcoded...
+
+récupérer les entrées de la télécommande sur le MAVLinkDevice comme entrées et les corriger avec évitement doit être possible si on utilise setattitudetarget en guided, rajouter commande pour gérer cela...
+pouvoir gérer followme avec nmeainterface, bExternal...
+rajouter support setekforigin
+
+Altitude_AGL : avec vertical lidar-lite et/ou px4f ground_distance, corriger avec roll pitch et ne pas prendre en compte si roll pitch trop élevés, si lidar pas dispo, utiliser la dernière altitude_agl valide avec les variations d'altitude mesurée par baro et/ou GPS
+Altitude : c'est l'altitude par rapport au repère env.txt (où l'altitude GPS est en général donnée) ou alors en option affichée en wgs, si GPS pas dispo ou pour fusionner, utiliser la variation de pression par rapport à l'origine de l'env (qui pourrait en option être prise comme la pression au démarrage ou l'armement du robot...)
+
+estimation altitude of sea floor à partir de celle dans env.txt et des autres mesures d'altitude
+
+Should add code in Observer that make the fusion depending on the robot and the sensors currently enabled, do not update z_mes directly in the sensors files... 
+baro data from mavlink, sbg, mt...
+altitude pressure vs gps pour un sous-marin dans un lac, robot terrestre, drone...
+gpszlocalization?
+
+controller pour uv drone : rajouter param u_offset, u_med_z ou il y a quelque chose qui permet déjà de s'en sortir?->tester en simu si le terme intégral est suffisant, mais il est souvent remis à 0...
+
+Obstacle avoidance, loiter
+
+GetTelemetersPololu(tableau)...?
+ouverture angulaire des sonars, rajouter param analoginputbeam?->un peu déjà géré par alpha_max_err mais suppose que tous les télémètres sont identiques...
+rajouter param flags pour pololu un peu comme bExternal de MAVLinkDevice, pour déterminer le rôle de chaque pololu connectée
+
+rajouter mark/quality et/ou type (pour connaitre le capteur d'origine) pour chaque d_mes pour aider dans la fusion lidar, video(kinect), sonar?
+commande pour changer quels capteurs rentrent dans la fusion : sonarprocessing simulator seanet hokuyo rplidar pololu0 pololu1 pololu2 BlueView0 BlueView1 video0 video1 video2
+
+d_mes vs d_all_mes : s'assurer que d_mes est le min et que dans d_all_mes, la 1ère doit être la plus petite...
+
+logobstacle?
+
+%waitareaconfig area.txt bIn procid id (execute procid quand on rentre dans la zone (bIn == 1) ou sort (bIn == 0))
+%
+%enablewaitarea id
+%
+%disablewaitarea id
+
+%geofenceconfig area.txt bIn id
+%
+%enablegeofence id
+%
+%disablegeofence id
+
+env obstacles interdit intérieur 
+
+drone : pour suivre un vecteur, faire en sorte que l'orientation du drone aille progressivement dans le bon sens quand on le contrôle avec u et ul...?
+ajouter Kp_y, Kd_y, etc. pour ul control et aussi en x pour u control (distancecontrol...)
+brakecontrol sould be superseded by bLoiterControl...
+station vs bDistanceControl vs bGuidedControl vs bLoiterControl?
+Faire en sorte que le drone reste en position par rapport aux obstacles (distancecontrol en u et ul)->bLoiterControl?
+Composante latérale bluerov et ciscrea, brake si lateralthrust?
+Si vr error grande, utiliser state eq, autrement n'utiliser que vr
+
+add vector field obstacle avoidance mission like visual obstacle, e.g using AIS and simulatedinternetswarmondevice
+Avoir un autre algo que le followme standard ou paramètres supplémentaires pour que buggy toujours entre base et robot, avec le buggy qui ne peut que passer par les traces du robot->footprintrelay
+meilleur geofencing ou similaire pour follow me
+Fuir le prédateur
+Obstacles liés au robot (antennes)
+Obstacles mobiles, essayer d'estimer la vitesse de l'obstacle pour l'éviter plus vite si nécessaire?
+Essayer de monter en dernier recours si l'obstacle est trop près?
+Toujours tourner à droite si on ne peut pas suivre la direction voulue?
+Potential fields to compute wtheta that fuses geofence, obstacles, theta_star
+Obstacles statiques de toutes sortes à spécifier dans fichier de config
+Obstacles dynamique générés par lidar et kinect, juste de lignes avec rayon autour?
+Programme et article potential fields de 2013
+Se poser la question si obstacle est franchissable ou pas en fonction de taille robot et taille obstacle
+Prendre en compte obstacles statiques connus étroits si besoin de faire demi-tour, pour ne pas sortir des footprints à un endroit où on peut être coincé
+rajouter geofence 3D dans geofence.txt avec segments et cercles in et out, enable/disablegeofence coordinates/file command...
+Garder en mémoire une carte des obstacles en parallèle de l'env connu et statique et pouvoir le partager par réseau
+minrange param, zone morte pour tous les sonar et echosondeurs...?
+rajouter params deadzone sonar/lidar?->dépend des missions, algos? dmin=d_max_err+0.5*sqrt(sqr(roblength)+sqr(robwidth)+sqr(robheight))...
+Preparer sample évitement d'obstacle ball et wallavoidance en relatif
+wallavoidance : on pourrait contourner l'obstacle par wall following à droite ou à gauche choisi intelligemment
+
+param extended menu pour choisir quels sonar/lidar sont affichés par $, sonarid (0 : Seanet, 1 : BlueView0, 2 : BlueView1, 3 : Hokuyo, 4 : RPLIDAR, 5 : sonars maestro, 6 : rngfnd mavlink, selon qu'ils soient disabled ou non l'id est inférieure ou égale) propre à chaque fenêtre...
+d, alpha, beta, rgbie, accuracy, xyz, sensor space, robot space, env
+Several views : as camera, as 2D sonar, as 2D lidar, vue sous forme de projection ou coupe...
+pouvoir afficher une image des données brutes de chaque sonar, lidar, groupe d'ultrasons, même kinect (dans différents repères, couleurs) et aussi afficher le résultat de la fusion (avec optionnellement couleur différente pour chaque point selon le capteur d'origine)
+faire fusion sonar, kinect, rplidar, etc. avec des min des distances mesurées à peu près au même angle? Mais il y a peu de distances sonar... prendre en compte l'ouverture angulaire des sonars, à rajouter en param?
+rajouer aussi possibilié d'utiliser es un peu comme ultrasons pololu
+Indiquer pings utilisés pour localisation
+FullImg : (webcams|sonarscreenshot|sonarwaterfall)|&(MapOverlay)|&(SonarDistancesOverlay)|&(WallTrackingOverlay)|&(VisualObstacleAvoidanceOverlay)|&(BallTrackingOverlay)|&(PipelineTrackingOverlay)
+MiniatureImg : (webcams|sonarscreenshot|sonarwaterfall)|&(MapOverlay)|&(SonarDistancesOverlay)
+(walltracking overlay fait aussi walldetect, wallavoidance)
+
+Rajouter dans les KML de détection le type d'objet détecté
+OBJTYPE_CARDS qui fait traitement de Julien
+prendre l'habitude de faire un ballconfig après le stopballtracking pour reset variables
+erl : avec les proc, on peut faire en sorte que le robot détecte d'abord un objet orange pas très grand et se rapproche pour essayer de détecter un objet plus grand...
+Ball : param 2ème seuil de taille pour confirmer ou non?
+pouvoir combiner les résultats de détection de plusieurs couleurs pour dire que l'objet a été détecté...
+rename ball to hslobj, séparer aussi la partie détection de lumière, partager variables objDistance, etc., comment gérer les actions, l'id pourrait servir de priorité...?
+multiple VideoInterface?
+if img size resized by video server...?
+dynamic gui resolution changes?
+set resolution for ball from the video automatically? Pour la taille des images partagées, prendre la résolution min des webcams?
+
+px4f : est-ce que flow_comp_m_x prend en compte l'altitude?->a priori non, juste compensé avec gyros, attention aux données aberrantes ponctuelles du LIDAR...
+
+flux optique avec données lidar pour déduire vrx et vry si on suppose que l'environnement est statique et essayer de déterminer si en fait il y a quand même des parties dynamiques pour les enlever
+Regression linéaire de ce qui a devant, derrière, droite, gauche et calcul du déplacement de la ligne connaissant vitesse de rotation
+
+ne garder dans les user workspace que les fichiers de config vraiment potentiellement utiles?
+Mission Planner disarm button should abort any current mission?->peut-être pas car on veut pouvoir continuer à envoyer des waypoints via Mission Planner, sauf peut-être si le bouton MISSION_START peut relancer...
+vitesse et arrivée en fly to here, en RTL...?
+en mode Auto, lancer équivalent waypointslist, mais devrait être dans un autre thread...
+should add opencvgui key to call waypointslist (with last parameters?), mais devrait être dans un autre thread...
+waypointslist 3D, gestion de l'altitude dans fly to here, w.r.t. home...
+accéder aux rcin avant override?->peut-être pas possible, utiliser set_attitude_target à la place de rc_override...?->vérifier rc_channels vs rc_channels_raw pour confirmer...
+
+menu dispsource (0 : default, 1 : AHRS, 2 : GPS, 3 : DVL)...
+
+roboteq serial
+
+Check observer omegazhat for submarines
+initpws n'est pas vraiment utilisé->il serait de toute façon tout de suite écrasé à cause de u, du coup c'est plutôt un u_0, uw_0, etc. qu'il faudrait?
+Rajouter params à linefollowingconfig pour que le robot ait automatiquement une précision plus importante quand il se rapproche de la destination->Attention si changement de r en cours de route, il risque d'attendre le chrono check strategy avant de changer de bord, il faut faire forcecheckstrategy si changement...
+linefollowingconfigex r gamma_infinite dist_end r_end gamma_infinite_end
+Linefollowingconfigex r debut, r milieu, r fin...
+
+rajouter possibilité de corriger l'estimation de vitesse des moteurs en fonction de la tension batterie mesurée
+Bat1 elec, bat2 actuators, should update energy estimation when V and I measured...
+récupérer tension batterie via 4G? Tension/courant dans log principal?->vbat1 et 2 mis à la fin de lognav...
+Attention à surcharge de maestro...->disabled if -1, sleep équilibrés, countermodulo...
+Maestrosleeptime=10+10*(vbat1chan!=-1?1:0)+10*(ibat1chan!=-1?1:0)+10*(vbat2chan!=-1?1:0)+10*(ibat2chan!=-1?1:0)
+
+abort fait des trucs bizarres quand on est dans waypointslist?
+check critical sections in interfaces...
+missing BOATBOT robid...
+terme intégral line following (attention à le limiter, remettre à 0...), ne plus faire l'approximation repère local pour les commandes xxxwgs?
+wzcontrolconfig mettre à jour les noms des coefs et utiliser le Kd2 pour voir si on utilise la formule spéciale...
+ComputeNMEAchecksum %X code VAIMOS, Iridium...
+
+1er waypoint envoyé par opencpn : c'est aussi différent si on fait un suivi de waypoint, mais ce serait pas disponible pour les voiliers car ils ne font que du suivi de ligne
+Message rte permettrait de rajouter wps sans tout recommencer (rtemsgmode)?
+
+bug com with opencpn when it sends also other nmea messages, because of period of 500 ms for nmea interface, the period should be lower and 500 ms should be used only to choose when to send data, add parameters for the send period of each individual nmea message...
+Mélange des waypoints s'il y a 2 clients nmeainterface...
+waypointslist waypoints.csv comme ça attend qu'une autre app modifie via Iridium/3G le fichier waypoints.csv, dont on pourrait remplacer le format avec celui de mission planner
+inspiré de VAIMOS, gestion de waypoints.csv et curwp.txt...?
+nb waypoints impairs, juste 1, reset CurWP, index qui démarre à 0 ou 1...
+show WPT(CurWP) on OpenCVGUI when waypointslist is in use?
+commande spéciale pour charger et surveiller un fichier Waypoints.csv comme VAIMOS pour pouvoir changer les waypoints uniquement par ftp
+ou plutôt voir sms, VAIMOS Iridium... faire fonction CheckMission() qui vérifie si mission.txt a changé?
+longitude180handling?
+
+udp : réfléchir à la logique des recvfrom, sendto que doit utiliser mavproxy (start mavproxy.exe --master=tcp:127.0.0.1:5760 --out=udp:127.0.0.1:14550) et mission planner pour comprendre pourquoi mavproxy binde sur un port random...->c'est peut-être moi qui doit faire bind sur 14550 et un recvfrom dessus pour récupérer le port utilisé par mavproxy...
+rajouter commentaires qui indiquent qu'on peut faire udp://...
+1er datagramme perdu pour server...
+ne gère pas encore le multi-clients, faire une version tcp et une autre udp de handlecliThreadProc, mais est-ce que c'est vraiment possible de faire un multicliudpsrv suffisamment générique...?
+peut-être qu'il faudrait spécifier 2 ports, comme dans SDK SBG?
+bien envoyer ack quand je reçois des commandes mavlink?
+
+move recvhttpcontent, recvhtml, sendhttpreq, etc. in OSNet?
+http : add function to get address and port from url...
+GoPro sends application/json, not text/html and randomly uses \n or \r\n...->bDisableStatusCheck...
+temps-réel avec ffmpeg, délai de 0.5 s avec OpenCV, difficile de dire si c'est vraiment mieux sur l'app...
+tester sous linux et pi0w avec opencv et ffmpeg et voir si lenteur pi0w perturbe vidéo...
+crash si changement de streaming window gopro via gstreamer...
+
+Need to check ReadLatestRS232Port() and others as well as checkdata (see MAVLinkInterface), waitfordata (see IridiumComm)...
+Make a select.h for MSVC for compatibility (en essayant de déterminer le type de fd qui est passé (en appelant une fonction de socket et voir si elle échoue...), si c'est une socket essayer d'appeler la bonne fonction, qu'on aurait renommée plus tôt, voir pour faire la même chose pour les fichiers pour les open et read...)...
+
+update sonarstaticlocstructured, sonartest
+Corriger comments sur alphas dans uxvctrl.txt pour saucisse et séparer cas miniking et micron
+
+Prise en compte de 2 GPS pour contracter le cap (ou 3 pour les 3 angles)
+Contraction cap avec gyros avec intégration sur une durée glissante
+
+peut-être paramètres pour bRollControl, bPitchControl, commands to selectively disable them...?
+need to check nmeainterface with e.g. u-center, send altitude, heading, pitch, roll compatible with seanet...
+arducopter : vérifier touches a,e remises au neutre, avec space, etc.
+
+Localisation sonar dynamique avec DVL->c'est pas les bonnes équations pour l'historique, etc.
+touche extended menu pour simulated dvl->juste une commande et touche # pour l'instant...
+mieux gérer les out of range de dvl, optical flow vs quand il y a des trames sans données, voir aussi GPS...
+si dvl ou of activés, indiquer dans GUI si valides...->bVrOK, ou alors juste regarder la largeur des intervalles?
+sog gps vs dvl->toujours essayer d'estimer la SOG soit à partir de mesures directes soit à partir de vr et R...
+pour les bateaux, si vraiment on détecte qu'il n'y a pas de GPS, passer en dr...
+
+replace x_bias_err, x_max_rand_err with x_gps_bias_err, x_gps_max_rand_err...
+
+accéléros : peu précis, sensible aux chocs et vibrations rejeter que si incohérent avec au moins 2 autres capteurs/algos (e.g. pression, effets propulseurs, DVL, GPS pour vertical, effets propulseurs, sonar, DVL, GPS pour horizontal)
+calculer vz à partir de pression pour pouvoir comparer avec effets propulseurs, DVL et accéléros
+moving average à faire sur 2 ou 4 mesures pour gérer les cas où il y a des deltas de 0 1 fois sur 2, comme parfois avec le GPS...
+et selon à quel point les mesures sont incohérentes, on agrandi leur intervalle ou on les rejette complétement...
+
+commande pour choisir aussi quelles équations d'état on utilise, désignées par une id?
+
+revoir mes noms de variables pour les mesures, devraient être des intervalles avec le nom du périphérique, et la largeur de l'intervalle doit être fixée par le capteur...?
+dans observer, c'est pas facile de choisir les bonnes equations d'état selon les capteurs dispos et l'état de leurs données (e.g. quadro avec optical flow, submarine avec DVL, précision GPS RTK...), si on fait avec la largeur des intervalles, définie dans les périphériques ça pourra aider...
+commande pour régler les erreurs des capteurs, et aussi en paramètres globaux?
+
+pour tous les capteurs rajouter : signx, signy, signz, signphi, signtheta, signpsi (changement de repère), x, y, z, phi, theta, psi (position du device dans robot), psip1, psip2 (calib mag pour corriger les perturbations en dernier recours)
+MT : Coordinate system different from legacy mode, hardcode harmonization or not...?
+
+QUADRO_SIMULATOR_ROBID to test roll and pitch control...
+
+rajouter fonctions matrix_multiply et autres comme fait dans firmware M0 par défaut, et même tout le code de traitement de razor dans osmisc ou extensions ou observer, rajouter dans config file dans coord sys propre au device : mag_ofs_x, mag_dia_x, mag_odi_x...?
+faire version spécifique du programme de calibration Razor pour qu'il lise données de MTi, ou alors pouvoir faire la calib via MAVLink (COMPASS_OFS_X offsets in milligauss on the X axis, COMPASS_DIA_X, COMPASS_ODI_X, compass soft-iron calibration matrix: [[DIA_X, ODI_X, ODI_Y], [ODI_X, DIA_Y, ODI_Z], [ODI_Y, ODI_Z, DIA_Z]]...), nouvelle formule de calib comme razor et mavlink...?->dans l'idéal c'est quand même mieux si l'AHRS gère la calib mag en interne...
+
+//wz : we keep as it is at the moment...
+//z/depth/altitude should share same values...
+should update controlconfig command...
+ajouter param pour la valeur initiale pour la stabilisation?->pour le cap stabilisé à l'angle actuel au moment de l'activation...->sauf que pour les drones il faut que ce soit plutôt stabilisé à 0...
+
+concept de boost mode en lien avec les régulations en z et pitch et roll?
+Ui=matrix*[uvx,uvy,uvz,uwx,uwy,uwz] dans fichier de config principal...? Mais si on veut relations non linéaires?->et on en a déjà avec le boost mode...->to hardcode depending on the robot?
+add in params wphi, wtheta and other things related to lateral movements like in quadrotors, key to activate roll and pitch control? in ArduPilot it depends on the mode...->to hardcode depending on the robot for the moment since the robots that need roll and pitch stabilization usually always need it...
+
+équations d'état bateaux... add bDisableStateEstimation, E key, like bGPSLocalization...
+
+voir aussi pour enregistrement des fichiers de config des périphériques, see if old config file format would be better to save/load parameters...?
+https://stackoverflow.com/questions/15453470/print-float-double-without-trailing-zeros
+
+rajouter touche bSonarAltitudeEstimation?
+
+Gyr/omegaz mais du coup je peux pas désactiver la centrale... voir pour pouvoir n'utiliser que gyros, utiliser options internes centrale? mais des fois je voudrais faire moi-même la fusion magnéto+gyros...
+ambiguités pour l'angle quand sort du champ de vision...
+PsiEstimationMode : 0 normal, 1 gyro, 2 razor-like fusion mag+gyr, 3 with state eq...
+If Width(psihat) < M_PI le prendre en compte pour gérer l'ambiguité
+quand on fait setstateestimation, psihat et zhat sont tout de suite écrasés par psi_mes et z_mes, même s'ils sont invalides...
+rajouter params calcul objAngle, si tous à 0 désactiver?
+
+Prise en compte des accéléros dans équations d'état... rajouter gyrx_hat/mes, gyry_hat/mes..., acc, v
+selon les accx_err, ça aura ou non une influence sur les équations d'état
+Gérer le -g dans acc...
+changer les bruits d'état en bruits discrétisés...?
+fusion de certains fichiers avec UxVDataViewer, notamment forward et backward..., intégrer sonarstaticlocstructured et lecture vidéo dans UxVDataViewer, afficher date, heure, min, sec?
+
+dans les linefollowing, bLineFollowingControl n'est pas changé quand on a fini?
+les variantes sans t ont peut-être peu d'utilité...?
+
+fmod_2PI avec des intervalles...?
+préparer fonctions get_short/uint...(addr, endianness2endianness, see _swap_endianess() in Razor firmware, Arduino.h...)
+Faire fonction cv rotationphithetapsi et coordonnées homogènes pour éviter d'utiliser interval...
+
+bugs
+manque StopChrono() dans handlemavlinkinterface() et peut-être ailleurs...
+VC_Linux internal bug : remote current build directory does not correspond to the directory containing .vcxproj file, see https://github.com/Microsoft/VSLinux/issues/325
+VC_Linux limitation : does not work from a network drive?
+UxVCtrl_MacOS a été compilé avec un vieux mavlink...
+sometimes the program stays blocked forever in the interfaces in select() in waitforclifortcpsrv(), lots of mem leaked if MAVLinkInterface was connected...
+Kinect/CLEye support and USE_OPENCV_HIGHGUI_CPP_API?
+crash opencv cpp mingw5
+problème echosondeur sur port série de pi0w?
+bug ublox voit pas $gnrmc à cause des corrections rtk, du coup on doit activer gga?
+lorsqu'il y a des erreurs de décodage opencv (e.g. avec rtp?), il y a des déconnexions des autres périphériques et XXXInterfaces...
+Quand problème caméra (rpi2 avec cv310), tous les autres device reconnectent en boucle?->pas vu ce type de problème sous Windows ni rpiz cv2.4...
+UxVCtrl et fileconv : vérifier les conversions entre repère NED, NWU, ENU, marine units, etc.
+check sign Euler angles computation from quaternions and matrix for SBG, old and new MTi...
+check sign of omegaz in PID for SBG on SAUC'ISSE!
+check ublox default values for CFG_NMEA...
+Bug followme buggy peut-être à cause de u ou uw remis à 0, vérifier aussi pour bubble->pas vu de problème en simu avec buggy et submarine dans les 2 sens...
+le changement de alphafvxy n'a peut-être pas été fait dans le bon sens pour SARDINE, vérifier notamment avec le passage du gate dans données sonar, regarder aussi pour SAUC-E 2016 et euRathlon 2014 et 2015...
+problèmes taille de long différente, éviter les long, beaucoup de long dans labjack, mais peut-être qu'il faut les laisser, voir pour mieux définir les uint32, uLong...
+printf size_t->%zu?
+chiffres significatifs...
+Warnings misleading indent, see Ubuntu 18.04/VS2017 and static/dynamic code analysis...?
+retester avec -Wunkown-pragmas, -Wwarn-cstrict
+vc_linux warnings de conversion à corriger par des casts explicites?, ne pas oublier d'activer l'option Copy Remotely pour tous les input files...
+tester longtemps en release sur les robots (avec tous les devices possibles) avec et sans debugger, avec et sans appverif et valgrind...
+SpeedBit Video Accelerator\Accelerator.dll seems to generate small bugs everytime a network function is called...
+crash simu mission guerlédan en tapant la commande exit, peut-être lié à MAVLinkInterface, qui était connectée?->aussi quand pas connecté...->peut-être lié au videorecording...->crash même quand mission interrompue par touche x...->crash même quand MAVLinkInterface désactivée...->pas revu...
+caractères NMEA invalides loggués parfois à la fin?
+Warning : NMEA checksum error->s'assurer que ça buggue pas avec fausses trames nmea trop grandes venant de UBX-RAWX, vérifier plus en détail si le talkerid est connu...->peut-être résolu...
+mon C_q_in_group est probablement faux car il choisit peut-être de prendre en compte le 1er ping du groupe et pas les autres, mais le 1er n'est pas forcément le bon...->voir formule de l'article
+Bug C_q_XXX : Pourquoi il faut if ((imax == -1)||(imin == (int)(V.size()))) x = interval(); ?
+null-terminated string en entrée de processnmea...
+check structure packing, alignement, pour plus tard : éviter les pragma pack...
+update AnalyzeMTMessage(), etc. that was discarding data that should not be, see ublox (check also if Seanet has the same problem...).
+Ne réagit pas aux touches, tester avec ubuntu 15.10 ou anciennes versions du programme->version WRSC marche...->cast char nécessaire, regarder plus en détails...
+prebuilt static libs : for VS2012 there is also the XP platform toolset, might get unexpected results if mixed with default platform toolset?
+Some threads may be too fast, check timings...
+MAVLinkInterfaceThread will not be stopped and might create a memory leak...->not easy to solve when it is a TCP server...
+strange thread destruction loop at exit sometimes : this due to e.g. NMEAInterface when there is a client ready to connect it, the server is still creating threads for it, that immediately stop because of bExit. For some reason this delays the WaitForThread in the main...?
+manque des StopChrono() au moins dans MT, SBG
+should add commands critical section so that bWaiting = FALSE would never risk to be overwritten just after...
+Invalid minangle, midangle or maxangle sometimes on rpi2?
+Si le pipe est au centre de l'image mais tout en bas, le tracking marchera pas bien...
+Pour les commandes sans paramètres, si des caractères erronés sont après la commande mais avant le retour à la ligne, ça marche quand même, est-ce qu'il faut retourner erreur?->rajouter \n dans l'analyse de toutes les commandes?->ne marche pas sous Linux...
+tester mission crash vidéo sur sardine pendant longtemps, sur des missions, en appuyant sur tous les boutons...
+race condition : vérifier que si 2 entercritical section différents se suivent, c'est toujours dans le même ordre quel que soit le thread...
+pb opencv 2.4.9 qt gentoo linux touches maj et avec plusieurs fenêtres opencv dans threads->à cause de Qt?
+GTK : now the keys are randomly received by the 2 windows...
+Attention à la touche NUM LOCK dans les vm Linux!
+bug seanet et peut-être d'autres : en sortie de la boucle de thread principal il y a des free qui ne devraient être faits que si bConnected, fuite mémoire aussi...?->en fait ça va pas bugger, mais c'est un peu limite...
+déco temp mti-g sardine->probably internal mti-g bug, its position estimation and packet counter seem to reset... ou alors le fait que j'ai changé la période du thread?
+surface intempestif pendant sonar map->bug dans mission, rajouter sleep entre headingreg et depthreg? comme si depthreg -2 pas pris en compte et régulation profondeur désactivée?->problème un peu comme avec le voilier qui validait pas waypoints et continuait régulé, deadlock...?
+fly to alt veut pas nombre à virgule ni alt nulle...
+surfaceobstacleavoidance needs to be debugged (corrupted memory...)...
+Maestro bloquée si on ne récupère pas en continu les données envoyées par la Razor sur son port série!
+
+build and install
+USE_FIND_PACKAGE_OPENCV/MODBUS/SBG and message to advise it when needed
+Tester Hardware-MATLAB MAVLink et SBG support : 
+export CMAKE_C_FLAGS=${CMAKE_C_FLAGS} -fPIC
+Pour compilation SBG MATLAB Linux et Mac OS
+cmake : faire copier ce qu'il faut du dossier source dans build si différents...?
+cmake64 detects only sbg and opencv...->should check better $ENV{ProgramFiles}, $ENV{ProgramFiles\(x86\)}, $ENV{ProgramW6432}
+cmake options static (attention cv342...), xp toolset visual studio?
+tester avec un nouveau mingw et linux, check inline and timegm in a small program
+unit tests : vérifier que la plupart des commandes ne retournent pas une erreur, vérifier le temps de détection sur des vidéos connues...
+cross compilation with cmake, variable PREFIX pour dépendances...
+Compiler uxvctrl pour le pixhawk?
+Mac OS : pas de CLOCK_MONOTONIC, clock_gettime(), librt (OSTime, Timer, Ev, Sem) mais il y a e.g. clock_get_time comme alternative, voir aussi SBG SDK...
+
+logs
+Dashboard : rajouter image en fond, cap voulu en remontée au vent car depend de l'estimation de vent
+Dashboard : rajouter les mêmes types d'infos que dans UxVCtrl (GUI et showdetailedinfo) et voir aussi avec UxVDataViewer
+pour les waypoints dans file conversions et ailleurs, utiliser %.9f car de toutes façons il y a toujours peu de waypoints (contrairement aux logs qui peuvent être gros)...
+Data viewer: pouvoir rejouer en temps réel ou accéléré, lien avec Mission Planner...
+logstate format : Observer, Simulator, upgradelogstate, downgradelogstate, logstate2tlog
+dans log, faire en sorte que range et bearing soit plutôt celui pour distance devant robot...?
+fluiddir, fluidspeed, d_mes, alpha_mes units...
+différents types d'altitude, AMSL, venant d'un GPS imprécis, depth, AGL...
+add specific columns for raw GPS data in log file?->maybe not necessary since already in raw data log files, that can be easily replayed...
+Log update values in accrx, accry, accrz hat/err...
+
+MAVLink
+Liaison udp pour controler le robot à distance sans problèmes de déconnexion/reconnection...
+pouvoir faire un exit (ExitCode=EXIT_SUCCESS) à partir de Mission Planner...->mais je vois pas quel bouton utiliser...
+NMEA2MAVLink bridge (and reverse) for BOATBOT OpenCPN, Mission Planner compatibility->voir aussi le menu caché de Mission Planner...
+envoyer global_position_int pour gérer le fait que qgc n'affiche pas position GPS si pas de fix? revérifier apmp, qgc sitl si no gps lock...
+altitude, mode pas affichés dans Mission Planner
+pouvoir utiliser pixhawk comme pwmin et/ou pwmout et/ou ahrs, etc.
+pouvoir utiliser rcin pour controler robot à la télécommande
+add scaled_imu to get accel in mavlinkdevice and mavlinkinterface
+en Guided il ne maintient pas la position avec juste que SET_ATTITUDE_TARGET...->check for mavlink command to loiter or similar?
+change ManualControlMode dynamically...
+mavlinkinterface/device : ne pas envoyer/demander toutes les trames à la même fréquence, rajouter params, comme heartbeat...
+Utiliser messages mavlink px4f video via mavlink interface (https://mavlink.io/en/services/image_transmission.html), comment gérer plusieurs caméras...?
+envoyer fluiddir pour voilier, voir comment c'est fait sur ArduSail (WIND_COV?), vérifier fonctionnement de rc_override vers UxVCtrl notamment pour voilier...
+pouvoir envoyer wind_dir, wind_vel dans mp...
+Pouvoir renvoyer les rcout mavlinkinterface pour tester avec px dans les mains
+Faire passer en option certains messages mavlink de mavlinkinterface à mavlinkdevice (ou même par défaut en option tous ceux qui sont pas gérés)
+Affichage tension batterie depuis mavlink, avec Energy_actuators...?
+delay/wait, waypoint validation, fly to here wp not displayed on mp, how to display altitude, flight planner set home does not work, ack needed for MISSION_START, how to handle thrust...?
+MAV_FRAME_GLOBAL frame : altitude AMSL
+MAV_FRAME_GLOBAL_RELATIVE_ALT frame : altitude as relative to the home position (home altitude = 0).
+Utilisation de qgroundcontrol : regarder ses options et s'en inspirer, rajouter paramètres...
+Cap pas correctement envoyé en mavlink osd
+Envoyer aussi rssi
+rajouter gestion de message manual control mavlinkinterface
+Return Through Footprints : RTL en choisissant quelle partie dans les footprints (définie par 1 cercle de zone (ou temps) de début et 1 cercle de zone (ou temps) de fin), voir code du follow me, ArduPilot Smart RTL...
+bForceConfirmHomeMsg : fait clignoter home en rouge si non confirmée ou ignorée manuellement
+pouvoir se connecter à MAVLinkInterface via série et plusieurs TCP en même temps...
+MAVLinkDevice : actuellement on ne peut controler que les canaux prévus par le firmware du coup faudrait aussi pouvoir changer la correspondance entre mes canaux et ceux de l'APM?
+save mavlink tlog for MAVLinkDevice?
+Mavlinkdevice add param PressureRef, WaterDensity?->pas sûr, c'est ardusub qui fournit directement l'altitude...
+param mp afterflytohere : 0 for do nothing, 1 stop, 2 loiter?
+fly to here écrasé si waypointslist en cours
+
+sonar, localisation, wf
+Prendre en compte le fait qu'on va voir le fond avec le sonar, surtout dans le cas de piscines à fond variable comme à l'IPN
+voir comment j'ai rajouté state equations 2.5D dans UxVDataViewer
+option dessin des pings bruts, corrigés en angle, corrigés en angle et pos...
+simu qui produit scanlines (en reconstituant une scanline à partir de la distance qu'il retourne, on risque d'en avoir besoin si on veut attribuer des scores), wf complète puis passe par SeanetProcessing?
+mettre partie dessin de seanetprocessing dans opencvgui, isoler dessins dans thread séparé?
+Où mettre la partie dessin des images sonar en overlay, c'est commun en partie avec seanet et simulator... dans SeanetProcessing? SeanetProcessing to rename...
+statevars va être très ralenti à cause de dmes..., faire une cs spécifique?
+mindist, maxDist, threshold params... maintenant c'est peut-être plus sur adspan, adlow, gain qu'il faut jouer...
+options pour enlever les outliers avant, après...
+repère dans lequel dessiner image sonar vs detection d'obstacles
+Utilisation de headingreg et depthreg pendant staticloc, mouvements dus au propulseur vertical...
+seanet : index_scanlines est peut-être moyennement géré si sector scan...
+données aberrantes vrxhat dans logstate?
+vhat->vxhat, vhat=Cabs(Sqrt(Sqr(vxhat)+..., vhat=Cequal(sog) if gps... vr...
+SRF02 gérer usb iss rs232 et i2c rpi
+hokuyo/RPLIDAR device like sonar, tool to convert data files to seanet, should make getlatestmessage able to handle all messages types since the device can send messages continuously...
+flux acoustique sur un mur pas tout à fait droit...
+LIDAR/sonar : estimer vitesse longi (peut-être pas lat, ça peut être vraiment faux...) si le cap change peu et les obstacles changent peu avec le faisceau avant et arrière
+Exp image sonar pour mieux détecter murs?
+
+GUI, video
+pouvoir afficher dans GUI un message temporaire dont le contenu s'efface après 2 s s'il n'a pas été modifié, un peu comme les alarmes...
+mettre aussi BRG de ball par rapport au nord?
+object detection : ajouter en option des prétraitements?
+Effacer messages ffmpeg et limiter perturbations?
+error while decoding MB
+cabac decode of qscale diff failed
+Top block unavailable for requested intra4x4 mode
+->peut-être que le thread n'arrive pas à tourner assez vite, afficher le framerate dans OpenCVGUI?
+param caméras gain, exposure, etc.
+kinectsdkhook : gérer plusieurs kinect
+Stabilisation profondeur peut-être pas pratique, affichage bleu détection pas clair...
+rajouter estimation de vitesse dans SOG (sum(delta_xi)/(i*dt)) pour pouvoir avoir l'ETR, afficher aussi en option le temps passé sur le waypoint courant
+afficher followme fence
+afficher temps depuis début mission
+Rampe etas quand on accélère, en option...?
+en plus des touches + et -, pouvoir se déplacer à droite et gauche dans le zoom avec les touches, comme dans UxVDataViewer ou Ecrazor...->manque de touches sur le clavier...
+zoom pas fait au bon endroit
+cv400 : tout changer en cv::Mat vu que tout est basé sur les IplImage, désactiver temporairement les include de fonctions C pour voir quel code utilise encore du C...
+Utiliser waitKeyEx() pour avoir full key code? Uniquement dispo en cv3?
+tester touches en nomachine, ssh -X...
+Afficher tension, direction vent, affichage des infos du waypoint courant mission planner
+modify waypoints/heading commands so that they do a line following in the case of a sailboat?
+Copier implémentation launchtcpsrv pour la modifier et stopper correctement?
+Move MAVLinkInterface in Hardware with its own config file?
+use cvGetCaptureProperty(capture, CV_CAP_PROP_FPS) when reading video file in Video.cpp, modify also in remotewebcamsrv?
+prévoir zoom sur la map, on a du mal à savoir son cap
+pouvoir afficher robot indépendamment de l'échelle?
+alterner les valeurs affichées toutes les s?
+afficher le commentaire action d'une mission (e.g. en bas...)->déjà affiché dans invite de commandes
+Fichier motif ou images pour dessiner robots comme buggy MATLAB Kalman, ou même coder en dur quand il y a plusieurs solides->Mission Planner...
+bug enregistrement de la 2ème caméra quand c'est dans le script? -> enregistrer vidéo manuellement ou rajouter un délai...
+utiliser bCleanup dans tous les threads pour le cvSet()?
+opencv cherche toujours à ouvrir la meme cam s'il n'y en a qu'une et qu'on veut en ouvrir une 2ème?
+Mettre en var globale les périphériques?
+détection quand il y a quelque chose de visible à la caméra pour détecter quand on est près du fond
+intercepter 1er CTRL+C pour faire bExit puis ne plus les intercepter?
+Appli gps qui affiche sog à partir des logs?
+Faire programme pour aider à la mag calib
+fournir simple couche d'adaptation pour pouvoir traiter webcam sans opencv
+
+acousticmodemlocalization
+rename acousticmodem commands to modem?
+transmettre aussi t pour améliorer précision de localisation
+commande comme setstateestimation/gpslocalization qui contracte la position par acoustique
+quand il y a incohérence, agrandir et recommencer à contracter 3 fois?
+toutes les 5-10 s quand sous-marin envoie ask\n 3 fois (avec au moins 2 cohérentes), surface envoie xyzerr (4 int16) 3 fois et si au moins 2 messages cohérents le sous-marin envoie rng\n puis attend la réponse (3 fois, la réponse semble de la forme \n\rRange=0.9m\n\r) et si au moins 2 distances cohérentes (ici c'est pas bit à bit, ça peut légèrement varier entre 2 rng...), il contracte sa position
+->mais c'est pas forcément robuste aux décalages, liés aux bouts de messages fantômes... s'il y en a...
+on peut peut-être s'en tirer aussi bien sans le ask\n, à réfléchir...
+dans la spec, il faudrait rajouter un message shh\n pour interrompre les sendxy provoqués par un ask\n... est-ce que c'est vraiment utilisable?
+cohérence des messages : il faut regarder bit par bit (il faut qu'au moins 2 bits sur 3 soient cohérents à chaque fois)
+(modems envoient probablement par paquet de 4 octets (sans doute complété par des octets nuls))
+flush du modem quand il reçoit des données invalides?
+add velocityofsound as env global param as necessary for echo message...
+rajouter param acousticmodem_r_max_err dans UxVCtrl.txt et MDM0.txt comme pour sonar...
+time-division method
+envoyer (périodiquement?) un message sp avec la valeur opi trouvé lat long... en option dans ball et pipe
+acoustic localization : stop specifically submarine to be able to communicate correctly (perturbations by thrusters?)?
+pour pouvoir analyser toutes les données qui viennent du modem facilement et retirer les vieilles, il vaut mieux utiliser des messages qui ont une en-tête et fin prédéfinie...
+faire un recv et analyser un peu le message comme les autres périphériques, regarder aussi ce qu'a fait Clément
+To be able to make a real communication protocol, should receinve 4 bytes, check the beginning of the data to determine if it is a known message, receive remaining data  if the specific message needs it, and act accordingly...
+vu le temps de transmission de 2 positions valides et d'1 rng, il vaut mieux que l'émetteur soit fixe...
+compte tenu du fait que hovercraft est presque fixe et de la vitesse du sous-marin, ça revient à une précision de 10 m
+peut-être qu'il vaudrait mieux regrouper les 2 positions dans le même message pour gagner du temps...
+disableallcontrols désactive aussi toute commande acoustique... (sans doute parce qu'il peut y avoir des régulations dues à une commande acoustique...)
+
+Missions
+Procid dans wallavoidance pour faire manoeuvre évitement auto robots terrestres, est-ce qu'on peut relancer le wallavoidance en fin de procédure?
+command sethome, RTH/Land/Surface after a timeout valid even when no mission running...
+Gate : Définir 1 point de départ fixe, utiliser un peu sonar pour mesurer distance au mur devant ou derrière le robot? En fait l'algo de localisation dynamique est peut-être quand même mieux, la partie difficile est l'estimation statique au départ...
+Snapshot should generate ply
+Rajouter détection de rouge sur pipe...
+Temps et status à mettre dans logs kml
+mettre logvid2imgoverlay sur github, corriger bug de flip ou autre avec vue rochers sauc-e, update rotation etc. with what is in Video
+Mosaiquing video avec les logs de 2014
+Faire détection plus robuste en regardant plusieurs images et selon un detectionrate sur une durée quitte à augmenter un peu FPS : objMinDetectionDuration...
+Chercher l'anomalie avec toutes les caméras et sonar avec portée réduite car elle a été bougée pour la finale?
+station : rajouter bStationControl comme bBrakeControl, voir paper_vstab_rc.pdf
+manque statevariables cs dans MissionLogThread, idem logwall? psi_wall... voir Ball...
+pas de setmissionaction init et end : peut-être que j'ai fait un copier coller sans eux? szAction non protégé...
+comment attendre la détection de ball OU un message acoustique dans les scripts?
+Pouvoir programmer avec les touches de la télécommande
+Infinite timeout if < 0 wplist, linefollowing, etc.?
+command watchdog t bExit qui interrompt la mission au bout d'un certain temps et en option quitte le programme (si le programme a été lancé dans un script batch, il peut alors être ensuite lancé avec une autre mission...)
+sauvegarder e,phi,delta_psi dans wall?
+commande pour régulation en vitesse?
+configdistancecomputation
+distancecomputation
+commande waitdistanceless/more/wgs x y d
+param friendly name
+Commande vocale : robot, thrust 0.5, stop, direction -90, utiliser cortana?
+
+Actuators
+rajouter option rampe comme sur robot CCI...
+Jrk getvariable pour pouvoir détecter déconnexions ou mode manuel (BOATBOT)
+Touches opencv gui->uNj(camera tilt), voir pour rajouter bras...
+s'inspirer aussi de l'interface de Maestro Control Center...?
+reconnection auto de ssc32 a peu de chances de servir car on ne fait qu'envoyer des données...
+revoir l'organisation des actionneurs (IM483I, ue9, ciscrea...), configuration de u1,u2 avec canal, pwm us ou ms->voir ssc32
+Pin number (not used) dans config.txt, regarder fio ain de ue9...
+ue9 : rajouter eth, DO, DI, pulseinput, i2c, voir comment faire similaire à SSC-32/IOIOSrv...
+trim/offset, min max facilement réglables dans interface, certains paramètres reconfigurables immédiatement, d'autres prennent du temps (offset, gain, portée sonar...?), faire fonctions spécifiques pour qu'on sache lesquels sont facilement modifiables...->maintenant on a les commandes deviceconfig device.txt...
+quantification des actionneurs centrée en 0, empêcher aussi de passer d'une valeur extrême à une autre (e.g. gouvernail quand waypoint opposé...), rudderupdate period?
+voiliers : pouvoir mettre la voile à autre chose que 0 au démarrage (pas trop important car la télécommande peut faire le nécessaire...)->utiliser InitPW?->mais écrasé par u dans le thread...
+vérifier la bonne utilisation d'InitPW...
+
+GPS, NMEA, waypoints, AHRS, DVL
+why it is possible to get the read responses right after the commands in PathfinderDVL raw data...?
+Nortek DVL supports RDI PD0, send Pathfinder commands, faire fichier RDIPD0Protocol.h?
+calib mag du DVL Nortek?
+prévoir commande pour mettre en veille le PathfinderDVL (avec warning s'il est en Ethernet)
+Test piscine avec DVL+staticsonalocalization : mettre plus grande erreur sur boussole et faire du suivi de ligne avec effet intégral pour corriger les erreurs de cap...->non en fait le DVL n'aidera pas vraiment...
+mt, sbg : fixtype, numsat, hdop...
+Pour chaque GPS, option bdisableuse, qui empêche mise à jour x_gps, bGPSOK, etc. mais il faut quand même qu'il reçoive les corrections rtcm...
+récupérer accel de mavlink, vérifier quand elles sont valides...?
+AHRS matrice de rotation, bras de levier...
+ublox : surveiller problèmes de pragma pack, taille de packet dans SetCfg()...
+gestion des corrections RTCM probablement mal faite (retards?)...->pas trop grave si on les injecte via VSPE...
+Activer dans config ublox pseudo range, carrier phase->UBX-RXM-RAW, RAWX, penser à enregistrer config avec UBX-CFG, pour pouvoir faire post process avec rtklib
+RemoteRS232MultiSrv pour permettre à plusieurs clients d'accéder à la base->un peu moins utile sous Windows (VSPE), mais peut-être pour Linux
+ublox et mavlinkinterface peuvent publier des données RTCM...
+Getubxdata->faire pour tout type de données, écriture dans fichier log...
+tester le bon décodage de UBX NAV SVIN...
+faire fichiers UBXProtocol.h, NMEAProtocol.h, AISProtocol.h, MAVLinkProtocol.h pour pouvoir les utiliser aussi facilement dans file conversions ou ailleurs? ou alors ça fait trop de fichiers pour pas grand-chose?
+dans nmeadevice, ne plus chercher à récupérer tous les nmea sentences en même temps, retourner une erreur seulement s'il n'y en a aucun->voir ublox
+pour le UBX, mieux généraliser mes fonctions FindMessage() : elles se résument toutes à on cherche un début de message partout et on essaye de voir combien d'octets il faudrait redemander pour avoir un message complet, on demande le max si on n'a pas trouvé de début de message (ou que le capteur envoie tout le temps des données), ou 1 octet si on en a trouvé un mais qu'on n'a pas d'idée de combien il faut redemander au min pour avoir un message complet...
+continuer avec les ubx withmid, withoutmid et voir comment gérer nmea, ubx et rtcm ensemble pour pas perdre de packets importants...
+faire ublox (2 devront pouvoir être connectés sur UxVCtrl), notamment pour pouvoir faire un programme (qui serait sur le robot) qui configure la base Tiny RTK (connectée en TCP) avec les bons messages et lance le mode Survey-in, puis renvoit les RTCM sur le rover Tiny RTK d'une part, tout en récupérant sa position GPS d'autre part...
+voir aussi pour gérer le mode RTCM injecté dans MAVLink pour pouvoir les retransmettre au rover Tiny RTK...
+Update also DCB settings Windows, check current settings to know what to set manually, check if equivalent to cfmakeraw()
+mtdata2 : faire findlatestmsgwithoutmid...? Coordinate system not the same between legacy and normal modes!
+mti-g : gps pris en compte si utctime valid, il faudrait peut-être plutôt regarder status? UTCValid semble le plus strict donc le plus sûr?
+utiliser nmeadeviceconfig bPause pour désactiver dynamiquement (par contre pas pour MTi-G à cause des angles...)
+add rotation matrix multiplication to enable coordinate system change, convention abcdefgh comme mti ou T11,T21,T31...
+Razor invalid data au début parfois sous linux, jusqu'à 2048 octets invisibles invalides?
+bGPSMultipathAutoDetection : if lidar detects obstacles all around (> 50% around the robot, < 5 m) and low light intensity (but not OK during the night...), that means that there are risks of multipath and GPS should not be trusted...
+rajouter support GPHDT pour cap dual GPS (comme HCHDG), GPZDA (date) et PRDID (angles)
+Add COG, SOG, pressure in MT, SBG, MAVLink
+MT, SBG specific NMEA messages... : attention, les trames NMEA sont mélangées aux autres et sont minoritaires, donc on risque d'avoir des déconnexions/reconnexions intempestives...
+bNMEAInterfaceHighPrec pour nombre de décimales dans trames (voir ce que fait ublox)
+add recvuntil for rs232...?
+convert AIS to C code...
+auto magnetic calbration algo in plane and space, see Matlab code in ptrbrtz, add magnetic declination in AHRS config files (or use yaworientation parameter)?
+gérer gpsd (Linux only?)
+Should be possible to remove NMEADevice now if necessary...
+adapter NMEAProtocol.h pour gérer NMEA Nortek (without tags, otherwise > 80 characters...)
+Pourquoi le #ox#o1 de razor apparait dans le second log?->parce que le nouveau log n'est créé qu'après le connect...
+Streaming output - always at 5Hz to match Honeywell output
+NMEA 0183 message containing Pitch, Roll and Heading (30 chars):
+$PTNTHPR,ddd.d,N,abbbb,N,acccc,N,kk<cr><lf> where:
+abbbb is pitch bb(degrees)bb(minutes) a is '-' for bow down, nothing for bow up.
+acccc is roll cc(degrees)cc(minutes) a is '-' for port up, nothing for port down.
+ddd.d is heading in degrees
+checksum etc as standard NMEA.
+
+Altitude sonar, objects detection sonar
+Altitude from sonar : use qinter to allow outliers and take into account position of the sonar on the submarine as well as roll and pitch
+sonaraltitudeestimation : chercher le plus petit rayon où il y a plus de 50% de pings qui ont une détection...
+faire filtre passe-bas sur le dernier tour sonar, afficher <dmin si résultat trop petit ou >rangescale si oo renvoyé par firstobsdist avec threshold à 5 ou faible
+prévoir aussi mode sécurité altitude (mais peut être intempestif si dans piscine avec sonar) et profondeur->commandes startaltitude/depthprotection
+essayer de déterminer un dmin et dmax entre lesquels on peut espérer voir des objets (zone < un certain seuil, avec la médiane)
+détecter les objets <= une certaine taille dans cette zone
+cas particulier du gate où c'est 2 objets éloignés d'une distance connue, pourrait aider à la localisation
+faire un tracking et voir s'ils se confirment
+
+voilier
+Control voile fg, foc zs, ou l'inverse, avoir une option pour choisir si contrôle indépendant? Mais gestion du stop et generalstop dans scripts?
+compat CV7 : in if (ublox.bEnable_NMEA_MWV) take into account apparent wind speed and robot speed (SOG, COG...) and roll and pitch...
+to be able to get apparent and true wind data from the sensors without trying to compute true wind from apparent wind : replace bDisableRollWindCorrectionSailboat with int TrueWindComputationMode : 0 no true wind computation from apparent wind, 1 computation with all possible corrections, 2 computation with only yaw and roll correction
+pouvoir tester tous ces modes avec le simulateur
+Estimation du vent vrai à partir de apparent : prendre en compte vitesse GPS et la vitesse du vent peut s'estimer grossièrement à partir de la vitesse du bateau, sauf que dépend aussi du courant...
+Prendre aussi en compte tangage, utiliser matrice d'euler
+setwindestimation/wgs : also add for water current and waves, any fluid...?
+prendre en compte vitesse gps et estimation de vtwind donnée en paramètre (en option, e.g. si vtwind_med pas mis à 0...)
+dans la phase de station, les actionneurs restent à leur dernière valeur, est-ce que c'est le mieux?
+si interruption de mission et qu'on reprend, il faudrait faire un forcecheckstragey et forcesailupdate...
+kalman pour retrouver vent vrai?
+lorsqu'on vire de bord, la girouette va se retrouver à un moment à un angle de 0 et ce sera forcément la direction du vrai vent, par contre pas filtrer passe-bas à cause du retard, filtrer en regardant quand on passe de 5 valeurs positives à 5 valeurs négatives
+VCtrl : add Error in status bar if a function failed...
+
+changer observer (et éventuellement simulator) pour que omegazdot=alphaomegaz*(u1-u2)-alphafomegaz*omegaz (au lieu de psidot=alphaomegaz*(u1-u2)...)
+si on a une IMU, on l'utilise pour omegazhat, si on a un GPS, on l'utilise pour la vitesse... (activer ça selon les robid)
+prendre en compte dans la localisation la position GPS de la bouée avec longueur du câble et profondeur du sous-marin?
+
+openal, pingertracking->script python séparé
+
+replay
+voir UxVDataViewer
+faire option lecture de fichier sonar qui lit les temps et attend de dt=t1-t0 avec t0 et t1 lus dans le fichier, voir comment c'est fait pour vidéo
+rajouter fonction replay uxvctrl, comment gérer mieux les histoires de conversions de temps?
+il faudrait sans doute faire des cas particuliers car les données sont parfois dans des fichiers séparés (caméra, sonar) et pour le sonar le temps de reconfiguration est variable donc c'est pas facile de manuellement choisir le moment où un fichier particulier doit être relu
+mais on peut éditer un peu les fichiers pour que ça colle bien... faire des programmes de concaténation qui remplissent avec des blancs quand il n'y a rien? et s'il y a changement de config, il y a eu appel à sonarconfig (quand il y a eu déconnexion intempestive, on peut concaténer car il n'y a pas de changement de paramètres)
+j'ai déja des commandes sonarconfig Seanet.txt, rajouter paramètres loop et delay?
+plutôt faire un programme qui regroupe les données de tous les fichiers capteurs (y compris sonar, nmea ou lognav?) en un gros fichier (video pourra être gérée indépendemment ou éclatée en fichiers)
+t;type;data
+mais il y a aussi des paramètres dans les fichiers de config...
+2 approches : un gros fichier qui contient tout ou plusieurs fichiers lus directement par les codes de gestion de périphériques correspondants (le problème est la synchro des temps)
+il faut qu'on puisse indiquer qui fixe la base de temps et qui doit se synchro dessus->il faut juste spécifier l'heure absolue de début pour que les différents replay sachent quand prendre des données des fichiers?
+paramètre absolutebeginreplaytime dans chaque fichier de config au lieu de delay? (il suffit de lire le nom du fichier en fait...)
+dans ce cas il suffirait de faire des sonarconfig log_with_date.csv au début et à chaque reconfig dans un fichier de mission inspiré de l'original, avec le mode spécial replay du sonar qui lit chaque ligne dès que le moment est bon en supposant que la date de début est celle dans le nom de fichier
+razor, es (indépendant ou via seanet), ssc sauvegardent données brutes sans indication de temps...
+should add variable datacounter for each device?
+rajouter device qui lit un fichier csv, qui attend le bon temps et avant de lire les données de chaque ligne (temps absolu ou relatif en option)
+ce serait bien aussi de pouvoir charger un fichier qui donne des données en fonction du temps et de la position...
+
+simu
+UxVSim : faire release avec config BOATBOT, VAIMOS et SAILBOAT2?
+P:\Robotics data\Competitions or robots specific data\ASVs\2011-2012\VAIMOS
+P:\Robotics data\Competitions or robots specific data\ASVs\Latest\Sailboat 2\Share\UxVSim
+P:\Robotics data\Competitions or robots specific data\ASVs\Latest\BOATBOT\UxVSim
+P:\devel\GitHub\UxVSim
+UxVSim VAIMOS : valeurs de roulis un peu extrêmes, should update equations to compute SOG and COG...
+Faire simu de voilier dans la rade avec données d'un vrai ais et faire tourner longtemps et vérifier qu'à aucun moment il y a collision
+améliorer simu de GPS bruité...
+add alphafvry, alphaomegax, m, Jx, Jy, Jz, l, L, h parameters
+UxVSim : faire motorboat qui a du vy, mettre des options bDisableDevice, rajouter biais des actionneurs en params?
+reprendre UxVSim et y rajouter des devices et équations pour d'autres robots, et/ou intégrer les devices simulés et équations de robots dans UxVCtrl?->au moins les équations, il y a déjà des robid prévus pour différents simulateurs...
+Intégrer modèles simu drone, char, buggy, avion, voilier de MATLAB...->ou alors faire dans un programme séparé avec le simulateur de voilier, voir aussi ardupilot_simulator...?
+
+CISCREA
+après un test rapide en rs485 sur le ciscrea dissous, il semble que la période du thread ciscrea ait des pics de 0.095 s, moyenne 0.070
+reorganisation CISCREA comme autres hardware pour pouvoir prendre en compte paramètres du fichier de config, voir noms/numérotation des moteurs, clockwise
+regarder paramètres internes caméra reg 11=0LRUDS01 (LRUDS : boutons OSD) (light adjustement...), programme indépendant commandes bas niveau pour les propulseurs ciscrea, rampe, faire un pwm logiciel pour les faibles vitesses...
+
+attention aux valeurs au départ d'initialisation, attention au setstateestimation...
+surveiller divisions par 0..., vérifier cohérence paramètres par défaut
+surveiller le abort et abortmission... n'arrive pas toujours à arrêter toutes les régulations?
+
+Duplicate stdout to output log file
+Test again cancel on command thread to exit...
+deadlocks à cause de killthread? il faudrait plutôt utiliser quelque chose comme WaitForUserInput() au lieu de fgets... Est-ce que ça marcherait pas mieux avec les cancel? Mais il se peut qu'il y ait des malloc dans la fonction Commands()... On peut peut-être désactiver le mode cancelable autour de l'appel à la fonction Commands()... En fait sous Windows c'est différent, les cancellation points sont quasiment que les fonctions en XXXEx...
+voir aussi rapport entre pthread_cleanup_push()/pthread_cleanup_pop() et QueueUserAPC()...
+
+robid log file?
+pause device supersedes restart, restart is now useless? mSleep(threadperiod) after Restart Disconnect()?
+on pourrait supprimer la gestion du bConnected si on faisait une boucle de connexion avec dedans une boucle de polling, comme c'est le cas dans multitcpsrv? mais ça m'oblige à dupliquer la gestion des bPause, bExit...
+Paramètres position xyzpsithetaphi des capteurs sur le robot et leurs erreurs sur les données dans les fichiers de config...
+image : passer au log pour que les zoom, rotations... deviennent comme des translations...?
+gestion vagues et z, courants et v, wind...
+uxvguiwinforms pour zoom et ancienne gui, rajouter entree de lat0,long0, err, affichage lat long, remoteopencv gui (envoi des images et réception des touches, faire en sorte que la partie server marche sous Android (ne doit pas appeler opencgui, pas de timers...)), rmtcommand/TelnetInterface (client serait juste telnet)
+connectionqualitychecker: programme server/client qui évalue la qualité de la connexion wifi et déclenche une alarme sonore en cas de problème
+procédure équilibrage auto en mesurant vitesse de montée : en fait il faudrait une bonne estimation de rho_water, V_robot et alpha...
+peut-être pas trop s'embêter à faire un programme qui fait tout pour récupérer en cas d'erreur, le faire quitter dès qu'il y a une erreur et avoir un autre programme qui surveille sa présence et le relance s'il est arrêté. Il faut que le programme soit ensuite capable de reprendre là où il en était
+
+
+
+OLD
+
+La conversion de BGR vers I420 avec cvtColor prend pi4 cpu 30% en 1280x720@25...
+De même, imwrite() : 
+JPG : 30%, retard 5-10 ms
+PNG : 30%, retard 130 ms
+BMP : 30%, retard 60 ms
+PPM : 30%, retard 100 ms
+(gros délais surtout dus à la SD, qui est pourtant une rapide?)
+
+cv rpi4 marche pas bien en 1920x1080@25-60, 200 ms par image, pourtant prend pas de processeur, peut-être qu'il faudrait régler le mode interne de la caméra comme on fait avec gstreamer?
+Video.cpp : régler les CAP_PROP avant et après l'ouverture de la cam?->en regardant le code de cap_v4l.cpp, il faut que ce soit fait après, tout ce qui doit être redémarré l'est à chaque set()...
+Forcer BGR3 opencv avec CAP_PROP_FOURCC, tester utilisation proc->opencv force à BGR3 dans tous les cas si c'est possible...
+
+pi0w pourquoi très bas fps avec videointerface->320x240@25 ms et capture @ 40 ms à peu près OK, processeur à 95%->attention aux redimensionnement et scale, les désactiver et mettre les réglages natifs pour Video et VideoInterface!
+
+OpenCV lit pas le I420, besoin de cv3.4.3 au moins, cv4.1.0 OK
+
+vlc.sdp BlueROV camera Protocol 'rtp' not on whitelist 'file,crypto'! pour UxVCtrl même avec variable réglée?->OPENCV_FFMPEG_CAPTURE_OPTIONS needs cv>=3.4.2
+
+set OPENCV_FFMPEG_CAPTURE_OPTIONS=protocol_whitelist;file,rtp,udp
+export OPENCV_FFMPEG_CAPTURE_OPTIONS="protocol_whitelist;file,rtp,udp"
+
+qgc et UxVCtrl en même temps sur /dev/video0 pi0w->FAIL
+
+reset de bMissionAtStartup si mission terminée sans commande exit à la fin...
+
+resume file indicating at which line the mission should restart in case the program stopped (as well as an initialization script, or we should design the script so that all the needed initialization steps are correctly specified on the resume line)
+setresumepoint : command to indicate a resumepoint (updates the resume file with the current mission line)->labels
+
+Touche pause qui relance la ligne courante? Ou qui arrête le robot à des cancellation points/labels (quand bWaiting) sans modifier les variables liées aux missions (arrêt bas niveau un peu comme quand on passe en manuel avec multiplexer), il faudrait pour ça que tous les actionneurs utilisent u1,u2, etc. au lieu de u, uw, etc. pour pouvoir agir directement sur u1, u2... Pause ne sauvegarderait/restaurerait que les variables liées aux régulations bas niveau, juste pour que ça marche pour le suivi de ligne et waypoints, utiliser touche p pour faire pause au lieu d'interrompre mission...?->bForceOverrideInputs...
+
+add delay param to wait before launching observer, controller, etc., to prevent bad first positions in the logs...->use waitforGNSS param...
+
+Logique de def du repere local w.r.t. vaimos...->param pour changer repère dès qu'on capte gps, avant de lancer les threads observer, etc.?
+Rajouter check gouvernail en même temps que calib voile?->FirstSailCalibrationDelay to wait for rudder test to finish, or in main() add an optional sleep (ruddercalibtime) if robid==VAIMOS
+
+$PHTRO,x.xx,a,y.yy,b*kk<cr><lf> where x.xx is pitch in degrees, a is 'M' for bow up, 'P' for bow down, y.yy is roll in degres b is 'B' for port down, 'T' for port up checksum etc as standard NMEA. (25 - 29 chars variable).
+
+$HCHDM,hhh.h,M*kk<cr><lf>
+where: $HCHDM signifies magnetic compass, magnetic heading
+hhh.h is heading without leading zeroes
+M signifies relative to Magnetic North
+* is a '*' character
+kk is XOR checksum of all chars between $ and * exclusive
+
+$HEHDT,hhh.h,T*kk<cr><lf>
+where: $HEHDT signifies north seeking gyro, true heading
+hhh.h is heading without leading zeroes
+T signifies relative to True North
+* is a '*' character
+kk is XOR checksum of all chars between $ and * exclusive.
+
+messages rc_override ne peuvent être envoyés que juste au début si bOverridePWMAtStartup ou ManualControlMode==0 ou 2
+
+mode auto : rc_override envoie des valeurs différents de 0 et 65535 pour certains channels->bDisablePWMOverride==TRUE
+mode télécommandé : rc_override envoie 0 pour tous les channels qui ont pu être modifiés->bDisablePWMOverride==FALSE
+
+overridechan est tout le temps surveillé si chancount >= overridechan et overridechan entre 1 et 18, sinon il n'est pas utilisé
+
+bDisablePWMOverride est déterminé en fonction de overridechan et bDefaultDisablePWMOverride
+
+au début ou si perte de connexion avec la télécommande, bDisablePWMOverride=bDefaultDisablePWMOverride
+perte de connexion avec la télécommande : chancount <= 0 ou chan de overridechan à 0 ou 65535
+si overridechan>1750 et != 65535 bDisablePWMOverride=!bDefaultDisablePWMOverride
+
+1 DO pour trigger sonars quand on veut->utiliser extra1chan
+
+sous vm Mac, thrust/turn 1 fait bouger le buggy/AUV simulé très lentement?->tester sous vm Linux...->semble lié à USE_OLD_CHRONO version clock_t, actuellement si ENABLE_GETTIMEOFDAY_WIN32 est pas activé c'est celle-là qui est prise même sous Linux/Mac mais clock_t ne fonctionne pas bien dans une vm...
+
+Le Alt RC mode perturbe les missions autonomes et aussi le contrôle via MAVLinkInterface car il remet u à 0 tout le temps, ne pas l'activer par défaut?->n'activer le RC mode que si on appuie sur zqsdaefv (faire fonction SetAltRCMode(&bAltRCmode)) et le stopper dès que le u a été remis à 0 du fait qu'on n'ait appuyé sur aucune touche...->il y a déjà le bZQSDPressed...
+Bug altrcmode : ne se produit que si on a appuyé une fois sur une touche dans OpenCVGUI...
+->il y avait un bug dans SSC32Interface, tout était probablement lié à ça vu que les tests étaient avec MATLAB et n'avait rien à voir avec le Alt RC mode...
+
+u_f, devices, interfaces, text in gui, observer...
+
+helios : D'où vient vrxhat?->calculé dans observer...
+helios : Accrxhat, etc. pas loggués dans logstate?->corrigé
+
+pour chaque sonar/lidar : une overlayimg qui peut être (normal ou waterfall ou rien) et (avec 1ères distances, toutes ou absentes) et (corrigé en bras de leviers, +psi, +pos, -pos+historique psi, +historique position, ou sans correction)
+
+bug bVideorecording à 0 après stop mission qui enregistrait (regarder quand on appuie sur r après le stopmission)? bVideoRecording and bVideoRecordRequests...
+crash du programme lorsqu'on appuie sur p pour stopper mission : video recording pas stoppé correctement (deletetimer doit pas être appelé si on a encore un timercallback en cours?)...? ou alors il ne faut pas arrêter en même temps les 2 vidéos... mais je les arrête pas...
+why I need to press twice r to stop videorecording when it was started by a script?->c'est logique, il faudrait sans doute que la variable locale bVideoRecording soit réglée en fonction de videorecordrequests, peut-être la supprimer dans OpenCVGUI et rendre l'enregistrement indépendant du fait que la GUI soit enabled ou pas, les videorecordrequests étant juste soit 0, soit 1, seul l'appui de la touche r ou les command start/stop videorecording doivent controler l'enregistrement...
+
+commander drone en althold/loiter/guided (attention, althold plus violent en horizontal) sans rcoverride même s'il ne capte pas le GPS...->SET_ATTITUDE_TARGET (doit être renvoyé régulièrement?), ne marche qu'en guided, du coup il suffit de revenir à un autre mode avec la télécommande pour reprendre la main...
+force mode marche pas, d'où mode non armable, peut-être à cause de chan 5?
+Home, prehome and preprehome pour pouvoir contourner en RTL/RTH, ne peuvent pas être mis dans env.txt car dépendent du robot, de la mission->RTL en repassant en option par le chemin comme SmartRTL
+
+signe u, ul, comparer entre réel et sitl, pourquoi il y avait juste que pour uw qu'un - avait été rajouté...
+
+faire un getmultiplevaluemaestro pour optimiser, mais pas sûr que ça marche?->pas urgent car pour l'instant on peut alterner les lectures, mais peut être intéressant si besoin de haute fréquence de lecture...
+
+check sign of omegaz for SBG and old MTi->OK
+
+GUI bloquée si GoPro pas connectée...->prévoir option pour lancer OpenCVGUI en 1er?->peut-être résolu avec nouvelles CS Video et GUI séparées...
+
+rajouter fond d'ecran carte google earth (->possible hack with video, but a bit hard to set good coordinates!)->voir google api, niveaux de zoom, etc.->Mission Planner...
+mousecallback to set waypoints, lines...->Mission Planner+OpenCPN...
+Roscontrol et rosjava android apps (no longer maintained?), communication avec MAVLink?
+
+Chemin avec espace pour source...
+Cmake n'arrivait pas à télécharger opencv windows->probablement corrigé...
+
+protéger par OpenCVCS les VideoWriter? Mais s'il y a une webcam qui met du temps à se connecter ça va bloquer...->CS séparées...
+
+fluiddir (in deg) values in log razor scan?->c'est juste le vent initial...
+Touche juste mise au neutre gouvernail?->déjà possible avec a ou e pour certains robots...
+
+Vérifier pourquoi reconnections razor->caractères invalides de temps en temps
+
+uw    idealangle                        realangle             pw
+      -0.75                             phyminangle=-0.5      1000
+      -0.125                            phymidangle=0         1500
+      0.5                               phymaxangle=0.5       2000
+-1    phyminangle-phymidangle=-0.5      minangle=-0.3         1200
+0     0                                 midangle=0.1          1600
+1     phymaxangle-phymidangle=0.5       maxangle=0.5          2000
+                                        -0.1                  1400
+
+phymaxangle=max(fabs(minangle),fabs(maxangle))=0.5
+phyminangle=-phymaxangle=-0.5
+phymidangle=0
+
+pouvoir rajouter un biais par rapport au neutre normal (BOATBOT avec sondeur...), mais peut-être déjà possible de le faire en fait avec les MidPW...
+
+waitxyt x y t
+waitxytrelative x y t
+waitxytwgs
+
+waitlinet
+waitlinetrelative
+waitlinetrelativerobot
+waitlinetwgs
+
+Le programme ne s'arrête pas si n'arrive pas à se connecter à udp://10.5.5.9, mais c'est sans doute à cause d'opencv
+
+Passer de 80 à 70 pour gamma_infinite par défaut pour pas revenir en arr si erreur de 20 deg sur cap...?
+
+Pas forcément remettre à 0 integral si changement consigne? Pas sûr...
+
+Linux : program killed when client disconnects from server->dans send mettre MSG_NOSIGNAL, mais pour write il n'y a pas de paramètre donc dans le open mettre signal(SIGPIPE, SIG_IGN) (or sigignore(SIGPIPE)) et/ou le mettre dans le main...
+https://stackoverflow.com/questions/17332646/server-dies-on-send-if-client-was-closed-with-ctrlc
+
+cmake-gui hangs sometimes at the end of sudo apt install...
+
+Ubuntu static
+gcc -o foo main.o -static -lbaz -lbar
+g++ -static-libgcc -static-libstdc++
+https://www.arangodb.com/2018/04/static-binaries-c-plus-plus-application/
+
+sln cfg par défaut x86->pas possible sans .suo (user-specific)?
+
+n'utiliser que des recvfrom et sendto dans le cas UDP et garder en mémoire le dernier sockaddr reçu dans la structure RS232PORT...->mais il faut être sûr qu'il y a un recvfrom en 1er...
+
+GoPro : faire un device gpControl?->intégrer dans le code de la video, mais légers délais possibles dus aux keep-alive...?
+
+ifndef and ! in comment...
+Réduire le nombre de fichiers dans UxVCtrl?->peut-être pas...
+
+YPRAG acc and gyr values not used for RazorAHRS and RazorAHRSInterface...
+When program stopped maestro does not stop thrust?->to check after changing configuration file Maestro0.txt
+Generalstop à la fin?->remettre les actionneurs au neutre à la fin selon le robid pour maestro, etc.?
+Pouvoir désactiver localisation dvl car s'il part du mauvais point de départ il est quand même précis et du coup on peut pas corriger avec sonar->enable/disableautodvllocalization
+
+n'afficher qu'en debug les warning bad nmea checksum, à cause des UBX-RXM-RAWX
+
+peut-être prendre en compte le ublox 2 dans bCheckGNSSOK et ne pas mettre à jour sa variable GNSSqualityublox, comme c'est le cas pour mavlinkdevice en followme...
+
+Observer, simulator : le GPS_submarine_depth_limit doit être considéré côté observer, et peut-être les autres choses qui font penser que c'est UNREL aussi...->en fait c'est vraiment des détails de choix de fusion de données qui ne peuvent pas facilement être indiqués sur la GUI...
+
+niveau de réception des satellites > 15-25, sinon risque de multipath...
+12 sat max, parfois même avec hdop <= 0.8 ça dérive, voir building ERL 2017...
+nbsat >= 10 and hdop <= 0.8, err = 2.5 m, 8 >= nbsat > 6 and hdop < 1, err = 5 m, 4 <= nbsat < 6 and hdop < 2, err = 55, see http://ardupilot.org/copter/docs/common-gps-how-it-works.html (assuming no multipath)
+
+notations régulation en position vs régulations en vitesse, e.g. en z?
+en followme on fait une régulation en vitesse, sauf qu'en pratique c'est que des vitesses limites, umin, umax, uidle...->en fait c'est plus une régulation en distance...
+
+sign(u, 0) buggy (movement direction if necessary)
+constrain, map, sq
+non-symmetrical control...->keep as it is...
+
+Commande proportionnelle à e.g. sqrt(error), sin...->à traiter comme cas particuliers...
+
+put by default GGA and RMC in ublox config files that use NMEA protocol...
+
+Vrai UTC à mettre dans log et ne rien mettre si on l'a pas
+phi, theta, psi Razor, SBG, MT, MAVLinkDevice, MAVLinkInterface, Observer, Controller, check also values on OpenCVGUI and for wind roll correction (Maestro, NMEADevice, ublox), remove old raw roll, pitch, yaw...
+Rajouter depth et altitude dans log file, différencier altitude AGL (above ground), AMSL, altitude_pressure/depth
+
+logstate était compatible avec le début de logsimu à l'origine...->modifier logsimu pour qu'il soit toujours un peu compatible?->tout faire comme logstate
+
+Nouveau seanet pro pour problème portée?->pas mieux, pareil avec micron software...
+
+Renommer dossiers AUVs\2016-2017 en UxVs\Latest, et mettre à jour script USERUpdtQuick et UpgradeOSUtils et dans GitHub pour chaque PC?
+
+rajouter dans samples un triangle sur place d'armes et terrain, et ar devant bat M
+
+si on a mavlinkdevice connecté à la mavlinkinterface et qu'on connecte mission planner, mission planner n'est pas mis à jour, mais c'est peut-être un problème d'ids...->MAVLinkInterfacePseudoRS232Port pas thread-safe
+
+faire en sorte que buggy s'arrete si perte de connection (bFullSpeedMode à activer juste pour moteurs et rajouter plus de précision dans le réglage de la puissance max
+
+comment reprendre la main avec la télécommande facilement?->utiliser un rc input channel pour désactiver le RC override?
+
+vxy->vrx, theta->psi (attention au psi du vent et autres éventuels phi à remplacer avant)
+
+Release GitHub : le dossier de binaires et de sources est téléchargé sous le même nom, publier sources comme UxVCtrl_Zip...?
+
+possible bug in videocapture destructor in cv320, probably solved in next version...
+Pb cvqueryframe windows 10 sjcam ou autres caméras internes->utiliser les fonctions en cpp en options pour l'accès à la caméra?
+c'est parce que l'api C cv3XX n'utilise que VFW, qui ne marche plus sous Windows 10...
+
+automatiquement rajouter les excluded from build dans Compat_vs20XX.bat, rajouter scripts pour changer de version d'opencv?->un peu compliqué...
+
+il doit rester d'anciennes données dans les alpha_mes_vector si on déconnecte et reconnecte...
+bug rplidar : le vecteur de données ne peut que continuer à grandir avec juste le bnewscan, il y a trop d'historique...
+
+Mini maestro marche pas sous Windows 64, sauf avec release eurathlon2015 (en fait même pas?)...->après redémarrage ça remarche, peut-être juste bug de driver propre à mon PC lié au BSOD que j'ai eu un peu avant...
+
+vc_linux->problème copie fichiers de config->mettre type does not participate in build
+vc_linux type de projet est-il compatible avec GUI OpenCV->add export DISPLAY=:0.0
+
+RPLIDAR : forcer DTR à low aussi pour Windows?
+Newrtscts, cleardtr...
+rplidar marche pas sous linux (SetMotorPWMRequestRPLIDAR, GET_ACC_BOARD_FLAG_REQUEST_RPLIDAR, paramètres d'ouverture du port série, utilisation de DTR...?)
+rplidar calcul angles : indices i et k devraient démarrer à 1?
+
+Zone morte sonar trop grande?->c'était juste lié au fait que d_mes_err était plus grand et que le repère était trop zoomé...
+
+Ublox sends NMEA+UBX-RAWX...
+
+NMEAProtocol.h
+AnalyzeSentenceNMEA()
+Stack around the variable 'checksum' was corrupted
+buf = 0x0c6fd844 "!k›A¸\x17,D"
+checksum = 0x0c6fd558 "*FFF...
+
+ComputeChecksumNMEA()
+sprintf(checksum, "*%02X", (int)res)
+
+Ubuntu 16.10 errors cv min, max, distinguer cas C et C++? Trouver où min et max sont définis en mode c++ (il y a aussi du min/max dans AIS.h)->min, max à define pour Linux seulement dans les fichiers où c'est vraiment nécessaire, et à undefine à la fin du fichier, e.g. OSMisc.h, SSC32.h...
+
+dans env rajouter pressure at the surface, water density, water velocity of sound,...?->peut-être pas car des fois le capteur change de config et ça dépend donc vraiment des conditions du capteur...
+
+utiliser les bEnableGGA, etc. pour voir si on appelle GetUBXPacket() ou GetNMEASentence()?
+
+Ne pas faire de reset de la base rtk et setbasecfg tout le temps!
+
+l'ouverture angulaire verticale totale du sonar est de vbeam=40 deg donc h=d*sin(vbeam/2.0)
+
+Augmenter param z err
+
+bug code modem : xhat et yhat ne sont pas agrandis en cas d'ensembles vides après Cdistance(), seul P est agrandi...?->déjà corrigé
+
+problème phénomène de convergence du GPS qui donne position très précise mais fausse à cause du biais... est-ce que j'aurais pas mis trop de biais?
+simu : au début convergence vers un intervalle tout petit correspondant au biais quand y a GPS, convergence vers un intervalle de vitesse tout petit...
+
+la localisation dynamique bloque trop longtemps les autres threads, notamment simu
+Quand je fais un lock des statevariables pour staticlocalization, vérifier que si le lock dure pas trop longtemps ça fait pas timeout et reconnexion des capteurs
+Contract a besoin de section critique pour dhat... isoler en une fonction qui utilise pas les variables globales mais prend tout le nécessaire en paramètres, bien voir ce qui en entrée et en sortie, et l'isoler dans un thread séparé...
+pendant une static localization, tout est bloqué à cause des sections critiques, il ne faut pas qu'il y ait une régulation en cap activé à ce moment!!!
+
+remplacer message GPS FIX (in use) par GPS FIX LOC pour coller avec SNR?
+
+faire en sorte qu'on puisse zoomer et se déplacer dans la vue de localisation comme en MATLAB->zoom déjà fait, et voir touche *
+
+Interval_adapt c_q_in->OK, c'est celui d'Ibex...
+
+abort dans procedure gere-t-il bien le return raté?
+
+Faire en sorte que generalstop implique abort?->non, ça supprimerait des possibilités en mode semi-autonome...
+
+check if improvements can be made to AUV control (e.g. to avoid sinking and lose control...)
+
+renommer analyze en decode et qu'il retourne aussi l'adresse de payload et payloadlen? mais du coup ça fera beaucoup de paramètres à rajouter dans toutes les fonctions...
+GN/GL parfois utilisé à la place de GP dans NMEA?->$GN, $GP->"$G%c" && c0=='N' ||'P'
+
+NAV-VELNED, NAV-POSLLH and NAV-STATUS sont ceux utilisés par ArduPilot
+
+pour les périphériques, des fois faire une structure correspondant à chaque trame améliorerait la lisibilité...?->problèmes de packing, padding...
+
+add pressure in logstate? 
+quel est l'intérêt de utc (in ms) s'il y a déjà t (in s since Epoch) dans nouveau log?->c'est l'heure brute du GPS
+
+odometer data SBG, format du log...?->non dispo
+
+vérifier signes, unités entre MT et SBG...->au moins difference de - sur le yaw et le roll, le Z, le Y (difference de NWU à NED), faire programme de conversion spécifique SBG2MT et inversement...
+faire un MT2NMEA pour pouvoir être compatible avec tous les programmes pour GPS
+rajouter param gpsaccuracythreshold pour SBG0.txt pour définir quand on prend en compte le GPS, ou trouver automatiquement...
+surveiller freq thread SBG
+
+check \n in commands for Linux...->ne marche pas
+bug : procedure 1 already exists quand elle est déclarée à la fin et qu'on a déjà du la chercher, sans doute pareil pour labels...->vérifier aussi si la ligne enregistrée est différente...
+tester aussi ce qu'il se passe si redéfinition...
+check correct jump/goto/execute/return lines w.r.t. ftellline()...
+
+bug : toujours pas de snapshot pour ASV (periode des snapshots trop grande?)...->mettre pic_counter = 1000 quand on détecte pas
+remove the msg_..._msg in mavlinkdevice
+need command procedure procedure.txt to be able to go back to previous point in the mission...
+
+Bug maestro rpiz et rpi2, déconnexions intempestives, compiler en debug pour comprendre, timings? Test with micro maestro?->changer hub usb, certains types semblent provoquer une incompatibilité...
+
+dessiner en cyan les distances sonar?->pas très visible si caméra activée...
+
+Pb compil linux ais
+
+pour mieux gérer les problèmes de EOL, au moment où on fait isdigit() ignorer les CR, LF...->use %[^\r\n]255s like in Video in all devices?->only good when we expect to get spaces in the string...
+
+commande checkXXX bTrue bNbCommandsToSkip pour faire un peu comme un if et goto
+checkball 0 2
+sendmsg
+track
+checkball 1 4
+balldetection
+checkball 0 2
+sendmsg
+track
+continuewall
+
+up/down/left/rightlimit en px pour les parties de robots visibles à l'écran lors des traitements (ou mieux, definir une forme plus complexe un peu comme la map dans env)
+Add cropping for each cam to handle zed correctly, -1 is no cropping->hscale and vscale partially gives similar functionality (translation missing)
+hcenter,vcenter,hshift,vshift to translate before and after rotation? check logvid2imgoverlay
+
+Need to improve command line only mode to display switch, gps fix... info in extra info->not really necessary, see log file
+
+temps de convergence au départ pour localisation gps et peut-être sonar quand on RAZ?->c'est sans doute normal, lié au fait qu'on sait qu'on bouge pas (si vrxhat n'est pas de largeur infinie)...
+affichage sonar déjà assez optimisé contrairement à ce que je pensais?
+trouver comment dessiner plus efficacement l'image sonar (sans superposition de dessin, quel que soit zoom...)->déjà pas mal?
+
+update additional parameter in ballconfig in samples...
+si bBalldetection ou bBalltracking arrêté alors qu'il y a eu une ball détectée, il continue à envoyer des msg acoustiques jusqu'à ce qu'une autre commande acoustique remplace
+
+problème reconnection GPS Galaxy S? c'est peut-être juste qu'il capte pas bien...->à cause de l'Ubiquiti!
+
+j'ai oublié de mettre les stopvideorecording? mais en fait ils risquent de ne pas vraiment être appelés...
+
+ardupilot mavlink : gps fix clignote car il y a des trames qui sont pas du GPS par moment (le GPS n'envoie des trames que toutes les 0.5 s)...->utiliser un chrono
+
+controle à distance des touches par wifi pas top (interruptions...)
+decrease opencvgui period for better effect on keys trex? RDP UDP causes key pressed loss? repeat key windows param?
+
+synchro temps des chronos et gettimeofday, utc...->mettre données brutes en gettimeofday, missions en chrono...
+dans logstate rajouter tv_sec;tv_usec; pour pouvoir synchroniser temps tasks et raw data
+
+sauvegarder toutes les données presque brutes px4flow pour postprocessing (flow, flow_rad...), angles ardupilot aussi (attitude mid 30, gps, altitude...)?
+mais on dirait que je reçois pas optical_flow_rad... changer de firmware?
+
+0 bizarres dans depth des logmission du harbor alors que pas de problèmes dans les données brutes pression...
+il y a des 0 qui s'affichent parfois brièvement pour depth dans opencvgui sur le nuc?
+zhat à 0 aussi dans logstate, mais rien vu dans pressure... attention, il y avait du z_mes pris par GPS?
+
+commandes enableautogpslocalization/disableautogpslocalization (dans observer?)
+
+observer : prévoir d'autres equations quand gps non dispo (voir etas_wheel eurathlon 2013 pour robot terrestre), comment déterminer si GPS OK...
+
+synchro gui etas_wheel à faire (touches et affichage pour u_max, uw_max...), synchro périph faite
+buggy, trex... : afficher aussi u_max
+
+replaceinfile enable disable kinect or new config (e.g. Release_compat), also for ciscrea, labjack, because of their dependencies (add new defines, check .gitignore...)
+
+maestro : add param to tell which version (micro maestro does not support set multiple targets...)
+servo voile tout le temps remis à jour? ajouter option pour choisir si on utilise la commande multiple targets?
+
+maintenant il n'y a plus besoin de lire ch9 et 10, ch gouvernail et voile échangés pour meilleure compatibilité avec autres robots
+
+afficher position des waypoints dans l'interface->en fait je peux un peu les tracer via le fichier env.txt, mais ce serait mieux si c'était automatique (en option avec touche...), le plus simple est d'afficher le waypoint courant ou la ligne courante...
+
+maestro : 115200, délai 15 ms entre write et read, mauvaise gestion des timeouts du 1er byte reçu (en debug j'ai vu que les 2 bytes finissaient bien par arriver...), mauvaise interprétation de Bytes==0...?->le timeout semble bien avoir lieu (mesuré avec chrono), tentative aussi avec flags FILE_FLAG_WRITE_THROUGH|FILE_FLAG_NO_BUFFERING mais c'est pas mieux, voire pire..., et avec un baudrate plus élevé il y a peut-être moins de problèmes, mais c'est pas clair...->délai 15 ms entre write et read semble résoudre le problème...
+
+wpfollowingfileconfig radius file bWGS
+linefollowingfileconfig radius gamma_infinite file bWGS
+startlinefollowingfile
+stoplinefollowingfile
+startwpfollowingfile
+stopwpfollowingfile
+
+waypoints.csv avec colonnes optionnelles, radius, durée de station, durée de surface, bUseGPS, profondeur, gamma_infinite
+
+affichage tous les counter==
+
+un fichier de config pour décrire les périphériques du robot?->c'est déjà un peu ce que fait UxVCtrl.txt
+
+touches z, s : ouvrir/fermer voile
+le fait qu'il revienne droit quand on va en marche av ou ar convient pas pour buggy, prévoir une touche pour activer/désactiver?->fait automatiquement selon robid
+
+rajouter heure, min, s avant auxbuf dans log sonar (voir leur calcul pour chaque ping...)
+
+gcc -fpermissive
+destroywindow dans code théo->bCleanUp
+
+sonarstaticlocdevice : merge à faire... a beaucoup servi pour débugger sonar au début, maintenant qu'est-ce qu'il a de plus?
+gui->sonarstaticlocstructured
+sonar device handling->uxvctrl, sonartest, sonardisptest
+localisation->sonarstaticlocstructuredsimu
+
+restaurer régulations et u après brake?-> mais le but du brake est de s'arrêter...
+dans bBallTrackingControl sauvegarder images et pouvoir juste faire un brake
+brake en option pour surfaceavoid?
+
+seanet : faire version de GetLatestMsgSeanet et GetMsgSeanet qui ne prennent pas en paramètre le mid mais retourne celui trouvé (pour pouvoir gérer les messages de l'echosondeur via le sonar)
+
+rubber boat : no sonar echo? c'est plutôt une ombre
+
+pour la ball en coop, il ne faut pas que les 2 robots utilisent leur sonar en même temps! l'investigator aurait droit à bouée GPS et Wi-Fi?
+
+visual obstacle paramètres pour autre algo ou nouvelles commandes? -> mieux vaut une nouvelle commande, il y a déjà assez de paramètres comme ça...
+
+#YPR=-71.64,21.12,-125.02 repère des marins avec 180/-180 au sud, nord vers connecteur ftdi
+
+prise en compte lat long mti-g si lat long différent de 0, support de bGPSOK...
+
+discontinuité hsl... singularité rouge : utiliser si hmin<hmax ou hmin>hmax pour gérer discontinuité->fait en dur...
+
+les vidéos ne sont pas lues à la bonne vitesse (mais on peut jouer sur captureperiod)
+
+CreateTimer(&timer, VideoRecordCallbackFunction, (void*)videoid, 1, captureperiod)->CreateTimer(&timer, VideoRecordCallbackFunction, (void*)videoid, captureperiod, captureperiod)?
+
+faire dossiers log, pic, vid, aud
+plante lorsque 2 fichiers vidéos sont ouverts?->résolu en rajoutant délai pour les 1ers cvqueryframe?
+dummy video (black) to be able to have gui when no camera
+
+pourquoi il avance? bug arrêt du wall tracking marche pas?->bug strncmp : stopxxx interprété par stop
+
+pourquoi en tracking tout devient vert->seuil à 0 parce que non géré
+
+log mti sans yaw? la configurer pour qu'elle envoie toujours euler, les accélérations et vitesses de rotation... ou faire en sorte que le code le fasse à chaque fois si pas possible pour vieille mti... le vieux mt software la déconfigure au lancement, utiliser plutôt mt manager...
+
+certaines portées du sonar ne seraient pas acceptées? a priori c'est juste seanet qui accepte pas...
+
+keys
+O orig GPS
+G pos GPS
+Z raz xy
+S pos sonar+-5,5 toujours...
+
+obstacle avoidance : uw=1 si obstacle à droite, -1 si à gauche, aléatoire si en face
+staticsonarloc ne semble plus avoir le droit de contracter dès qu'il a réussi à contracter
+$ dans l'aide, rajouter touche pour activer/désactiver osd mission courante
+ajout de utc dans mti : vérifier codage big/little endian...
+en dessous de thrust 0.5 en normal on n'avance pas...
+
+enregistrer aussi des images/vidéos avec les détections dessus tous les un certain temps, idem données sonar et wall following...
+
+il y a plein de 0 dans les données brutes gps loggées, sans doute parce qu'on s'est mis en mode wb...-> en fait je loggue pas les bonnes trames? ou alors il n'avait pas souvent le fix?->bug
+
+pouvoir synchro utc et temps ordinateur avec nmea : mais a priori la précision sera d'une s de toutes façons...
+
+revoir le log de la mti en prenant exemple sur les données prises avec mti-g
+
+modifier config ssc32 : voir servo.txt, la vérification des limites spécifiées sera faite à la config
+prendre en compte le fait que les PWM peuvent aller de 500 à 2500 pour aller plus loin avec certains servos
+faut que changement supérieur à certain seuil pour qu'on change l'actionneur pour éviter les tremblements (rudder, sail...)
+rajouter SetPWMsSSC32 qui fait plusieurs channel
+
+prévoir une commande spéciale comme setstateestimation/gpslocalization qui attende la réponse par acoustique (x,xerr,y,yerr,t,terr..., il y aurait demande de la position de l'autre modem et commande rng...)
+toutes les 5-10 s le robot de surface envoie xyzerr (4 int16) et en réponse le sous-marin répond rng (la correction d'erreur se fera par envoi de plusieurs)
+
+utilité du bError dans CISCREAThread, on risque de mettre à jour des données invalides... je voulais vérifier alarm, bExit...
+
+il tourne très vite quand il avance pas, par contre quand il avance à fond il tourne peu : à cause du boost!
+en fait en boost il a vraiment du mal à tourner comme on veut par rapport à l'arrêt...
+pour qu'il puisse avancer tout en tournant un peu, il faudra sans doute qu'il ait une vitesse minimale sinon ça fera n'importe quoi...
+
+couleurs texte gui, le vert c'est nul dans l'eau!!
+
+l'estimation de omegazhat est très imprécise, voir pourquoi, tester avec vrai robot...? estimer par simu avec les entrées ou filtre passe bas...
+comment évaluer correctement la vitesse connaissant la position (par simu avec les entrées ou filtre passe bas...)
+le filtre passe-bas va sans doute retourner des vitesses très faibles, il vaut mieux encore estimer à partir des entrées...
+
+ciscrea tourne d'1 tr/s au moins
+
+les ordreX sont bizarres...
+
+ajouter partie calibration magnétique pour boussole interne CISCREA, rajouter signe (pour une boussole simple, le signe a du sens, pas vraiment pour une IMU...) et enlever roll et pitch par rapport à MT car c'est une simple boussole
+
+vitesse de la boucle du thread ciscrea? où mettre les sleep? temps d'attentes entre les requêtes modbus en cas d'échec? tester rtu et tcp
+ne pas faire plus de 60 requêtes/s environ? attention à ne pas bloquer aussi les autres threads avec les sections critiques pendant les requêtes modbus...
+2 requetes modbus avec des mSleep(10) (sous Windows mSleep() doit durer au moins 15 ms en réalité) entre chaque donne une période de thread d'un peu plus de 60 ms en RS485, un peu moins en TCP
+=> 1 requete modbus pour plusieurs registres d'un coup semble durer environ 10-15 ms
+si on met pas de mSleep entre les requêtes, il y a des Modbus retry, et ils durent en fonction des réglages de timeout modbus (en RS485, il semble que les timeouts soient *2, en TCP c'est comme réglé)
+
+démarrage rov avec trame de 1000 caractères (250 ms de com) nécessaire? le robot redémarre en boucle tout seul dès que le boitier est branché? Semble OK (en RS485 uniquement), bien envoyer une trame suffisamment longue/communiquer suffisamment longtemps...
+
+modbus tcp does not support req of more than 128 bytes? possible...
+
+rajouter proportionnellement à u_max, uw_max, uv_max quand on reste appuyé sur une touche?
+tester régulation boost mode avec vrai robot, c'est peut-être bien d'avoir un mode mi-vitesse et mode full (mode normal/mode rapide ou même mettre un coefficient réglable, séparer ce coef pour propulseurs horizontaux et verticaux) car le mode mi-vitesse pratique pour manoeuvres manuelles => u_coef, uw_coef
+
+pour les suivis de waypoints ou ligne, il faut des commandes qui prennent x,y et d'autres lat long (wgs)
+mettre valeurs par défaut pour gamma_infinite, r (r sera commun à wp et line) dans uxvctrl.txt
+plus besoin du r dans gotoxyrt
+cancelgotoxy?-> le stop fait déjà ça...
+log avec unix time, lat, long, depth (pour unixtime, on va faire juste avec t vu que de toute façon on n'a pas l'heure exacte...)
+faire variable depth, compass de la même façon que latitude et longitude pour ces unités classiques? pas forcément utile, risque de rajouter de la confusion?
+rajouter angle_env = M_PI/2.0-d0*M_PI/180.0; à setenvcoordposition
+gpslocalization t qui bloque jusqu'à ce qu'il ait le fix ou le timeout, en général il vaudra mieux entre sûr d'être en surface depuis longtemps pour améliorer la précision
+bGPSOK? pour simulator, le GPS fait des mesures quand z >= z_gps_lim
+distinction gpssurface, gpssubmarine, faire 2 commandes distinctes? plutôt gérer qu'un seul gps, la plupart du temps on n'en a qu'un, et on augmente l'erreur si sur bouée pour l'instant, si on rajoute le cas particulier bouée il faudra prendre en compte longueur du câble et profondeur pour que ça ait vraiment un intérêt de faire la distinction...
+
+régulation en profondeur peut-être un peu imprécise et use les propulseurs, peut-être faire une commande plus progressive -> mais risque de faire que le sous-marin se stabilise avec le propulseur qui tourne tout le temps
+
+organisation include config.h dans hardware (voir sonar...)
+
+visualobstacleavoidance/wallavoidance
+en fait le wall tracking est un line following avec une distance d0 au lieu de 0, généraliser line following avec d0 (voir sonar...)
+
+thrustboost marche pas à cause de u1u2u3 mis à jour tout le temps, en fait il n'a pas de sens si on fait une régulation avec boost en ne diminuant qu'un propulseur pour tourner
+mettre le nouveau type de régulation en cap : en fait c'est surtout l'estimation de omegazhat avec sin qui est intéressante dedans
+
+bitmask pour les robid, simulateurs bit 1
+pb mti donnée aberrante constante de temps en temps?-0.261799=>-15 deg sans corrections mag et dans env_La_Spezia (345)=>yaw à 0 -> need more accurate buflen as input of findmtmessage, checking the checksum is not enough reliable!
+set MTi to EULER mode with software
+
+nmea device et faut qu'il puisse y avoir plusieurs nmeadevice différents sur un robot
+
+bug si 2 caméras configurées mais en fait 1 présente, bug arrêt du programme à cause de terminate thread?
+
+ajouter en coin et agrandi si touche 'm' la map avec option robot centré avec rotating map
+maintenant tout est exprimé in env coordinate system, on utilise EnvAngle quand il y a un calcul avec boussole, GPS...
+repères ENU, env, submarine...
+enlever les videoid_ball du fichier de config...
+bug lorsque la résolution de la video effective n'est pas celle voulue
+p fait abort command si pas de mission
+balldetection 30 1 tapé dans l'invite de commandes semble infini...
+paramètre uvmax pour la régul profondeur pour économiser bat
+arreter de tourner en avancant lorsqu'on est avec les touches sans regulation
+option disable video display dans opencvgui dans fichier de config et opencvgui
+fmod_2pi à la place du sin(asin())
+thread ciscrea bloquant quand echec connexion, missing lots of err check...
+bDistanceControl, u_ball = u pour cruisespeed
+mettre en option la caméra de opencvgui, ou un opencvgui pour chaque cam?
+regrouper log observer et controller en un même fichier
+touche pour call/abort mission.txt avec petit triangle vert clignotant
+en fait je suis dans repère nwu, changer les angles pas marins en enu
+estimation de omegazhat
+fgets3, fscanf, sscanf?
+command prompt en option
+pouvoir lire une video en option
+des = 0 supprimés en bloc dans globals.h
+remettre à 0 integral si changement de consigne, revoir où on le remet à 0...
+doit afficher osd meme sans video
+osd:heading/regul(marin), depth/regul, x(+/-err), y(+/-err), 
+projet comet et MissionTest à regouper
+
+un thread pour la prise de données de chaque périphérique, l'accès aux données par var globales (globals.h) doit être immédiat
+un thread de fichier log general?
+un timer pour enregistrement vidéo
+un timer pour enregistrement audio
+un thread pour chaque traitement long
+un thread boucle de régulations de base
+un thread lecture-interpréteur fichier de mission, entrées clavier (Commands.h)
+un thread GUI
+un thread simulateur

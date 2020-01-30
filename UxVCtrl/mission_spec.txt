@@ -1,0 +1,540 @@
+%
+% MISSIONS
+%
+%wallconfig d0 beta delta dmin dmax gamma_infinite r bLat bBrake procid (d0 : double ]-oo,oo[ target distance in m, beta : double [-180,180] mod(360) beam width in deg, delta : double [-180,180] mod(360) beam direction in deg, 0 being the front of the robot, dmin : double ]-oo,oo[ min detection distance in m, dmax : double ]-oo,oo[ max detection distance in m, gamma_infinite : double ]-oo,oo[ angle to come closer to the line when far away in rad (for tracking) / double ]-oo,oo[ angle limit of the line to be considered as an obstacle to avoid in rad (for avoidance), r : double [0,oo[ distance at which the angle to the line to track will be gamma_infinite/2 in m, bLat : int [0,1] 1 if the wall to track is lateral, bBrake : int [0,1] brake if the wall is detected if 1 (only for detection and avoidance), procid : int [-1,256[ -1 does nothing when detected, otherwise stop tracking or avoidance and execute procid (not implemented for tracking))
+%
+%walldetection t (t : double [0,oo[ timeout in s, the function blocks until the wall is detected or the timeout is reached)
+%
+%startwalltracking (modify headingreg when wall detected, keep any previous depthreg, thrust)
+%
+%stopwalltracking
+%
+%startwallavoidance (modify headingreg, thrust when wall detected, keep any previous depthreg)
+%
+%stopwallavoidance
+%
+%ballconfig h- h+ s- s+ vl- vl+ bHExclusive bSExclusive bVLExclusive r_selpix g_selpix b_selpix colormodel objMinRadiusRatio objRealRadius objMinDetectionRatio objDetectionRatioDuration d0 kh kv lightMin lightPixRatio bAcoustic bDepth camdir bDisableControl bBrake objtype mindistproc procid videoid id (h-, h+, s-, s+, vl-, vl+ : int [0,240] HSV/HSL intervals representing the colors of the object (e.g. in MS Paint for HSL), bHExclusive, bSExclusive, bVLExclusive : int [0,1] the interval is exclusive if 1, r_selpix, g_selpix, b_selpix : int [0,255] RGB color to display selected pixels, colormodel : int [0,2] 0 for HSL, 1 for HSV, 2 for RGB, objMinRadiusRatio : double [0,1] we only consider objects that have an estimated radius in pixels greater than width*objMinRadiusRatio, objRealRadius : double [0,oo] real radius of the object in m, objMinDetectionRatio : double [0,1] the object will be considered as detected if at least a ratio of objMinDetectionRatio images during objDetectionRatioDuration got a detection, objDetectionRatioDuration : double [0,oo[ duration in s related to objMinDetectionRatio, d0 : double ]-oo,oo[ target distance in m, kh : double [0,1] horizontal regulation coefficient, kv : double [0,1] vertical regulation coefficient, lightMin : int [0,255] min RGB value if there is a white light, lightPixRatio : double [0,1] we consider there is a white light if it covers that ratio of the picture, bAcoustic : int [0,1] 1 to activate acoustic message if detected, bDepth : int [0,1] 1 to activate depth control, camdir : int [-1,2] 0 if used with a front camera, 1 left, -1 right, 2 bottom, bDisableControl : int [0,1] 1 to disable control when the object is detected, bBrake : int [0,1] brake if the visual obstacle (objtype=3) is detected if 1, objtype : int [0,4] 0 ball, 1 pipeline, 2 pinger, 3 visual obstacle, 4 ERL 2019 rectangular cards, mindistproc : double [0,oo[ minimum distance in m to execute procid, procid : int [-1,256[ -1 do nothing when detected, otherwise stop tracking and execute procid if the distance is less than mindistproc, videoid : int [0,oo] video id, id : int [0,oo] id)
+%
+%startballtracking id (modify headingreg and depthreg when ball detected, keep any previous thrust, but reverse thrust to stop when the size of the ball on the webcam image is too big, modify headingreg when pipeline detected, keep any previous depthreg (might also change depth a little bit), thrust (could also reduce thrust when reaching the end of the pipeline (yellow center in the bottom of the camera image), could turn slowly in the direction where the pipeline was seen last time if lost))
+%
+%stopballtracking id
+%
+%surfacevisualobstacleconfig weather boatsize obsMinDetectionRatio obsDetectionRatioDuration bBrake procid videoid (weather : c (cloudy) or s (sunny), boatsize : int [0,oo] height in pixels of the visible part of the boat on the camera, obsMinDetectionRatio : double [0,1] the obstacle will be considered as detected if at least a ratio of obsMinDetectionRatio images during obsDetectionRatioDuration got a detection (not implemented), obsDetectionRatioDuration : double [0,oo[ duration in s related to obsMinDetectionRatio, bBrake : int [0,1] brake if the obstacle is detected if 1, procid : int [-1,256[ -1 does nothing when detected, otherwise stop avoidance and execute procid (not implemented), videoid : int [0,oo] video id)
+%
+%surfacevisualobstacledetection t (t : double [0,oo[ timeout in s, the function blocks until the obstacle is detected or the timeout is reached)
+%
+%startsurfacevisualobstacleavoidance (modify headingreg, thrust when obstacle detected, keep any previous depthreg)
+%
+%stopsurfacevisualobstacleavoidance
+%
+%pingerconfig pulsefreq pulselen pulsepersec hyddist hydorient preferreddir bUseFile (pulsefreq : int [0,48000] frequency of the pulse in Hz, pulselen : double [0,oo[ pulse length in s, pulsepersec : double [0,oo[ number of pulse per s, hyddist : double [0,oo[ distance between the hydrophones in m, hydorient : double [0,360[ orientation of the hydrophones w.r.t. the robot in deg (0=hyd0 on the front and hyd1 on the rear, 90=hyd0 on the right and hyd1 on the left), preferreddir : double [0,360[ preferred direction w.r.t. the robot in deg to solve symmetry ambiguity (0=front, 90=right), bUseFile : int [0,1] use pingerdetection.txt info for tracking, bBrakeSurfaceEnd : int [0,1] brake, surface and stop the mission if the object is detected if 1, procid : int [-1,256[ -1 does nothing when detected, otherwise stop tracking and execute procid (not implemented), videoid : int [0,oo] video id)
+% Other coefficients related to hydrophones to add...?
+%
+%startpingertracking (modify headingreg with pinger information from hydrophones, keep any previous depthreg (might surface), thrust (might stop))
+%
+%stoppingertracking
+%
+%externalprogramtriggerconfig filename period retrydelay nbretries procid id (filename : filename to detect, period : int [0,oo] in ms, retrydelay : int [0,oo] delay in ms to retry to delete filename if it is in use by another program, nbretries : int [-1,oo] if -1 do not delete filename when detected, otherwise retry to delete it if it is in use by another program, procid : int [-1,256[ -1 do nothing when filename is detected, otherwise execute procid, id : int [0,oo] id)
+%
+%enableexternalprogramtrigger id
+%
+%disableexternalprogramtrigger id
+%
+%followmeconfig dmin dmax uidle umin umax spaceperiod forbidlat forbidlong forbidalt forbidradius target mode bDepth (dmin : double ]-oo,oo[ min distance in m, dmax : double ]-oo,oo[ max distance in m, uidle : double [-1,1] target thrust when <dmin, umin : double [-1,1] target thrust when between dmin and dmax, umax : double [-1,1] target thrust when >dmax, spaceperiod : double ]0,oo[ space period in m to create waypoints from the target trajectory, forbidlat : double [-90;90] latitude of the center of the forbidden area in decimal degrees, forbidlong : double [-90;90] longitude of the center of the forbidden area in decimal degrees, forbidalt : double [-oo;oo] altitude of the center of the forbidden area in m, forbidradius : double [0;oo] forbidden area radius around (forbidlat,forbidlong,forbidalt) in m or 0 to disable forbidden area (partially implemented, in practice it just resets the track to follow if the target enters the forbidden area so this does not really prevent the follower to go through the forbidden area...), target : int [0,3] 0 to follow from SwarmonDevice0 data, 1 to follow from MAVLinkDevice0 data, 2 to follow from MAVLinkDevice1 data, 3 to follow from MDM0 data, mode : int [0] 0 to only follow on the target trajectory without going backwards if too close, bDepth : int [0,1] 1 to take depth into account (not implemented))
+%
+%startfollowmetracking (modify headingreg, depthreg, thrust using linefollowing)
+%
+%stopfollowmetracking
+%
+% LOCALIZATION AND ADVANCED MOVING COMMANDS
+%
+%setenvcoord lat_env long_env alt_env orientation_env (lat_env, long_env, alt_env : double ]-oo,oo[ in decimal deg and m, orientation_env : double [0,360[ mod(360) angle of the x axis of the environment coordinate system to the North in deg, should be set to 90 if no specific environment (i.e. an East - North - Up coordinate system) is used as reference in deg in North - East - Down coordinate system)
+%
+%gpssetenvcoordposition t (double [0,oo[ timeout in s, the function blocks until the timeout is reached. Set the position of the environment coordinate system from the current position using GPS. If the GPS is not available or reports that the data might be unreliable, the environment coordinate system is not modified.)
+%
+%gpslocalization t (double [0,oo[ timeout in s, the function blocks until the timeout is reached. Estimation of the current position using GPS. If the GPS is not available or reports that the data might be unreliable, this estimation will be ignored. Otherwise, if the new estimated position is inconsistent with any previously estimated position, this replaces any previously estimated position)
+%
+%enableautogpslocalization
+%
+%disableautogpslocalization
+%
+%enableautodvllocalization
+%
+%disableautodvllocalization
+%
+%stateestimationconfig psi_source theta_phi_source x_y_source z_source (psi_source : int [0,2] 0 for AHRS, 1 for GPS, 2 for DVL, theta_phi_source, x_y_source, z_source not implemented)
+%
+%setstateestimationwgs lat lat_err_m long long_err_m alt alt_err_m orientation orientation_err speed speed_err rotation_speed rotation_speed_err (lat, long, alt : double ]-oo,oo[ current GPS position estimation in decimal deg and m to indicate to the default dead reckoning localization algorithm the current submarine state, lat_err_m, long_err_m, alt_err_m : double [0,oo[ error in m, orientation : double [0,360[ mod(360) current angle to the North in deg, orientation_err : double [0,360[ error in deg, speed : double ]-oo,oo[ current speed in m/s, speed_err : double [0,oo[ error in m/s, rotation_speed : double ]-oo,oo[ current rotation speed to the North in deg/s, rotation_speed_err : double [0,oo[ error in deg/s. Usually used in the beginning of a mission to indicate the starting point. This replaces any previously estimated position)
+%
+%setstateestimation x xerr y yerr z zerr psi psierr vrx vrxerr omegaz omegazerr (x, xerr, y, yerr, z, zerr, psi, psierr, vrx, vrxerr : double ]-oo,oo[ current state estimation and errors to indicate to the default dead reckoning localization algorithm the current submarine state in the environment coordinate system. Usually used in the beginning of a mission to indicate the starting point. This replaces any previously estimated position)
+%
+%setwindestimationwgs winddir windspeed (winddir : double [0,360[ mod(360) true wind angle to the North in deg, windspeed : double ]-oo,oo[ true wind speed in knots)
+%
+%setwindestimation psitwind vtwind (psitwind : double [-pi,pi[ mod(2*pi) true wind vector direction in rad, vtwind : double ]-oo,oo[ true wind speed in m/s)
+%
+%windfilterconfig wind_filter_coef (wind_filter_coef : double [0,1] wind filter coefficient where 0 disables the filter)
+%
+%drconfig alphavrxhat.inf alphavrxhat.sup alphaomegazhat.inf alphaomegazhat.sup alphafvrxhat.inf alphafvrxhat.sup alphafomegazhat.inf alphafomegazhat.sup alphazhat.inf alphazhat.sup vzuphat.inf vzuphat.sup
+%
+%calibalphavrx t (double [0,oo[ timeout in s, the function blocks while moving forward with heading control until the timeout is reached, it uses GPS to try to estimate alphavrx coefficient)
+%
+%staticsonarlocalization t [nbretries, retryperiod?] (double [0,oo[ timeout in s, the function blocks until the timeout is reached[, nbretries : int [0,oo[ number of retries if the algorithm reports that the data might be unreliable, make the robot go backward and turn a little bit before a retry], this command can be used when the submarine is stopped to get a better estimation of the current position using sonar. If the algorithm reports that the data might be unreliable, this estimation will be ignored. Otherwise, if the new estimated position is inconsistent with any previously estimated position, this replaces any previously estimated position)
+%
+%enabledynamicsonarlocalization
+%
+%disabledynamicsonarlocalization
+%
+%sonaraltitudeestimationconfig dmin ratio (dmin : double [0,oo[ minimum range limit in m, ratio : double [0,1] minimum ratio of pings containing a detection)
+%
+%enablesonaraltitudeestimation
+%
+%disablesonaraltitudeestimation
+%
+%externalvisuallocalizationconfig h- h+ s- s+ vl- vl+ bHExclusive bSExclusive bVLExclusive r_selpix g_selpix b_selpix colormodel objMinRadiusRatio objRealRadius objMinDetectionRatio objDetectionRatioDuration T11 T21 T31 T41 T12 T22 T32 T42 T13 T23 T33 T43 T14 T24 T34 T44 coef1_angle coef2_angle xerr yerr zerr psierr videoid (h-, h+, s-, s+, vl-, vl+ : int [0,240] HSV/HSL intervals representing the colors of the object (e.g. in MS Paint for HSL), bHExclusive, bSExclusive, bVLExclusive : int [0,1] the interval is exclusive if 1, r_selpix, g_selpix, b_selpix : int [0,255] RGB color to display selected pixels, colormodel : int [0,2] 0 for HSL, 1 for HSV, 2 for RGB, objMinRadiusRatio : double [0,1] we only consider objects that have an estimated radius in pixels greater than width*objMinRadiusRatio, objRealRadius : double [0,oo] real radius of the object in m, objMinDetectionRatio : double [0,1] the object will be considered as detected if at least a ratio of objMinDetectionRatio images during objDetectionRatioDuration got a detection (not implemented), objDetectionRatioDuration : double [0,oo[ duration in s related to objMinDetectionRatio, T : homogeneous coordinates 4x4 transformation matrix such that [x;y;z;1]=T*[i0;j0;objDistance;1] with [i0;j0] in [0;1]*[0;1] normalized position of the object in the image and objDistance in m, coef1_angle : double, coef2_angle : double such that psi=coef1*objAngle+coef2 with objAngle in rad, psi will not be used if coef1=coef2=0, xerr : double, yerr : double, zerr : double, psierr : double, videoid : int [0,oo] video id)
+%
+%enableexternalvisuallocalization
+%
+%disableexternalvisuallocalization
+%
+%acousticmodemlocalization t (double [0,oo[ timeout in s, the function blocks until the timeout is reached. Estimation of the current position using the last known acoustic modem position and range. If the acoustic modem position and range are not available or might be unreliable, this estimation will be ignored. Otherwise, if the new estimated position is inconsistent with any previously estimated position, this replaces any previously estimated position)
+%
+%wpfollowingconfig r (r : double [0,oo[ validation radius in m)
+%
+%linefollowingconfig r gamma_infinite (r : double [0,oo[ distance at which the angle to the line to track will be gamma_infinite/2 in m, gamma_infinite : double ]-oo,oo[ angle to come closer to the line when far away in rad)
+%
+%gotoxy x y (x, y : double ]-oo,oo[ position in m in the environment coordinate system)
+%
+%gotoxyt x y t (x, y : double ]-oo,oo[ position in m in the environment coordinate system, t : double [0,oo[ timeout in s, the function blocks until the position or the timeout is reached)
+%
+%gotoxyrelative x y (x, y : double ]-oo,oo[ position in m from the current position in the environment coordinate system)
+%
+%gotoxytrelative x y t (x, y : double ]-oo,oo[ position in m from the current position in the environment coordinate system, t : double [0,oo[ timeout in s, the function blocks until the position or the timeout is reached)
+%
+%gotoopit t (t : double [0,oo[ timeout in s, the function blocks until the position or the timeout is reached. Go to the current OPI position)
+%
+%gotoopi (go to the current OPI position)
+%
+%gotoxywgs lat long (lat, long : double ]-oo,oo[ position in decimal deg in WGS)
+%
+%gotoxytwgs lat long t (lat, long : double ]-oo,oo[ position in decimal deg in WGS, t : double [0,oo[ timeout in s, the function blocks until the position or the timeout is reached)
+%
+%linefollowing xa ya xb yb (xa, ya, xb, yb : double ]-oo,oo[ position in m in the environment coordinate system of the 2 waypoints defining the line)
+%
+%linefollowingt xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m in the environment coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached)
+%
+%linefollowingstation xb yb t_station t (xb, yb : double ]-oo,oo[ position in m in the environment coordinate system of the destination waypoint defining the line (starting waypoint is the current position), t_station : double [0,oo[ time to wait when the waypoint is reached in s (before generating a new line from the current position), t : double [0,oo[ timeout in s, the function blocks until the timeout is reached)
+%
+%linefollowingrelative xa ya xb yb (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the environment coordinate system of the 2 waypoints defining the line)
+%
+%linefollowingtrelative xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the environment coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached)
+%
+%linefollowingrelativerobot xa ya xb yb (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the robot coordinate system of the 2 waypoints defining the line)
+%
+%linefollowingtrelativerobot xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the robot coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached)
+%
+%linefollowingwgs lata longa latb longb (lata, longa, latb, longb : double ]-oo,oo[ position in decimal deg in WGS of the 2 waypoints defining the line)
+%
+%linefollowingtwgs lata longa latb longb t (lata, longa, latb, longb : double ]-oo,oo[ position in decimal deg in WGS of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached)
+%
+%linefollowingwgsstation latb longb t_station t (latb, longb : double ]-oo,oo[ position in decimal deg in WGS of the destination waypoint defining the line (starting waypoint is the current position), t_station : double [0,oo[ time to wait when the waypoint is reached in s (before generating a new line from the current position), t : double [0,oo[ timeout in s, the function blocks until the timeout is reached)
+%
+%waitxyt x y t (x, y : double ]-oo,oo[ position in m in the environment coordinate system, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitxytrelative x y t (x y : double ]-oo,oo[ position in m from the current position in the environment coordinate system, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitxytwgs lat long t (lat long : double ]-oo,oo[ position in decimal deg in WGS, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitzt z acc t (z : double ]-oo,oo[ altitude in m in the environment coordinate system, acc : double ]0,oo[ accuracy in m, t : double [0,oo[ timeout in s, the function blocks until the destination altitude or the timeout is reached, without control)
+%
+%waitztrelative z acc t (z : double ]-oo,oo[ altitude in m from the current position in the environment coordinate system, acc : double ]0,oo[ accuracy in m, t : double [0,oo[ timeout in s, the function blocks until the destination altitude or the timeout is reached, without control)
+%
+%waitztwgs alt acc t (alt : double ]-oo,oo[ altitude in m in WGS, acc : double ]0,oo[ accuracy in m, t : double [0,oo[ timeout in s, the function blocks until the destination altitude or the timeout is reached, without control)
+%
+%waitlinet xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m in the environment coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitlinetrelative xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the environment coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitlinetrelativerobot xa ya xb yb t (xa, ya, xb, yb : double ]-oo,oo[ position in m from the current position in the robot coordinate system of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waitlinetwgs lata longa latb longb t (lata, longa, latb, longb : double ]-oo,oo[ position in decimal deg in WGS of the 2 waypoints defining the line, t : double [0,oo[ timeout in s, the function blocks until the destination waypoint or the timeout is reached, without control)
+%
+%waypointslist bGenerateLineToFirst bStation delay_wait_new t_station t (bGenerateLineToFirst : int [0,1] 0 to start directly to follow the first line (useful e.g. when we are already on it and we do not want to go back to its beginning) or 1 to generate a preliminary line from the current position to the beginning of the first line, bStation : int [0,1], delay_wait_new : double [0,oo[ time to wait when the list is probably being changed in s, t_station : double [0,oo[ time to wait when the last waypoint is reached in s (before generating a new line from the current position), t : double [0,oo[ timeout in s, the function waits for a waypoints list from OpenCPN (through NMEAInterface) and blocks until the timeout is reached or the last waypoint is reached with bStation set to 0)
+%
+%obstacleavoidance max_distance_around min_distance_around min_distance_around_full_speed amplitude_avoid etalement_avoid bLat_avoid bEnable
+%
+% DEVICES COMMANDS
+%
+%ciscreaconfig CISCREA.txt bPause
+%
+%lirmia3config LIRMIA3.txt bPause
+%
+%gpcontrolconfig gpControl.txt bPause
+%
+%pathfinderdvlconfig PathfinderDVL.txt bPause
+%
+%nortekdvlconfig NortekDVL.txt bPause
+%
+%mesconfig MES.txt bPause
+%
+%mdmconfig MDM.txt bPause
+%
+%seanetconfig Seanet.txt bPause
+%
+%blueviewconfig deviceid BlueView.txt bPause
+%
+%hokuyoconfig Hokuyo.txt bPause
+%
+%rplidarconfig RPLIDAR.txt bPause
+%
+%srf02config SRF02.txt bPause
+%
+%ms580314baconfig MS580314BA.txt bPause
+%
+%ms583730baconfig MS583730BA.txt bPause
+%
+%p33xconfig P33x.txt bPause
+%
+%razorahrsconfig RazorAHRS.txt bPause
+%
+%mtconfig MT.txt bPause
+%
+%sbgconfig SBG.txt bPause
+%
+%nmeadeviceconfig deviceid NMEADevice.txt bPause
+%
+%ubloxconfig deviceid ublox.txt bPause
+%
+%mavlinkdeviceconfig deviceid MAVLinkDevice.txt bPause
+%
+%swarmondeviceconfig SwarmonDevice.txt bPause
+%
+%ue9aconfig UE9A.txt bPause
+%
+%ssc32config SSC32.txt bPause
+%
+%pololuconfig deviceid Pololu.txt bPause
+%
+%minisscconfig MiniSSC.txt bPause
+%
+%im483iconfig IM483I.txt bPause
+%
+%videoconfig videoid Video.txt bPause
+%
+%kinectto2dlidar nbpixhborder nbpixvborder minkinectrange maxkinectrange videoid bEnable debug (minkinectrange, maxkinectrange in m, uses also Horizontal/VerticalBeamVideo and z from the selected Video)
+%
+%showgetpositionmaestro deviceid channel (channel : int [0,24])
+%
+%setpositionmaestro deviceid channel pwm (channel : int [0,24], pwm : int [500,2500] PWM in us)
+%
+%statustextmavlinkdevice deviceid bDisplay
+%
+%setmodemavlinkdevice deviceid custom_mode (custom_mode : int [0,32] see enum control_mode_t in https://github.com/ArduPilot/ardupilot/blob/master/ArduCopter/defines.h (e.g. 0 : Stabilize, 2 : AltHold, 3: Auto, 4 : Guided, 5 : Loiter, 6 : RTL, 9 : Land, 15 : Autotune, 20 : Guided_NoGPS, 21 : Smart_RTL, 23 : Follow))
+%
+%armmavlinkdevice deviceid bArm
+%
+%setattitudetargetmavlinkdevice deviceid period type roll pitch yaw roll_rate pitch_rate yaw_rate thrust (Copter needs to be in Guided mode for SET_ATTITUDE_TARGET MAVLink message, period = -1 disables sending, type = 0 sends directly the parameters to the autopilot, type = 1 uses keyboard)
+%
+%takeoffmavlinkdevice deviceid altitude (in m)
+%
+%landmavlinkdevice deviceid yaw latitude longitude altitude (in deg and m)
+%
+%mavlinkdevicein deviceid bEnable
+%
+% ACOUSTIC COMMANDS
+%
+%%rngacousticmodem nbretries retryperiod (send rng and wait for the result)
+%
+%%sendxyzerracousticmodem nbretries retryperiod (send xyzerr)
+%
+%%recvxyzerracousticmodem nbretries retryperiod (wait for xyzerr)
+%
+%%startsendmsgacousticmodem (send repeatedly predefined messages to the acoustic modem)
+%
+%%stopsendmsgacousticmodem
+%
+%%startrecvmsgacousticmodem (listen to predefined messages from the acoustic modem)
+%
+%%stoprecvmsgacousticmodem
+%
+%startrngmsgacousticmodem
+%
+%stoprngmsgacousticmodem
+%
+%startsendxymsgacousticmodem
+%
+%stopsendxymsgacousticmodem
+%
+%startrecvxymsgacousticmodem
+%
+%stoprecvxymsgacousticmodem
+%
+%startsendaskmsgacousticmodem
+%
+%stopsendaskmsgacousticmodem
+%
+%startrecvaskmsgacousticmodem
+%
+%stoprecvaskmsgacousticmodem
+%
+% Partial implementation (without OK!\n acknowledgement)...
+%startsendspwtmsgacousticmodem
+%
+% Partial implementation (without OK!\n acknowledgement)...
+%stopsendspwtmsgacousticmodem
+%
+% Partial implementation (without OK!\n acknowledgement)...
+%startrecvspwtmsgacousticmodem
+%
+% Partial implementation (without OK!\n acknowledgement)...
+%stoprecvspwtmsgacousticmodem
+%
+% Partial implementation (without OK!\n acknowledgement)...
+%waitrecvspwtmsgacousticmodem t (double [0,oo[ timeout in s, the function blocks until the desired message is received or the timeout is reached)
+%
+%euRathlon 2015, also used in ballconfig...
+%startsendopimsgacousticmodem
+%
+%stopsendopimsgacousticmodem
+%
+%startrecvopimsgacousticmodem
+%
+%stoprecvopimsgacousticmodem
+%
+%waitrecvopimsgacousticmodem t (double [0,oo[ timeout in s, the function blocks until the desired message is received or the timeout is reached)
+%
+% Maybe the shh\n message is not useful in practice...
+%startsendshhmsgacousticmodem
+%
+%stopsendshhmsgacousticmodem
+%
+%startrecvshhmsgacousticmodem
+%
+%stoprecvshhmsgacousticmodem
+%
+%waitrecvshhmsgacousticmodem t (double [0,oo[ timeout in s, the function blocks until the desired message is received or the timeout is reached)
+%
+%startrecvxyrngmsgacousticmodem
+%
+%stoprecvxyrngmsgacousticmodem
+%
+%euRathlon 2015...
+%startrecvanysendxymsgacousticmodem
+%
+%stoprecvanysendxymsgacousticmodem
+%
+% GENERAL COMMANDS
+%
+%showdetailedinfo bStdOutDetailedInfo
+%
+%robid
+%
+%enableallalarms
+%
+%disableallalarms
+%
+%showbatteryinfo
+%
+%showswitchinfo
+%
+%enableopencvgui guiid (int)
+%
+%disableopencvgui guiid (int)
+%
+%startvideorecording videoid (int)
+%
+%stopvideorecording videoid (int)
+%
+%snapshot
+%
+%setopencvguikeytargetid guiid (int, only available if ENABLE_SHARED_WAITKEY_OPENCVGUI to select the window that will respond to keys)
+%
+%cameratiltup
+%
+%cameratiltdown
+%
+%cameratiltcenter
+%
+%cameratilt u (double [-1,1])
+%
+%lightsbrighter
+%
+%lightsdimmer
+%
+%lights u (double [0,1])
+%
+%rcswitches rc_aux3_sw rc_ail_sw rc_gear_sw rc_ele_sw rc_rud_sw (rc_aux3_sw : int [0,2], rc_ail_sw : int [0,1], rc_gear_sw : int [0,1], rc_ele_sw : int [0,1], rc_rud_sw : int [0,1])
+%
+%arm
+%
+%disarm
+%
+%call mission.txt (only used from command-line)
+%
+%abort (abort the mission)
+%
+%pause (pause the mission)
+%
+%resume (resume the mission)
+%
+%jump linenumber (int > 0, only used inside a mission file)
+%
+%label id (int [0,256[, only used inside a mission file)
+%
+%goto id (int [0,256[, only used inside a mission file)
+%
+%procedure id (int [0,256[, only used inside a mission file)
+%
+%execute id (int [0,256[ procedure id, only used inside a mission file)
+%
+%return (only used inside a mission file)
+%
+%exit
+%
+%regset regid value (regid : int [0,32[, value : double ]-oo,oo[)
+%
+%regsetrand regid minvalue maxvalue (regid : int [0,32[, minvalue : double ]-oo,oo[, maxvalue : double ]-oo,oo[)
+%
+%regsettoheading regid (regid : int [0,32[)
+%
+%regsettox regid (regid : int [0,32[)
+%
+%regsettoy regid (regid : int [0,32[)
+%
+%regsettoz regid (regid : int [0,32[)
+%
+%regprint regid (regid : int [0,32[)
+%
+%regadd regid1 regid2 (regid1 : int [0,32[, regid2 : int [0,32[, set regid1 to regid1+regid2)
+%
+%regmul regid1 regid2 (regid1 : int [0,32[, regid2 : int [0,32[, set regid1 to regid1*regid2)
+%
+%regpow regid1 regid2 (regid1 : int [0,32[, regid2 : int [0,32[, set regid1 to regid1^regid2)
+%
+%regeq regid1 regid2 procid_true procid_false (regid1 : int [0,32[, regid2 : int [0,32[, procid_true : int [-1,256[ execute procid_true if regid1 == regid2, does nothing if -1, procid_false : int [-1,256[ execute procid_false if regid1 != regid2, does nothing if -1)
+%
+%reglt regid1 regid2 procid_true procid_false (regid1 : int [0,32[, regid2 : int [0,32[, procid_true : int [-1,256[ execute procid_true if regid1 < regid2, does nothing if -1, procid_false : int [-1,256[ execute procid_false if regid1 >= regid2, does nothing if -1)
+%
+%regin regid1 regid2 regid3 procid_true procid_false (regid1 : int [0,32[, regid2 : int [0,32[, regid3 : int [0,32[, procid_true : int [-1,256[ execute procid_true if regid1 in [regid2,regid3] does nothing if -1, procid_false : int [-1,256[ execute procid_false if regid1 not in [regid2,regid3], does nothing if -1)
+%
+%help
+%
+%setmissionaction name (string representing the current action name to store in the mission log file)
+%
+%wait t (double [0,oo[ timeout in s, the function blocks until the timeout is reached)
+%
+%system cmd (string representing the command or script file to run)
+%
+%reboot
+%
+% Windows only...
+%playsoundasync sound.wav
+%
+% Windows only...
+%playsound sound.wav
+%
+% Windows only...
+%loopsound sound.wav
+%
+% Windows only...
+%stopsound
+%
+% Might be unsafe...
+%reloadconfig
+%
+%saveconfig
+%
+% Might be unsafe...
+%reloadenv
+%
+%saveenv
+%
+%sethome lat_home long_home alt_home (lat_home, long_home, alt_home : double ]-oo,oo[ in decimal deg and m)
+%
+%home
+%
+%setvideointerfacesource guiid videoid (guiid, videoid : int, -1 to disable)
+%
+%simulatedgps bEnable
+%
+%simulateddvl bEnable
+%
+%overrideinputs bEnable
+%
+%mavlinkinterfacein bEnable
+%
+%controlconfig u_max uw_max u_coef uw_coef (double [0,1])
+%
+%zcontrolconfig Kp_z Kd_z Ki_z up_max_z ud_max_z ui_max_z u_min_z u_max_z error_min_z error_max_z dz_max_z
+%
+%ycontrolconfig Kp_y Kd_y Ki_y up_max_y ud_max_y ui_max_y u_min_y u_max_y error_min_y error_max_y dy_max_y
+%
+%wzcontrolconfig Kp Kd1 Kd2 Ki uw_derivative_max uw_integral_max cosdelta_angle_threshold wdradius vrxmax omegazmax
+%
+%wycontrolconfig Kp_wy Kd_wy Ki_z up_max_wy ud_max_wy ui_max_wy u_min_wy u_max_wy error_min_wy error_max_wy omega_max_wy
+%
+%wxcontrolconfig Kp_wx Kd_wx Ki_z up_max_wx ud_max_wx ui_max_wx u_min_wx u_max_wx error_min_wx error_max_wx omega_max_wx
+%
+%sailboatconfig betatrav betaarr zeta check_strategy_period sail_update_period sailboattacktype sailformulatype (betatrav : double ]-oo,oo[ sail angle when the wind comes from the side in rad, betaarr : double ]-oo,oo[ sail angle when the wind comes from the rear in rad, zeta : double ]-oo,oo[ close-hauled angle in rad, check_strategy_period : double [0,oo[ in s, sail_update_period : double [0,oo[ in s, sailboattacktype : int [0,2], sailformulatype : int [0,2])
+%
+% SIMPLE MOVING COMMANDS
+%
+%depthreg z (double ]-oo,oo[ in m (negative underwater), enable depth control)
+%
+%altreg z (double ]-oo,oo[ in m (alias for depthreg)
+%
+%aglreg z (double ]-oo,oo[ in m, enable altitude Above Ground Level control)
+%
+%rollreg orientation (double [-180,180[ mod(360) in deg in North - East - Down coordinate system)
+%
+%pitchreg orientation (double [-180,180[ mod(360) in deg in North - East - Down coordinate system)
+%
+%headingreg orientation (double [0,360[ mod(360) in deg in North - East - Down coordinate system)
+%
+%headingrelativereg orientation (double [0,360[ mod(360) in deg, 0 is towards the nose and 90 towards the right)
+%
+%enabledepthreg
+%
+%disabledepthreg
+%
+%enablealtreg (alias for enabledepthreg)
+%
+%disablealtreg (alias for disabledepthreg)
+%
+%enableaglhreg
+%
+%disableaglreg
+%
+%enablerollreg
+%
+%disablerollreg
+%
+%enablepitchreg
+%
+%disablepitchreg
+%
+%enableheadingreg
+%
+%disableheadingreg
+%
+%headingandlateralcontrolmode mode (0 : PURE_HEADING_CONTROL_MODE, 1 : PURE_LATERAL_CONTROL_MODE, 2 : HEADING_AND_LATERAL_CONTROL_MODE)
+%
+%thrust u (double [-1,1])
+%
+%turn u (double [-1,1])
+%
+%lateralthrust u (double [-1,1])
+%
+%pitchthrust u (double [-1,1])
+%
+%rollthrust u (double [-1,1])
+%
+%verticalthrust u (double [-1,1])
+%
+%setinput id u (id : int [1,14], u : double [-1,1])
+%
+%brake (try to stop the robot taking into account horizontal thrusters speed)
+%
+%stop (stop only horizontal thrusters)
+%
+%generalstop
+%

@@ -1,0 +1,10 @@
+﻿  Main.cpp
+  OSComputerRS232Port.c
+  OSCore.c
+  OSMisc.c
+  OSNet.c
+  OSTime.c
+  Generating code
+  All 72 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Test_devices.vcxproj -> C:\Users\Administrator\Ecole Nationale Supérieure de Techniques Avancées Bretagne\Guerlédan - Documents\BRAVE\Test_devices\Release\Test_devices.exe

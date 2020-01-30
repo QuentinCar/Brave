@@ -1,0 +1,823 @@
+% Hexadecimal identifier of the robot (see Globals.h)
+% robid
+% Submarine Simulator
+0x00000001
+% Buggy Simulator
+%0x00100000
+% SAUCISSE
+%0x00000002
+% SARDINE
+%0x00000004
+% BlueROV
+%0x00000040
+% LIRMIA3
+%0x00000080
+% BUBBLE
+%0x00000200
+% Motorboat
+%0x00000400
+% Sailboat
+%0x00004000
+% Sailboat 2
+%0x00008000
+% Buggy
+%0x00200000
+% ETAS WHEEL
+%0x00020000
+% ArduCopter
+%0x04000000
+%roblength (in m)
+1
+%robwidth (in m)
+1
+%robheight (in m)
+1
+% nbopencvgui (max 5)
+2
+% videoimgwidth
+320
+% videoimgheight
+240
+% captureperiod (in ms)
+100
+% HorizontalBeam (in ]0..360] deg)
+70
+% VerticalBeam (in ]0..360] deg)
+50
+% bUseRawImgPtrVideo
+0
+% bCropOnResize
+0
+% szVideoRecordCodec (WMV2, MJPG, HFYU, DIVX, XVID, etc., see OpenCV FOURCC codecs)
+WMV2
+% bEnableOpenCVGUIs[0]
+1
+% bEnableOpenCVGUIs[1]
+1
+% bEnableOpenCVGUIs[2]
+0
+% bEnableOpenCVGUIs[3]
+0
+% bEnableOpenCVGUIs[4]
+0
+% bShowVideoOpenCVGUIs[0]
+0
+% bShowVideoOpenCVGUIs[1]
+0
+% bShowVideoOpenCVGUIs[2]
+0
+% bShowVideoOpenCVGUIs[3]
+0
+% bShowVideoOpenCVGUIs[4]
+0
+% opencvguiimgwidth[0]
+320
+% opencvguiimgwidth[1]
+320
+% opencvguiimgwidth[2]
+320
+% opencvguiimgwidth[3]
+320
+% opencvguiimgwidth[4]
+320
+% opencvguiimgheight[0]
+240
+% opencvguiimgheight[1]
+240
+% opencvguiimgheight[2]
+240
+% opencvguiimgheight[3]
+240
+% opencvguiimgheight[4]
+240
+% opencvguiperiod (in ms)
+100
+% ExitOnErrorCount (0 to never exit)
+0
+% AutoResumeMissionMode (0 : disabled, 1 : if the program did not exit successfully during a mission or the mission was not aborted explicitely, the next time it will resume to the latest label command (that should be stored in CurLbl.txt), 2 : same as 1 except it will resume only if the mission is launched at program startup)
+0
+% bDisablelognav
+0
+% bStdOutDetailedInfo
+0
+% bCommandPrompt
+1
+% bEcho
+1
+% bDetachCommandsThread
+1
+% WaitForGNSSLevel (see GNSS accuracy levels in Globals.h (e.g. 4 for a good GPS fix))
+0
+% WaitForGNSSTimeout (in ms)
+0
+% bSetEnvOriginFromGNSS
+0
+% Interfaces parameters
+% bMAVLinkInterface
+1
+% szMAVLinkInterfacePath (server TCP port (e.g. :5760), client IP address and TCP port (e.g. 127.0.0.1:5760) or local RS232 port)
+:5760
+% MAVLinkInterfaceBaudRate
+115200
+% MAVLinkInterfaceTimeout (in ms)
+1500
+% MAVLinkInterface_mavlink_comm (from 0 to 4)
+4
+% MAVLinkInterface_system_id (0 : all, 1 : vehicle, 81 : PX4FLOW, 255 : GCS)
+1
+% MAVLinkInterface_component_id (0 : all, 1 : autopilot, 50 : PX4FLOW, 190 : Mission Planner, see also enum MAV_COMPONENT)
+1
+% MAVLinkInterface_target_system (0 : all, 1 : vehicle, 81 : PX4FLOW, 255 : GCS)
+0
+% MAVLinkInterface_target_component (0 : all, 1 : autopilot, 50 : PX4FLOW, 190 : Mission Planner, see also enum MAV_COMPONENT)
+0
+% bForceDefaultMAVLink1MAVLinkInterface (0 to enable default MAVLink v2 protocol, 1 to force to default MAVLink v1)
+1
+% bDisableMAVLinkInterfaceIN
+0
+% MAVLinkInterface_rc_override_time (0 to disable RC override)
+3
+% MAVLinkInterface_overridechan (RC input channel used to disable RC override, from 1 to 18)
+6
+% MAVLinkInterface_bDefaultDisablePWMOverride
+1
+% MAVLinkInterface_forceoverrideinputschan (RC input channel used to enable force override inputs, from 1 to 18)
+6
+% MAVLinkInterface_bDefaultForceOverrideInputs
+0
+% bNMEAInterface
+1
+% szNMEAInterfacePath (server TCP port (e.g. :5001), client IP address and TCP port (e.g. 127.0.0.1:5001) or local RS232 port)
+:5001
+% NMEAInterfaceBaudRate
+4800
+% NMEAInterfaceTimeout (in ms)
+1500
+% NMEAInterfacePeriod (in ms)
+500
+% bEnable_NMEAInterface_GPGGA
+0
+% bEnable_NMEAInterface_GPRMC
+1
+% bEnable_NMEAInterface_GPGLL
+0
+% bEnable_NMEAInterface_GPVTG
+0
+% bEnable_NMEAInterface_HCHDG
+1
+% bEnable_NMEAInterface_HCHDM
+0
+% bEnable_NMEAInterface_HEHDT
+0
+% bEnable_NMEAInterface_HEROT
+0
+% bEnable_NMEAInterface_WIMWV
+0
+% bEnable_NMEAInterface_WIMWD
+0
+% bEnable_NMEAInterface_WIMDA
+0
+% bEnable_NMEAInterface_PRDID
+0
+% bEnable_NMEAInterface_PHTRO
+0
+% bEnable_NMEAInterface_PHTRH
+0
+% bEnable_NMEAInterface_IIRSA
+1
+% bEnable_NMEAInterface_SDDBT
+0
+% NMEAInterfaceSendPeriod (in ms, not implemented)
+500
+% bDisableNMEAInterfaceIN
+0
+% bRazorAHRSInterface
+1
+% szRazorAHRSInterfacePath (server TCP port (e.g. :5007), client IP address and TCP port (e.g. 127.0.0.1:5007) or local RS232 port)
+:5007
+% RazorAHRSInterfaceBaudRate
+57600
+% RazorAHRSInterfaceTimeout (in ms)
+2000
+% bROSMode_RazorAHRSInterface
+0
+% bSBGInterface
+0
+% szSBGInterfacePath (server TCP port (e.g. :5007), client IP address and TCP port (e.g. 127.0.0.1:5007) or local RS232 port)
+:5007
+% SBGInterfaceBaudRate
+115200
+% SBGInterfaceTimeout (in ms)
+2000
+% bSSC32Interface
+1
+% szSSC32InterfacePath (server TCP port (e.g. :5004), client IP address and TCP port (e.g. 127.0.0.1:5004) or local RS232 port)
+:5004
+% SSC32InterfaceBaudRate
+9600
+% SSC32InterfaceTimeout (in ms)
+1000
+% bPololuInterface
+0
+% szPololuInterfacePath (server TCP port (e.g. :5004), client IP address and TCP port (e.g. 127.0.0.1:5004) or local RS232 port)
+:5004
+% PololuInterfaceBaudRate
+115200
+% PololuInterfaceTimeout (in ms)
+1000
+% PololuType_PololuInterface (0 : Maestro (not implemented), 1 : Jrk)
+1
+% DeviceNumber_PololuInterface (default is 12 for Maestro (not implemented), 11 for Jrk)
+11
+% bVideoInterface
+1
+% szVideoInterfacePath (server TCP port (e.g. :4014))
+:4014
+% videoimgwidth_VideoInterface
+320
+% videoimgheight_VideoInterface
+240
+% captureperiod_VideoInterface (in ms)
+40
+% VideoInterfaceTimeout (in ms)
+5
+% bForceSoftwareResizeScale_VideoInterface
+0
+% guiid_VideoInterface (-1 to disable)
+-1
+% videoid_VideoInterface
+0
+% encodequality_VideoInterface (JPEG : in [0,100], the higher is the better quality, but uses more CPU and bandwidth)
+50
+% Devices parameters
+% bDisableVideo[0]
+0
+% bDisableVideo[1]
+0
+% bDisableVideo[2]
+1
+% bDisableVideo[3]
+1
+% bDisableVideo[4]
+1
+% bDisablegpControl
+1
+% bDisablePathfinderDVL
+1
+% bDisableNortekDVL
+1
+% bDisableMES
+1
+% bDisableMDM
+1
+% bDisableSeanet
+1
+% bDisableBlueView[0]
+1
+% bDisableBlueView[1]
+1
+% bDisableHokuyo
+1
+% bDisableRPLIDAR
+1
+% bDisableSRF02
+1
+% bDisableMS580314BA
+1
+% bDisableMS583730BA
+1
+% bDisableP33x
+1
+% bDisableRazorAHRS
+1
+% bDisableMT
+1
+% bDisableSBG
+1
+% bDisableNMEADevice[0]
+1
+% bDisableNMEADevice[1]
+1
+% bDisableublox[0]
+1
+% bDisableublox[1]
+1
+% bDisableublox[2]
+1
+% bDisableMAVLinkDevice[0]
+1
+% bDisableMAVLinkDevice[1]
+1
+% bDisableMAVLinkDevice[2]
+1
+% bDisableSwarmonDevice
+1
+% bDisableUE9A
+1
+% bDisableSSC32
+1
+% bDisablePololu[0]
+1
+% bDisablePololu[1]
+1
+% bDisablePololu[2]
+1
+% bDisableMiniSSC
+1
+% bDisableIM483I
+1
+% Controller parameters
+% u_max (in [0;1])
+1
+% uw_max (in [0;1], (0.5 : boost, 1 : normal) for SAUC'ISSE, (0.35 (difficult to control...) : boost, 0.25 : normal) for CISCREA)
+0.5
+% u_coef (1 : boost, 0.5 : normal)
+1
+% uw_coef (1 : boost, 0.5 : normal)
+1
+% Kp (1.0 : simu, 1.0 : SAUC'ISSE, 1.0 : SARDINE, 0.5 : CISCREA)
+1.0
+% Kd1 (0.5 : simu, 0.25 : SAUC'ISSE, 0.5 : SARDINE, 1.0 : CISCREA)
+0.5
+% Kd2 (0.1 : simu, 0.05 : SAUC'ISSE, 0.1 : SARDINE, 0.1 : CISCREA)
+0.1
+% Ki (0.1 : simu, 0.1 : SAUC'ISSE, 0.1 : SARDINE, 0.1 : CISCREA)
+0.1
+% uw_derivative_max
+0.08
+% uw_integral_max
+0.1
+% cosdelta_angle_threshold (0 : simu, 0 : SAUC'ISSE, 0 : SARDINE, 0 : CISCREA)
+0
+%0.78
+% wdradius (accuracy of the distance control in m)
+0.25
+% vrxmax (0.4 : simu, 0.4 : SAUC'ISSE, 0.4 : SARDINE, 1.5 : CISCREA, Hovecraft : 2)
+0.4
+% omegazmax (0.8 : simu, 0.8 : SAUC'ISSE, 0.8 : SARDINE, 6.0 : CISCREA, Hovecraft : 1)
+0.8
+% Kp_z
+0
+% Kd_z
+0
+% Ki_z
+0
+% up_max_z
+0.75
+% ud_max_z
+0
+% ui_max_z
+0.25
+% u_min_z
+-0.75
+% u_max_z
+0.75
+% error_min_z (in m)
+-0.05
+% error_max_z (in m)
+0.05
+% dz_max_z (in m/s)
+0.25
+% Kp_y
+1
+% Kd_y
+0
+% Ki_y
+0
+% up_max_y
+1
+% ud_max_y
+0
+% ui_max_y
+0.1
+% u_min_y
+-1
+% u_max_y
+1
+% error_min_y (in m)
+-0.5
+% error_max_y (in m)
+0.5
+% dy_max_y (in m/s)
+5
+% Kp_wy
+1
+% Kd_wy
+0
+% Ki_wy
+0
+% up_max_wy
+1
+% ud_max_wy
+0.5
+% ui_max_wy
+0.1
+% u_min_wy
+-1
+% u_max_wy
+1
+% error_min_wy (in rad)
+-0.5
+% error_max_wy (in rad)
+0.5
+% omega_max_wy (in rad/s)
+0.8
+% Kp_wx
+1
+% Kd_wx
+0
+% Ki_wx
+0
+% up_max_wx
+1
+% ud_max_wx
+0.5
+% ui_max_wx
+0.1
+% u_min_wx
+-1
+% u_max_wx
+1
+% error_min_wx (in rad)
+-0.5
+% error_max_wx (in rad)
+0.5
+% omega_max_wx (in rad/s)
+0.8
+% gamma_infinite (in rad, can be overwritten, see http://www.ensta-bretagne.fr/jaulin/paper_jaulin_irsc12.pdf)
+1.3
+% r (accuracy of line/waypoint following in m, can be overwritten, see http://www.ensta-bretagne.fr/jaulin/paper_jaulin_irsc12.pdf)
+5
+% betaside (sail angle when the wind comes from the side (in rad))
+0.5
+% betarear (sail angle when the wind comes from the rear (in rad))
+1.5
+% zeta (close-hauled angle (in rad))
+0.87
+% check_strategy_period (in s)
+60
+% sail_update_period (in s)
+15
+% sailboattacktype (0, 1 or 2, see Controller.cpp)
+0
+% sailformulatype (0, 1 or 2, see Controller.cpp)
+0
+% bCheckRudder (0 to disable or 1 to enable VAIMOS rudder check at the beginning)
+1
+% bCalibrateSail (0 to disable or 1 to enable VAIMOS sail calibration at the beginning)
+1
+% sail_calibration_period (in s, for VAIMOS)
+43200
+% max_distance_around
+1
+% min_distance_around 
+0.25
+% min_distance_around_full_speed
+0.5
+% amplitude_avoid
+5
+% etalement_avoid
+1
+% bLat_avoid
+1
+% controllerperiod (in ms)
+25
+% Observer parameters
+% psi_source (0 for AHRS, 1 for GPS, 2 for DVL)
+0
+% theta_phi_source (not implemented)
+0
+% x_y_source (not implemented)
+0
+% z_source (not implemented)
+0
+% z_pressure_acc (in m)
+0.1
+% dvl_acc (in m/s)
+0.005
+% of_acc (in m/s)
+0.005
+% acousticmodem_acc (in m)
+5
+% phi_ahrs_acc (in rad)
+0.1
+% theta_ahrs_acc (in rad)
+0.1
+% psi_ahrs_acc (in rad)
+0.1
+% accrx_ahrs_acc (in m/s2)
+0.1
+% accry_ahrs_acc (in m/s2)
+0.1
+% accrz_ahrs_acc (in m/s2)
+0.1
+% omegax_ahrs_acc (in rad/s)
+0.1
+% omegay_ahrs_acc (in rad/s)
+0.1
+% omegaz_ahrs_acc (in rad/s)
+0.1
+% alpha_max_err (in rad, modified by Seanet)
+0.01
+% d_max_err (in m, modified by Seanet)
+0.1
+% alphavrxhat.inf
+0.09
+%0.09 for SARDINE
+%0.24 for SAUCISSE
+%2.4 for Buggy
+%0.49 for Catamaran
+% alphavrxhat.sup
+0.10
+%0.10 for SARDINE
+%0.26 for SAUCISSE
+%2.6 for Buggy
+%0.50 for Catamaran
+% alphaomegazhat.inf
+0.7
+%0.7 for submarines
+%0.7 for Buggy
+% alphaomegazhat.sup
+0.8
+%0.8 for submarines
+%0.8 for Buggy
+% alphafvrxhat.inf
+0.725
+%0.725 for SARDINE
+%0.475 for SAUCISSE
+%0.275 for Catamaran
+% alphafvrxhat.sup
+0.775
+%0.775 for SARDINE
+%0.525 for SAUCISSE
+%0.325 for Catamaran
+% alphafomegazhat.inf
+0.20
+% alphafomegazhat.sup
+0.25
+% alphazhat.inf
+0.10
+%0.10 for submarines
+%0.49 for Buggy
+% alphazhat.sup
+0.12
+%0.12 for submarines
+%0.51 for Buggy
+% vzuphat.inf
+0.005
+% vzuphat.sup
+0.015
+% alphashat.inf
+-0.1
+%-0.1 for Simulator, SARDINE and CISCREA
+%3.04 for SAUCISSE
+% alphashat.sup
+0.1
+%0.1 for Simulator, SARDINE and CISCREA
+%3.24 for SAUCISSE
+% omegashat.inf
+2.3
+% omegashat.sup
+2.4
+% xdotnoise.inf
+-0.001
+% xdotnoise.sup
+0.001
+% ydotnoise.inf
+-0.001
+% ydotnoise.sup
+0.001
+% zdotnoise.inf
+-0.001
+% zdotnoise.sup
+0.001
+% phidotnoise.inf
+-0.001
+% phidotnoise.sup
+0.001
+% thetadotnoise.inf
+-0.001
+% thetadotnoise.sup
+0.001
+% psidotnoise.inf
+-0.001
+% psidotnoise.sup
+0.001
+% vrxdotnoise.inf
+-0.001
+% vrxdotnoise.sup
+0.001
+% vrydotnoise.inf
+-0.001
+% vrydotnoise.sup
+0.001
+% vrzdotnoise.inf
+-0.001
+% vrzdotnoise.sup
+0.001
+% omegaxdotnoise.inf
+-0.001
+% omegaxdotnoise.sup
+0.001
+% omegaydotnoise.inf
+-0.001
+% omegaydotnoise.sup
+0.001
+% omegazdotnoise.inf
+-0.001
+% omegazdotnoise.sup
+0.001
+% RTK_fixed_acc (in m)
+0.025
+% RTK_float_acc (in m)
+0.5
+% GPS_high_acc (in m)
+2.5
+% GPS_high_acc_HDOP (<=)
+0.8
+% GPS_high_acc_nbsat (>=)
+8
+% GPS_med_acc (in m)
+5
+% GPS_med_acc_HDOP (<=)
+1
+% GPS_med_acc_nbsat (>=)
+6
+% GPS_low_acc (in m)
+10
+% GPS_low_acc_HDOP (<=)
+2
+% GPS_low_acc_nbsat (in m, >=)
+4
+% GPS_min_sat_signal (in [0;99])
+20
+% GPS_submarine_depth_limit (in m, >=)
+-0.5
+% GPS_SOG_for_valid_COG (in m/s, >=)
+0.11
+% rangescale (in m, modified by Seanet)
+10
+% sdir
+1
+%1 for Simulator and CISCREA
+%-1 for SAUCISSE and SARDINE
+% nb_outliers
+25
+% dynamicsonarlocalization_period (in s)
+3
+% observerperiod (in ms)
+25
+% Wind, current and waves
+% vtwind_med (true wind speed in m/s, see also Observer and any wind sensor)
+4
+% vtwind_var (true wind speed max variation in m/s)
+2
+% psitwind_med (true wind direction in rad, see also Observer and any wind sensor)
+0
+% psitwind_var (true wind direction max variation in rad)
+0
+% wind_filter_coef (wind filter coefficient, between 0 and 1)
+0.99
+% vc_med (vitesse du courant en m/s)
+0
+% vc_var (variation de vitesse max du courant en m/s)
+0
+% psic_med (direction du courant en rad)
+0
+% psic_var (variation de direction max du courant en rad)
+0
+% hw_var (amplitude des vagues en m)
+0
+% Power consumption
+% P_electronics_1 (in W)
+0
+% P_electronics_2 (in W)
+0
+% P_electronics_3 (in W)
+0
+% P_electronics_4 (in W)
+35
+% P_actuators_1 (in W)
+90
+% P_actuators_2 (in W)
+0
+% P_actuators_3 (in W)
+0
+% P_actuators_4 (in W)
+0.4
+% bat_filter_coef
+0.9
+% Simulator initial state
+% x_0 (in m)
+0
+% y_0 (in m)
+0
+% z_0 (in m)
+0
+% phi_0 (in rad)
+0
+% theta_0 (in rad)
+0
+% psi_0 (in rad)
+0
+% vrx_0 (in m/s)
+0
+% vry_0 (in m/s)
+0
+% vrz_0 (in m/s)
+0
+% omegax_0 (in rad/s)
+0
+% omegay_0 (in rad/s)
+0
+% omegaz_0 (in rad/s)
+0
+% alpha_0 (in rad)
+0
+% d_0 (in m)
+0
+% Simulator physical parameters
+% x_max_rand_err (in m)
+3.0
+% x_bias_err (in m)
+2.0
+% y_max_rand_err (in m)
+3.0
+% y_bias_err (in m)
+-1.0
+% z_max_rand_err (in m)
+0.05
+% z_bias_err (in m)
+0.02
+% phi_max_rand_err (in rad)
+0.02
+% phi_bias_err (in rad)
+0.01
+% theta_max_rand_err (in rad)
+0.02
+% theta_bias_err (in rad)
+0.01
+% psi_max_rand_err (in rad)
+0.02
+% psi_bias_err (in rad)
+0.01
+% vrx_max_rand_err (in m/s)
+0.0025
+% vrx_bias_err (in m/s)
+0.001
+% vry_max_rand_err (in m/s)
+0.0025
+% vry_bias_err (in m/s)
+0.001
+% vrz_max_rand_err (in m/s)
+0.0025
+% vrz_bias_err (in m/s)
+0.001
+% omegaz_max_rand_err (in rad/s)
+0.05
+% omegaz_bias_err (in rad/s)
+0.02
+% alpha_max_rand_err (in rad)
+0.005
+% alpha_bias_err (in rad)
+0.002
+% d_max_rand_err (in m)
+0.25
+% d_bias_err (in m)
+-0.1
+% alphavrx
+0.1
+%0.10 for SARDINE
+%0.25 for SAUCISSE
+%2.5 for Buggy
+%0.5 for Catamaran
+% alphaomegaz
+0.7
+%0.7 for submarines
+%0.7 for Buggy
+% alphafvrx
+0.75
+%0.75 for SARDINE
+%0.5 for SAUCISSE
+%0.3 for Catamaran
+% alphafomegaz
+0.21
+% alphaz
+0.1
+%0.1 for submarines
+%0.5 for Buggy
+% vzup (speed due to the buoyancy in m/s)
+0.01
+% alphas
+0
+%3.14
+% omegas
+2.3562
+% outliers_ratio
+0.5
+% bNoSimGNSSInsideObstacles
+0
+% bRawSimStateInMAVLinkInterface
+0
+% simulatorperiod (in ms)
+70

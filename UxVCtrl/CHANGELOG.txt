@@ -1,0 +1,1335 @@
+326
+Added bForceSoftwareResizeScale_VideoInterface parameter in place of bUDP_VideoInterface.
+Renamed VideoInterfacePort to szVideoInterfacePath.
+Updated Video and VideoInterface.
+Improved error messages for UxVCtrl.txt.
+
+325
+Corrected some warnings on Linux.
+Corrected the name of GUIID_VID_IF and VIDID_VID_IF MAVLinkInterface parameters.
+Corrected cast error in PololuInterface.
+Added GetAddrPortTypeFromDevPath().
+
+324
+Removed extra memcpy() and memset() in VideoInterface.
+Added GUIID_VID_IF_PARAM_ID and VIDID_VID_IF_PARAM_ID MAVLinkInterface parameters.
+
+323
+Reduced sleep time in Video since the read() is likely to be blocking.
+FPS property is now set from captureperiod.
+Added bUseRawImgPtrVideo parameter to try to avoid extra copies if the dimensions of the webcams images can be the same as the global ones.
+Added AutoResumeMissionMode parameter as well as pause and resume commands.
+
+322
+Corrected bug in roll wind correction.
+Added regadd, regmul, regpow commands.
+Renamed phi as phil to avoid ambiguity with roll in Controller.cpp.
+
+321
+Improved compatibility with VNav.
+Updated ublox.
+
+320
+Added WaitForGNSSLevel, WaitForGNSSTimeout, bSetEnvOriginFromGNSS parameters.
+Added bSaveCfg, bDisableRTCMTransfer parameters to ublox.
+
+319
+Updated SBG.
+
+318
+Added PololuInterface (only for Jrk).
+Updated SBG.
+Updated ublox.
+
+317
+Updated SBG.
+
+316
+Added bDetachCommandsThread parameter.
+Added setopencvguikeytargetid command (preliminary).
+
+315
+Added threadperiod parameter for most of the devices.
+Added bCheckRudder and ExitOnErrorCount parameters.
+Updated SSC32 and IM483I to synchronize VAIMOS rudder check with sail calibration.
+
+314
+Improved compatibility with OpenCV 4.1.0.
+
+313
+Updated SBG.
+Improved compatibility with libmodbus 3.1.4.
+Improved compatibility with OpenCV 4.1.0.
+
+312
+Continuation of SBGInterface integration.
+
+311
+Added a third MAVLinkDevice.
+Updated SBG.
+Beginning of SBGInterface integration.
+
+310
+Added bSendStartSentence, szStartSentence, bSendStopSentence, szStopSentence to ublox.
+
+309
+Changed order in MAVLink code to match better pymavlink equivalents.
+Added bStdOutDetailedInfo, bCalibrateSail, sail_calibration_period parameters for VAIMOS compatibility.
+
+308
+Added bEnable_NMEAInterface_HCHDM, bEnable_NMEAInterface_PHTRO, bEnable_NMEAInterface_PHTRH parameters.
+
+307
+Corrected kinectto2dlidar.
+
+306
+Added colormodel parameter to ballconfig and externalvisuallocalizationconfig.
+
+305
+Corrected bval1, bval2 not declared if DISABLE_OPENCV_SUPPORT.
+
+304
+Updated HeadingAndLateralControlMode.
+
+303
+bEnableAltRCMode to TRUE for ARDUCOPTER.
+Snapshot saves also enabled OpenCVGUI.
+
+302
+Added headingandlateralcontrolmode command.
+
+301
+Added takeoffmavlinkdevice, landmavlinkdevice, waitzt, waitztrelative, waitztwgs, ycontrolconfig commands.
+
+300
+Updated obstacle avoidance.
+Corrected error message about overridechan too high if set to 19.
+
+299
+Updated obstacle avoidance.
+Updated SRF02 and Pololu telemeters.
+
+298
+Added lights (extra2chan) and trunk (camtiltchan) control for ETAS WHEEL.
+Updated SRF02 and Pololu telemeters.
+Added/updated kinectto2dlidar, obstacleavoidance, regsettoheading, regsettox, regsettoz, regin commands.
+
+297
+Corrected bGuidedControl and bBrakeControl conditions in Controller.cpp. 
+
+296
+Corrected sdir and alphashat handling.
+Added support to more telemeters in Pololu.
+
+295
+Added bGuidedControl.
+Added obstacleavoidance command.
+
+294
+Added AirPressure, WaterVelocityOfSound, WaterFloorAltitude parameters to env.txt.
+Added bDefaultDisablePWMOverride parameter to MAVLinkDevice.
+Added mavlinkdevicein command.
+
+293
+Added preliminary SRF02 support.
+Added setpositionmaestro command.
+
+292
+Updated SeanetProcessing.cpp.
+
+291
+Corrected bug in SSC32Interface introduced in V289.
+
+290
+Corrected MAVLink v1 compatibility.
+Improved compatibility with OpenCV 4.0.1.
+Added FORCE_SINGLE_THREAD_OPENCVGUI option.
+
+289
+Added overrideinputs and setinput commands and updated simulatedgps, simulateddvl and mavlinkinterfacein.
+Added also received MAVLink messages in the tlog file.
+Added MAVLinkInterface_rc_override_time, MAVLinkInterface_overridechan, MAVLinkInterface_bDefaultDisablePWMOverride, MAVLinkInterface_forceoverrideinputschan and MAVLinkInterface_bDefaultForceOverrideInputs parameters.
+Updated RC_CHANNELS_OVERRIDE support in MAVLinkInterface.
+
+288
+Improved compatibility with Mac OS.
+
+287
+Updated bRawSimStateInMAVLinkInterface behavior.
+Improved compatibility with Mac OS.
+
+286
+Added an approximate implementation for CheckInsideObstacle() when OpenCV is not available.
+
+285
+Corrected accelerations handling.
+Added altreg, enablealtreg, disablealtreg as alias for depthreg commands.
+Improved compatibility with Mac OS.
+
+284
+Added regsetrand command.
+Added phi_max_rand_err, phi_bias_err, theta_max_rand_err, theta_bias_err, vry_max_rand_err, vry_bias_err, vrz_max_rand_err, vrz_bias_err parameters.
+Merged VisualObstacle into Ball.
+Corrections in VideoRecord.
+Added VideoInterface.
+
+283
+Added enable/disablesimulatedgps, reload/saveenv, calibalphavrx commands.
+Corrected gpssetenvcoordposition to ensure it is the GPS position that is used.
+Corrected drconfig.
+Added bNoSimGNSSInsideObstacles (temporary implementation) and bRawSimStateInMAVLinkInterface parameters.
+
+282
+Removed USE_ALTERNATE_RECORDING option.
+Added bCropOnResize, opencvguiimgwidth, opencvguiimgheight parameters.
+
+281
+Added more accurate time in logs filenames.
+
+280
+Updated Ball and VideoRecord.
+
+279
+Added regset, regprint, regeq and reglt commands.
+
+278
+Corrected CMakeLists.txt.
+
+277
+Added ExternalProgramTrigger.cpp.
+
+276
+Improved compatibility with OpenCV 4.0.0.
+
+275
+Updated Visual Studio 2017 project files target platform.
+Improved compatibility with GCC.
+
+274
+Minor display updates.
+
+273
+Updated sonar display.
+
+272
+Updated ReadMe.txt and CMakeLists.txt.
+
+271
+Corrected color selection condition.
+Corrected some warnings on Linux.
+
+270
+Added stateestimationconfig command.
+
+269
+Updated ENTER key code for Linux.
+
+268
+Continuation of analog sonars integration.
+
+267
+Updated OpenCVGUI.
+Added snapshot command.
+Added roblength, robwidth, robheight parameters.
+
+266
+Updated MAVLinkInterface.
+Added reboot, home, sethome commands.
+
+265
+Corrected setmodemavlinkdevice and setattitudetargetmavlinkdevice commands.
+
+264
+Added statustextmavlinkdevice, setmodemavlinkdevice, armmavlinkdevice, setattitudetargetmavlinkdevice commands.
+
+263
+Updated MAVLinkDevice and OpenCVGUI.
+Added arm and disarm commands.
+
+262
+Updated extended menu in OpenCVGUI.
+Added MAVLinkInterface_target_system and MAVLinkInterface_target_component parameters.
+Updated MAVLinkDevice.
+Added rcswitches command.
+Added B key to set throttle to 50% easily.
+
+261
+Added MessageLen, InternalBufferSize and ModemBitRate parameters to MDM.
+
+260
+Added GetTemperatureP33x().
+Updated Pololu to add analog sonars support.
+
+259
+Corrected bug in headingrelativereg.
+
+258
+Added opencvguiperiod parameter.
+Merged MissingWorker and Pipeline into Ball.
+
+257
+Updated CMakeLists.txt.
+
+256
+Updated CMakeLists.txt.
+
+255
+Changed thread-safety in OpenCVGUI, Video and VideoRecord.
+
+254
+Updated ReadMe.txt and CMakeLists.txt.
+Changed default build options.
+
+253
+Corrected sailboattacktype.
+
+252
+Corrected sailboattacktype.
+
+251
+Added sailboattacktype and sailformulatype parameters.
+Updated sailboatconfig command.
+Added setwindestimationwgs and setwindestimation commands.
+
+250
+Disabled u < 0 for sailboats.
+Renamed showmaestrogetposition to showgetpositionmaestro.
+Renamed ksi to zeta, betatrav to betaside, betaarr to betarear.
+Corrected comment about objRealRadius.
+Added bDispERR option in OpenCVGUI.
+Moved some commands.
+Added windfilterconfig command.
+
+249
+Minor corrections.
+
+248
+Updated bias support for rudders.
+Added showmaestrogetposition command.
+Updated Pololu and SSC32 to support up to 24 and 32 PWMs respectively.
+
+247
+Renamed Maestro to Pololu.
+
+246
+Updated ball detection and corrected related samples.
+
+245
+Added linefollowingrelativerobot, linefollowingtrelativerobot, waitxyt, waitxytrelative, waitxytwgs, waitlinet, waitlinetrelativerobot commands.
+
+244
+Added objMinDetectionRatio and objDetectionRatioDuration parameters (not implemented) in commands related to detections.
+Added bat_filter_coef parameter.
+Added PololuType parameter to Maestro.
+Added alternating display of VBAT1 and VBAT2 in OpenCVGUI.
+Added the display of alarms in the middle of OpenCVGUI.
+vbat2 added to lognav.
+Replaced enable/disablebatteryalarm commands by enable/disableallalarms.
+Updated showbatteryinfo and showswitchinfo commands.
+Added wzcontrolconfig and sailboatconfig commands.
+
+243
+Updated CMakeLists.txt and other minor updates.
+
+242
+Improved compatibility with OpenCV 3.4.2.
+
+241
+Beginning of built-in sailboat simulator integration.
+
+240
+Updated ReadMe.txt.
+
+239
+Added bEnable_NMEAInterface_WIMWV, bEnable_NMEAInterface_WIMWD, bEnable_NMEAInterface_WIMDA, bEnable_NMEAInterface_SDDBT parameters.
+Added bEnable_NMEA_HDT, bEnable_NMEA_ROT, bEnable_NMEA_DID parameters to ublox.
+
+238
+Corrected RS232Port connection bug in all interfaces.
+
+237
+Added bSendCalibration parameter to RazorAHRS.
+Added NMEAInterfacePeriod and NMEAInterfaceSendPeriod (not implemented) parameters.
+
+236
+Updated waypointslist command.
+
+235
+Updated ffmpeg support.
+Added DISABLE_IGNORE_SIGPIPE.
+
+234
+Updated ComputeChecksumNMEA().
+Updated waypointslist command.
+
+233
+Quick fix to solve the reconnection of NMEAInterface due to last \n in NMEA waypoints data from OpenCPN.
+Added bDisablelognav and bEnable_NMEAInterface_IIRSA parameters.
+
+232
+Quick fix for waypointslist command.
+
+231
+Added temporary support of Pololu Jrk motor controller in Maestro for Motorboat robid.
+Updated preliminary CMake support.
+
+230
+Updated preliminary CMake support and other updates.
+
+229
+Updated preliminary CMake support and other updates.
+
+228
+Added bDisableNMEAInterfaceIN parameter.
+Added preliminary waypointslist command.
+Updated preliminary CMake support.
+
+227
+Added preliminary Sailboat 2 support.
+Added robid command to print the current robid.
+
+226
+Updated showdetailedinfo.
+Added the output of servo_output_raw in MAVLinkInterface.
+Added the output of HEHDT, HEROT, PRDID in NMEAInterface.
+
+225
+Updated preliminary CMake support and other minor updates.
+
+224
+Updated Compat_vs2017.bat to be able to build without OpenCV.
+Added preliminary CMake support.
+Improved MinGW compatibility.
+Updated Visual Studio 2017 project files target platform.
+Removed Visual Studio 2008 project files.
+
+223
+Continuation of GoPro integration.
+
+222
+Continuation of GoPro integration.
+
+221
+Beginning of GoPro integration.
+
+220
+Attempt to add UDP support to RS232Port.
+
+219
+Updated #ifndef comments.
+
+218
+Updated RS232Port with WaitForRS232Port() and other reading functions.
+
+217
+Added cameratiltup, cameratiltdown, cameratiltcenter, lightsbrigther, lightsdimmer commands.
+Corrections in MANUAL_CONTROL MAVLink message.
+
+216
+Added drconfig, lights and cameratilt commands.
+Added partial support of MANUAL_CONTROL MAVLink message.
+
+215
+Attempt to correct bug in autoswitch to MAVLink v2.
+Added parameters MAVLinkInterface_mavlink_comm and bForceDefaultMAVLink1MAVLinkInterface.
+Added N key to set camera tilt to neutral position.
+
+214
+Upgraded to MAVLink v2.
+
+213
+Combined bEnableRCMode and bEnableFullSpeedMode to bEnableAltRCMode.
+Added disarm key.
+
+212
+Corrected bug in LIRMIA3 that caused the program to exit whenever any communication error occurs.
+
+211
+Updated ReadMe.txt.
+Updated OpenCVGUI.
+Beginning of BLUEROV integration.
+
+210
+Added MS583730BA.
+Corrections in LIRMIA3 integration.
+
+209
+Beginning of 3D QUADRO_SIMULATOR_ROBID integration.
+Corrections and additions for pitch and roll control.
+
+208
+Updated depth control.
+
+207
+Added szVideoRecordCodec parameter.
+
+206
+Added CLEye support.
+Continuation of LIRMIA3 integration.
+
+205
+Continuation of LIRMIA3 integration.
+
+204
+Corrections in MS580314BA.
+Minor updates in OpenCVGUI.
+
+203
+Added enable/disableautodvllocalization commands.
+Updated extended menu in OpenCVGUI.
+Ensured motors are stopped before exit depending on robid.
+Added acc and gyr in RazorAHRSinterface.
+
+202
+Added U and H keys for pitch and roll control.
+Added omega and accr in RazorAHRS.cpp if bROSMode.
+Continuation of LIRMIA3 integration.
+
+201
+Beginning of LIRMIA3 integration.
+
+200
+Added a break command before disconnection in PathfinderDVL to avoid to let it ping after exit. 
+
+199
+Corrected conversion bug in PathfinderDVL.
+Removed unexpected pause symbol in OpenCVGUI.
+
+198
+Updated commands to enable simulated DVL.
+
+197
+Added a simulated DVL to simulator.
+
+196
+Updated MAVLinkInterface.
+
+195
+Updated PathfinderDVL.
+
+194
+Updated NMEAInterface and RazorAHRSInterface.
+Added bROSMode_RazorAHRSInterface parameter.
+Added preliminary rollreg and pitchreg commands.
+
+193
+Updated SSC32Interface.
+
+192
+Added bDisableMAVLinkInterfaceIN parameter.
+Continuation of NMEAInterface integration. 
+Beginning of RazorAHRSInterface integration.
+Beginning of SSC32Interface integration.
+
+191
+Added preliminary support of MAVLINK_MSG_ID_RC_CHANNELS_OVERRIDE to MAVLinkInterface.
+
+190
+Quick fix to be able to stop lateral input with space key.
+Corrected RTK_FIXED case for MAVLinkDevice. 
+Beginning of roll and pitch control integration.
+
+189
+Updated simulator initial state.
+
+188
+Added preliminary parameters related to roll and pitch control.
+Updated ROBIDs.
+
+187
+Added saveconfig and reloadconfig commands.
+
+186
+Added GetGNSSlevel() to get more info about the GNSS fix quality.
+Updated the main measurements as intervals.
+
+185
+Updated NMEA and ublox to get more info about the GNSS fix quality.
+
+184
+Added menu in OpenCVGUI.
+
+183
+Continuation of DVLs integration.
+
+182
+Added PD6 RDI DVL support to ublox.
+
+181
+Attempt to prevent NAN in MT and SBG.
+
+180
+Added bROSMode parameter to RazorAHRS.
+
+179
+Updated RazorAHRS to support #YPRAG sentence.
+
+178
+Beginning of NortekDVL integration.
+
+177
+Updated logstate and logsimu file formats.
+
+176
+Corrected bug in SendNbSimpleMessageAndWaitNsMDM().
+Updated logstate and logsimu file formats.
+
+175
+Updated bSetBaseCfg to SetCfg in ublox.
+Try to extrapolate UTC when only GGA and GLL available.
+
+174
+Beginning of PathfinderDVL integration.
+Added parameters related to 3D observer.
+Try to compute UTC from NMEADevice, ublox, SBG, MT if valid.
+
+173
+Updated logstate and logsimu file formats.
+Corrected handling of phi, theta, psi.
+
+172
+Continuation of BlueView integration.
+
+171
+Corrected bug for BlueView in Makefile.
+Updated logstate and logsimu file formats.
+
+170
+Corrected bug introduced in previous version in the parsing of UxVCtrl.
+
+169
+Beginning of BlueView integration.
+Beginning of NMEAInterface integration.
+
+168
+Renamed Hovercraft to BUBBLE and TREX to ETAS_WHEEL.
+Added buggy simulator.
+Corrected heading control bug for Buggy and Motorboat when going backwards.
+
+167
+Temporary correction to handle multiple connections to MAVLinkInterface.
+Corrections in Follow Me.
+
+166
+Modified KML generated from snapshot.
+Modifications in wallavoidance.
+
+165
+Corrected KML generated from snapshot.
+
+164
+Corrected inversion of latitude and longitude in KML generated from snapshot.
+Added a KML file with PhotoOverlay for ball.
+
+163
+Added support of procid for wallavoidance.
+
+162
+Modified buggy keyboard control behavior.
+Added forbidden area to Follow Me.
+
+161
+Updated buggy support in Maestro.
+
+160
+Added recording of a tlog file to MAVLinkInterface (but only works when there is a connection).
+Updated Follow Me.
+Added new parameters to MAVLinkDevice.
+Added preliminary SAUC'ISSE support to Maestro.
+
+159
+Removed Visual Studio 2012 files.
+Added preliminary implementation of Follow Me.
+
+158
+Added ALT_SAILBOAT_CONTROLLER (to check).
+Replaced psi by psiw, thetahat by psihat, omegahat by psidothat, thetadot by psidot, omegadot by psidotdot, omega by psidot, psidots by omegas, theta_mes by psi_mes, theta_ by psi_ (except in OSUtils and Wall.h), wtheta by wpsi, vxyhat by vrxhat, vxy_mes by vrx_mes, vxy_dot by vrx_dot, vxy by vrx (with special cases), psidot by omegazdot (with special cases).
+Added a KML file with PhotoOverlay when pressing the snapshot key.
+
+157
+Default project files are now with Visual Studio 2017 and OpenCV 2.4.13.
+
+156
+Added alternate implementation of video and GUI handling using OpenCV CPP API (but disabled by default).
+
+155
+Minor corrections in VC Linux project.
+
+154
+Added arrows keys to move in the view of OpenCVGUI (but disabled with key code cast, need to check portability).
+Enabled MAV_DATA_STREAM_POSITION messages in MAVLinkDevice.
+Added several parameters for MAVLinkDevice and MAVLinkInterface.
+
+153
+Performance improvement in automatic handling of RPLIDAR data history.
+
+152
+Updated automatic handling of RPLIDAR data history.
+
+151
+Improved compatibility with old RPLIDAR.
+Added the display of altitude for QUADRO.
+Added maxhist parameter for RPLIDAR.
+
+150
+Added Visual Studio 2015 and VC Linux projects.
+Corrected problems with long size on Linux 64 bit.
+
+149
+Corrected the use of ComputeChecksumNMEA() in EncodeSentenceNMEA().
+Minor update in SonarAltitudeEstimation.
+Correction in EXPRESS_SCAN angles computations for RPLIDAR.
+
+148
+Corrected Hokuyo, RPLIDAR and simulator w.r.t. sonar.
+
+147
+Added EXPRESS_SCAN support for RPLIDAR.
+
+146
+Continuation of RPLIDAR integration.
+Corrected Hokuyo w.r.t. sonar.
+
+145
+Added waitlinetrelative, waitlinetwgs commands (to check).
+Attempt to correct a bug in NMEA checksum computation.
+
+144
+Changed accuracy of some values in the log files.
+
+143
+Updated ublox.
+Added bEnable_UBX_NAV_SOL parameter for ublox for ArduPilot compatibility.
+
+142
+Added PressureRef and WaterDensity parameters for P33x.
+Added P_electronics_XXX and P_actuators_XXX parameters for energy monitoring.
+Improved compatibility with Visual Studio 2017 and gcc 6.2.0.
+
+141
+Updated ublox.
+
+140
+Added SonarAltitudeEstimation.
+
+139
+Added support for a 3rd ublox, typically the RTK base.
+
+138
+Added HorizontalBeam and VerticalBeam parameters.
+Continuation of ExternalVisualLocalization integration.
+
+137
+Added magnetometers data in SBG and MT logs.
+Continuation of ExternalVisualLocalization integration.
+
+136
+Begginning of ExternalVisualLocalization integration.
+Begginning of RPLIDAR integration.
+
+135
+Increased accuracy of depth control.
+Updated Hokuyo w.r.t. sonar.
+Corrections in dynamic sonar localization.
+Added dynamicsonarlocalization_period parameter.
+
+134
+Harmonizations with sonarstaticlocstructuredsimu.
+
+133
+Corrected problem with too precise but inaccurate GPS position estimation.
+Expand box differently for sonar localization.
+
+132
+Added SonarLocalizationThread to handle some computations separately.
+
+131
+Added controllerperiod, observerperiod, moved simulatorperiod parameters.
+
+130
+Reverted back to x,y error for sonar localization.
+
+129
+Reverted back to c_acc instead of c_acc_group due to possible bug.
+Expand box differently for sonar localization.
+Prevented too precise GPS position estimation while there was a bias.
+
+128
+Changed period for Simulator, SeanetProcessing, Observer, UE9, Controller.
+
+127
+GUI blocked several seconds with buggy when "Unable to connect to a local/remote camera or open a video file" : deleted OpenCVCS around cvShowImage() in OpenCVGUI.
+Added LeaveCriticalSection(&StateVariablesCS) / EnterCriticalSection(&StateVariablesCS) in SIVIA_dyn() to avoid blocking too much the other threads.
+Do not bisect, only contract for dynamic sonar localization to speed up.
+Added white dot to display center in sonar display to know where the robot is w.r.t. blue lines indicating obstacles.
+Improved readability of thrusters power in OpenCVGUI.
+
+126
+Heading, depth and altitude w.r.t. sea floor control inputs now set to current state when enabled.
+Added enabledynamicsonarlocalization/disabledynamicsonarlocalization commands (but not working well).
+
+125
+UBXDevice renamed as ublox.
+
+124
+Continuation of UBXDevice integration.
+
+123
+Beginning of UBXDevice integration.
+
+122
+Added szMAVLinkInterfacePath, MAVLinkInterfaceBaudRate and MAVLinkInterfaceTimeout parameters.
+
+121
+Added TCP server support to RS232Port.
+
+120
+Corrected bug with keys that were not working on Linux.
+
+119
+Removed inttypes.h since it should only be added when needed.
+Corrected bug when checking duplicate keys.
+Improved compatibility with gcc 6.2.0.
+
+118
+Added help command.
+Added keys.txt configuration file.
+
+117
+Added Linux support for SBG.
+Corrected bug in condition when raw Euler angles were not sent from MT/SBG.
+Added parameter gpsaccuracythreshold (3*sigma) for SBG.
+
+116
+Corrected bug when if Euler angles were not sent from MT/SBG, they were not stored in the log file while they were still computed from quaternions.
+Changed UTC_Seconds from int to double in the log file for sbgCenter compatibility.
+Added test code to check the thread period of SBG, MT and RazorAHRS.
+
+115
+Added preliminary SBG support.
+
+114
+Improved error messages during hardware initialization.
+
+113
+Preliminary ffmpeg support.
+Corrected procid for ball.
+
+112
+Corrected label/goto problems.
+Added procedure, execute and return commands.
+Added preliminary MAVLinkInterface to be able to send telemetry data to Mission Planner.
+Changed labelid parameter to procid in all missionconfig.
+
+111
+Added labelid parameter to all missionconfig (with partial implementation for ball).
+
+110
+Attempt to solve random corrupted video recording on Raspberry Pi Zero.
+Added X key corresponding to disableopencvgui.
+Renamed showcytroninfo to showswitchinfo.
+Updated Maestro configuration file to support several analog inputs.
+
+109
+Added SetRudderThrusterMaestro() to optimize for Sailboat.
+Added USE_MOTORBOAT_WITH_FLUX option for Motorboat.
+Improved period regularity of Maestro thread.
+
+108
+Compacted SurfaceVisualObstacle code to reduce compilation time.
+Added ENABLE_BUILD_OPTIMIZATION_SAILBOAT option to reduce compilation time for Sailboat with Raspberry Pi Zero.
+Added USE_ALTERNATE_RECORDING option in case of codecs problems.
+
+107
+Inverted coordinates for excluded_area_points in Video.
+Improved different line endings support.
+Improved compatibility with Visual Studio 2015 and gcc 5.2.1.
+
+106
+Improved compatibility with OpenCV 3.1.0.
+Corrected potential memory leak in SurfaceVisualObstacle.
+Added hcenter, vcenter, hshift, vshift, nb_excluded_area_points, excluded_area_points parameters in Video configuration files.
+Added jump, label and goto commands.
+
+105
+Corrected GUI problems when bEnableOpenCVGUIs[videoid] is 0 on Linux.
+Corrected display bug of waypoints and lines to follow if bRotatingMap.
+Attempt to correct problems with OpenCV windows in threads on Linux.
+Renamed start/stopopencvgui command to enable/disableopencvgui.
+Added showcytroninfo, showbatteryinfo, enable/disablebatteryalarm commands.
+
+104
+Updated logpingertask.
+
+103
+Updated pinger commands.
+
+102
+Updated pinger commands.
+
+101
+Updated snapshots frequency for objects tracking.
+
+100
+Corrected parsing order of gotoopit and gotoopi commands.
+
+99
+Corrected position parsing in OPI acoustic message.
+
+98
+Attempt to limit race conditions.
+
+97
+Updated OPI acoustic message.
+Added gotoopi and gotoopit commands.
+
+96
+Optimization : do not always erase overlayimg in missions threads.
+Changed the period of most of the mission threads to captureperiod.
+Corrections in pinger tracking.
+Added objMinDetectionDuration parameter for the missions with detections (not used yet).
+
+95
+Added missing worker and pinger missions.
+Corrected build problem in Commands.h due to numerous else-if.
+
+94
+Improved Linux compatibility.
+
+93
+Corrected MAVLinkDevice rudder direction.
+Improved Linux compatibility.
+
+92
+Added temporary lateral command ul for QUADRO_ROBID.
+Added Rearm key.
+Improvements in MAVLinkDevice.
+
+91
+Replaced Sail by IM483I.
+Corrected bug "for function parameters, array types are adjusted to pointer types" in NMEADevice.
+Minor improvements in MAVLinkDevice.
+
+90
+Minor corrections.
+
+89
+Prevented display/system sleep on Windows (to try to avoid automatic maintenance...).
+
+88
+Added InitPW, MidAngle parameters in actuators configuration files.
+Added preliminary MAVLink PWM input and output support.
+Beginning of minimal AIS support.
+
+87
+Added support of extended length messages in MT.
+Preliminary support of MTDATA2 messages.
+Added bLegacyMode parameter in MT.
+
+86
+Corrected sscanf()-related bugs in NMEADevice.
+
+85
+Added support of a 2nd NMEADevice.
+Corrected $WIMDA to take true wind direction instead of magnetic.
+Added $GPGLL, $IIMWV, $WIMWV, $WIMWD support.
+
+84
+Corrections in the different position contractions.
+Compacted some MDM code parts.
+
+83
+Renamed start/stopgpslocalization commands to enable/disableautogpslocalization.
+Removed the temporary code that disabled all the modem communications when the ball was not detected while trying to detect it.
+Added parsing of time and date in NMEADevice when available.
+
+82
+Visual Studio 2008 project now uses OpenCV 2.4.9 (download http://www.ensta-bretagne.fr/lebars/Share/OpenCV2.4.9.zip and extract in C:).
+
+81
+To check (modified before euRathlon GC, not tested)!
+Send acoustic message when ball detected (check when it begins/stops...).
+Modifications in position contraction with the different methods (check error size, differences between commands and GUI keys...).
+Updates in MDM (to check and improve recvany, to follow better the defined protocol and get a real communication depending on the commands...).
+
+80
+Added lathat;longhat;althat;headinghat in logstate.
+Corrected GPS FIX blinking with ArduPilot because of low GPS msg frequency (to improve...).
+
+79
+Added display of uw and u in GUI for submarines.
+Added J key for start/stopgpslocalization and corresponding GUI indication. 
+
+78
+Added T to change text colors.
+Added QUADRO_WORKSPACE in USERUpdtQuick.bat.
+
+77
+Added +/- keys for coordspace zoom.
+Added support of a 2nd MAVLinkDevice for the ArduPilot.
+
+76
+Updated MAVLinkDevice.
+Decreased Razor, MT, MAVLink period because of fast ground and aerial robots.
+Hokuyo0.txt configuration file corrected.
+GPS fix info now displayed on GUI.
+Added tv_sec;tv_usec; in logstate and logsimu.
+Changed Hokuyo log format to reduce size.
+Corrected O and G keys so that they correspond better to the commands.
+Added bEnableFullSpeedMode.
+
+75
+Continuation of MAVLinkDevice integration.
+Corrected QUADRO_ROBID considered as invalid parameter.
+
+74
+Added RC mode option ('7' key) for a better manual control of TREX.
+Improved GUI depending on the robid.
+Added state observer for TREX.
+Replaced bDisableGPS by bDisableNMEADevice.
+Begginning of MAVLinkDevice integration.
+Added QUADRO_ROBID.
+Added bGPSOKNMEADevice, bGPSOKMT, bGPSOKMAVLinkDevice, bGPSOKSimulator to indicate if there is a GPS fix.
+Added start/stopgpslocalization commands, bGPSLocalization enabled by default (however GPS position is only used if GPS fix).
+Corrected potential bug where GPS was setting z_mes.
+
+73
+Added Compat.bat to improve compatibility of Visual Studio projects when necessary.
+
+72
+Improved compatibility with VSim for Sailboat (configuration : MT, GPS, SSC-32, Sail).
+
+71
+Added support of Kinect v2 in the Visual Studio 2012 project.
+Replaced SAUCISSE_LIKE by SAUCISSE_CLASS.
+Added TREX_ROBID.
+
+70
+Added RCMode and BAT1 display on Sailboat GUI.
+
+69
+Changed key for Cytron.
+
+68
+Added logging of vbattery1.
+Corrected parameters checking in Maestro to enable -1 for analoginputchan to disable it.
+Added bEnableSetMultipleTargets parameter for Maestro (better compatibility with Micro Maestro).
+
+67
+Added Cytron value to check autonomous/manual mode changes.
+
+66
+Updated battery alarms to reflect current hardware modifications (PC batteries now in serial).
+
+65
+Sailboat channels modified to improve compatibility with motorboats.
+Maestro analoginputchan disable value is now -1.
+Updated battery alarms to reflect current hardware modifications (PC batteries changed, servo voltage sensor removed).
+
+64
+Update w.r.t. RemoteWebcam 14.
+
+63
+Better handling of files path with spaces.
+
+62
+Corrected bug in the display of environment circles (bad radius).
+Added display of current waypoint.
+
+61
+Added roll correction for true wind estimation.
+Minor modifications in MDM.
+Minor modifications in Maestro timings to avoid temporary disconnections due to overload.
+
+60
+Corrected Sailboat settings.
+
+59
+Modifications related to wind.
+
+58
+Added temporary battery alarm for Sailboat.
+Added possibility to use hardcoded parameters in hardware.
+
+57
+Small improvements in GUI.
+
+56
+Continuation of Hokuyo integration.
+
+55
+Modifications related to wind and YPR.
+
+54
+Corrections in wind angles.
+
+53
+Added analog input parameters for Maestro.
+
+52
+Added parameters related to sailboats.
+
+51
+Corrections in Maestro.
+
+50
+Beginning of Hokuyo integration.
+
+49
+Added linefollowingwgsstation command.
+Continuation of sailboats integration.
+
+48
+Added support of GPRMC and GPVTG GPS sentences.
+Corrections w.r.t. apparent wind.
+
+47
+Continuation of sailboats integration.
+
+46
+Corrected bug SAILBOAT_ROBID considered as invalid.
+RazorAHRS TCP port set to 4007.
+
+45
+Added threshold parameter to Sail.
+Continuation of sailboats integration.
+
+44
+Renamed to UxVCtrl as UxV is the usual designation of UAV, UGV, USV, UUV...
+
+43
+Updated ResetWorkspace.bat/.sh to include ReadMe.txt in each output folder.
+Updated local repository.
+
+42
+Updates in remote video.
+Added the possibility to specify an URL for cvCreateFileCapture() (OpenCV partially supports some IP cameras).
+Updates in actuators.
+
+41
+Beginning of sailboats integration.
+
+40
+Added EchoByte function in MDM and DelayReadWriteEchoByte parameter.
+Added timeout parameter for all serial devices.
+
+39
+Preliminary support of buggy via smartphone and IOIO.
+Improved controls for buggy and motorboats.
+
+38
+Daisy-chained echosounder support now activated by default and improved log file compatibility.
+
+37
+Improved compatibility with recent versions of gcc with -fpermissive.
+Improved compatibility with OpenCV versions built with Qt support.
+Increased Razor AHRS RS232 port timeout for better compatibility.
+
+36
+Added new system command.
+Added experimental sound commands for Windows (using WinMM).
+
+35
+Corrected bug introduced by the command parsing when checking the null terminal character with strncmp().
+
+34
+Beginning of Maestro integration.
+
+33
+Improved command parsing by checking the null terminal character with strncmp().
+Added bPause parameter to deviceconfig commands.
+
+32
+Added bounding box parameters in env.txt.
+
+31
+Some updates in interval (interval.cpp/.h still not fully updated w.r.t. version with separators).
+Removed obsolete information in mission_spec.txt.
+Minor modifications in MDM.
+Added specific acoustic messages (ASK, SPWT, SHH).
+
+30
+Preliminary support of daisy-chained echosounder on sonar (but not currently activated).
+Added possibility to restart SwarmonDevice like others.
+Image-related functions moved from Globals.h to CvProc.h.
+Added altitude w.r.t. sea floor control.
+Added and modified options related to bBrake in the missions.
+Changed the order of some parameters in ballconfig.
+Added alpha_max_err, d_max_err parameters in the configuration file of Seanet.
+Added HorizontalBeam and VerticalBeam parameters in the configuration files of Seanet and Video, however they are not yet really used.
+Improved compatibility with Visual Studio 2015.
+
+29
+Removed printf() of acoustic messages.
+
+28
+Removed the expansion of the resulting box after contraction with modem distance as it was too pessimistic.
+Decreased x_max_err and y_max_err.
+Added setstateestimationwgs command.
+Added bottom camera handling for ball.
+Minor changes.
+
+27
+Changed modem commands.
+Added purge and corrected send/recv, sendall/recvall functions for the modem.
+SENDXY message is now sent twice so that only 2 identic RECVXY will be taken into account for the localization.
+
+26
+Corrected bug where fcopyload() failed while it was actually successful.
+Introduced modem commands.
+Corrected bug in the handling of MDM, MES, MT, NMEADevice, P33x, RazorAHRS, Seanet, SSC32 log files (should not have been set to NULL in Connect()).
+bGPSOK variable removed.
+A NMEADevice will no more be restarted just because it does not have the GPS fix.
+
+25
+Beginning of surfacevisualobstacleavoidance integration.
+
+24
+Removed some SSC-32 test code.
+Added option to enable/disable backwards for new motorboat (because of waterproofness issues of some moving parts).
+Minor reorganizations of some device commands.
+Preliminary RazorAHRS support.
+
+23
+GPS data can now be automatically taken into account if the MTi-G has a valid GPS signal.
+Corrected bug where invalid commands where sent to SSC-32 when there is no PWM to update.
+Changed SSC-32 thresholds as well as thrust and rudder computations.
+Added u and uw in observer log because u1,u2,u3 does not correspond correctly to motorboat outputs.
+Corrected side effects due to the modification of the function parameters inside SetAllPWMsSSC32().
+Corrected wrong updates of LastPWs in SetAllPWMsSSC32(), when the value for a channel was below the threshold while another one was above.
+Changed several SSC-32 default values.
+
+22
+Changed deque<vector<interval>> notation to deque< vector<interval> > do disambiguate >>.
+Added better support of socklen_t type in OSNet.h.
+Corrected some invalid return values in some threads.
+Added cast to int when saving values from timeval struct in MT and P33x.
+Corrected printf() call when echo is activated in Commands.h.
+Added missing critical sections in MissionLogThread.
+Added missing critical sections in Video around DisconnectVideo() because of non thread-safe OpenCV codec-related functions.
+Attempts to improve portability of OpenCVGUI.
+Corrected Makefile for Ubuntu 10.10.
+
+21
+Added a restart command for each device.
+Some minor reorganizations and harmonizations.
+
+20
+Corrected back some deadlocks in release due to KillThread().
+Added support of different resolution and captureperiod for each camera. They will be converted to the resolution and captureperiod used by OpenCVGUI.
+Improved compatibility for the DueTime in the timer of VideoRecord.
+Added rotation, scale and flip parameters for cameras.
+
+19
+Improved exit behavior.
+Improved workspace organization.
+Added delays to correct crash when reading 2 video files.
+Added preliminary remote camera support.
+
+18
+Corrected bug where stopwalltracking was interpreted as stop because of commands order test in Commands.h.
+
+17
+Added missing parameters for light in ballconfig.
+Corrected heading control bug in lateral ball tracking.
+
+16
+Corrected name of OpenCVGUI windows.
+Corrected bug where omegaz_mes was never set by MT.
+Corrected bug where the depth was meaningless in logmission.
+
+15
+Added O(gpssetenvcoordposition),G(gpslocalization),Z(resetstateestimation),S(staticsonarlocalization) keys related to localization.
+Corrected sign bug in WaypointControl.
+Corrected some missing critical sections in goto.
+
+14
+Added a key to enable/disable missions overlays.
+Restored SampleTimeFine column in MT logs to improve compatibility with MT Manager.
+Modified staticsonarlocalization to try to quickly solve contraction problems when the initial box is precise but totally inaccurate.
+Improved wall and visual obstacle avoidance to avoid on the right or the left depending on the obstacle relative position.
+Corrected display and log bugs for some values for wall.
+
+13
+Added time and GPS data support in MT log files.
+Added camera number in recorded video file name.
+Corrected bug in NMEADevice log files.
+
+12
+Updated SSC32.
+Modified period for controller and observer.
+Added temporarily thread period indication in some threads.
+
+11
+Added wall tracking.
+Minor modifications in the positions of the critical sections in the missions threads.
+Added temporary implementation of the command staticsonarlocalization.
+
+10
+Beginning of modem and echosounder integration.
+Corrected obstacle avoidance to save a picture of every obstacle.
+Added support of lateral camera for ball tracking, estimation of its absolute position, and detection of the light.
+Added keys to use the CISCREA OSD to set parameters of the camera.
+Added commands to go to relative positions.
+Activated some Seanet parts.
+Activated simulated sonar.
+Added command to change Seanet configuration file and restart it.
+
+9
+Some changes in high-level controls.
+Added depth control as an option for the ball tracking.
+Corrected mission log header.
+Corrected other logs header starting with a '%'.
+
+8
+Changed conversions related to CISCREA thrusters.
+Corrected possible sign error in SAUC'ISSE heading control.
+Changed text colors.
+Added different possibilities to try to estimate vrx and omegaz.
+Added the possibility to easily add omegaz as state variable and measurement in the simulator if necessary.
+Changed the name of some parameters of the observer and simulator.
+Corrections for boost mode to keep the same rotation speed at maximum speed than at null speed.
+Added voltage monitoring for CISCREA with a Li-ion battery.
+Corrected bug in ball tracking (sign in distance control).
+
+7
+Added line following.
+Added new command controlconfig to replace and extend thrustboost, as well as improve manual control.
+Changed light and tilt bounds.
+Added grouped CISCREA Modbus requests.
+Added sleep delays in CISCREA-related functions and corrections for Modbus TCP/RTU.
+Minor changes.
+
+6
+Added GPSOK variable to indicate when the GPS data are valid.
+Added and modified localization-related commands.
+Modified mission log format.
+Added conversion functions between different coordinate systems.
+Corrected bug where conversions between WGS and environment coordinate system work only in the case of an East - North - Up environment coordinate system.
+
+5
+Added support of bSaveRawData for NMEADevice, MT, P33x.
+Reorganization of include config.h in Hardware.
+Beginning of integration of Seanet.
+Added support of altitude for NMEADevice.
+Renamed GPSSurface to GPS.
+
+4
+Corrected problem with lights.
+Corrected bugs when checking modbus operations for CISCREA.
+Corrected uw sign for CISCREA.
+Corrected bug when parsing CISCREA configuration file.
+
+3
+Corrected possible bug in the use of wu instead of u for pipeline tracking.
+Added missing critical sections in control parts of ball, pipeline and visual obstacle.
+Corrected possible bug in distance control for ball tracking.
+Added preliminary support of visual obstacle avoidance and beginning of wall detection.
+Changed command naming conventions.
+Changed source files organization.
+
+2
+Minor updates in the display of the map.
+
+1
+Initial version.

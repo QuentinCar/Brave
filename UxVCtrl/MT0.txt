@@ -1,0 +1,31 @@
+% Server TCP port (e.g. :4001), client IP address and TCP port (e.g. 127.0.0.1:4001) or local RS232 port
+%127.0.0.1:4007
+COM5
+% BaudRate
+115200
+% Timeout (in ms)
+1000
+% threadperiod (in ms, require associated thread)
+50
+% bSaveRawData (require associated thread)
+1
+% bLegacyMode
+1
+% rollorientation (in rad)
+0.0
+% rollp1
+0.0
+% rollp2
+0.0
+% pitchorientation (in rad)
+0.0
+% pitchp1
+0.0
+% pitchp2
+0.0
+% yaworientation (in rad)
+0
+% yawp1
+0
+% yawp2
+0

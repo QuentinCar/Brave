@@ -1,0 +1,398 @@
+procedure 0
+stop
+depthreg 0
+wait 10
+abort
+return
+ballconfig 20 220 75 240 75 150 1 0 0 255 0 0 0 0.03 0.07 0.5 0.5 1.0 0 0 220 0.05 1 0 0 0 0 0 1000 0 1 0
+startballtracking 0
+setstateestimation 0 15 0 15 0 10000 0 10000 0 0.1 0 0.1
+wpfollowingconfig 0.25
+linefollowingconfig 0.25 0.78
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 3.25
+wait 10
+thrust 0.5
+linefollowingt 1.5 0.75 1.5 3.25 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+staticsonarlocalization 3
+gotoxy 1.5 0.75
+wait 10
+thrust 0.5
+linefollowingt 1.5 3.25 1.5 0.75 30
+thrust -0.7
+wait 1
+stop
+wait 3
+%
+stopballtracking 0
+stop
+depthreg 0
+wait 10

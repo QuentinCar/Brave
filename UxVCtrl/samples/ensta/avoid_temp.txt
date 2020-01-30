@@ -1,0 +1,14 @@
+procedure 0
+stop
+headingrelativereg 90
+wait 10
+thrust 0.5
+startwallavoidance
+wait 600
+return
+setmissionaction wall
+thrust 0.5
+wallconfig 0.75 0.7 0 0 3 0.78 1 0 1 0
+startwallavoidance
+wait 600
+stopwallavoidance

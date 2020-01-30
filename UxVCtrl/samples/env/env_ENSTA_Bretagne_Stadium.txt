@@ -1,0 +1,50 @@
+% Angle of the x axis of the environment coordinate system to the North, should be set to 90 if no specific environment (i.e. an East - North - Up coordinate system) is used as reference (in deg in North - East - Down coordinate system)
+90
+% Latitude, longitude, altitude of the environment coordinate system (in decimal deg and m)
+48.418079
+-4.473487
+88
+% AirPressure (pressure in bar)
+1
+% WaterVelocityOfSound (in m/s)
+1475
+% WaterFloorAltitude (in the environment coordinate system in m)
+0
+% Number of circles
+0
+% x  y  r (in m)
+% Number of walls
+14
+% xa  ya  xb  yb (in m)
+32.035798 60.212053 49.452154 62.391473 
+49.452154 62.391473 54.603636 24.184897 
+54.603636 24.184897 104.085529 30.422932 
+104.085529 30.422932 106.262881 14.788925 
+106.262881 14.788925 90.772543 13.009806 
+90.772543 13.009806 92.307801 -1.845836 
+92.307801 -1.845836 159.907467 6.171318 
+159.907467 6.171318 161.096052 -8.673204 
+161.096052 -8.673204 22.139790 -24.107060 
+22.139790 -24.107060 19.962659 -9.462688 
+19.962659 -9.462688 91.414835 -1.934792 
+91.414835 -1.934792 90.034555 13.009806 
+90.034555 13.009806 38.471370 5.982287 
+38.471370 5.982287 32.035798 60.212053
+% Bounding box for a structured environment
+% box_env[1].inf (in m)
+-200
+% box_env[1].sup (in m)
+200
+% box_env[2].inf (in m)
+-200
+% box_env[2].sup (in m)
+200
+% Coordinate system used to display the map
+% xMin (in m)
+-4
+% xMax (in m)
+4
+% yMin (in m)
+-4
+% yMax (in m)
+4

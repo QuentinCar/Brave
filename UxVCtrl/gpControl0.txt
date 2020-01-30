@@ -1,0 +1,24 @@
+% Device IP address
+udp://10.5.5.9:8554
+% threadperiod (in ms, require associated thread)
+100
+% bDisableHTTPPersistent
+1
+% bDisableStreamingSettings
+0
+% bDisableStatusCheck
+1
+% streamingstarthttpreq
+http://10.5.5.9/gp/gpControl/execute?p1=gpStream&a1=proto_v2&c1=restart
+% streamingbitratehttpreq
+http://10.5.5.9/gp/gpControl/setting/62/2000000
+% streamingresolutionhttpreq
+http://10.5.5.9/gp/gpControl/setting/64/7
+% statushttpreq
+http://10.5.5.9/gp/gpControl/status
+% streamingstatusid
+32
+% keepalivemsg
+_GPHD_:0:0:2:0.000000
+% keepaliveperiod (in ms)
+2000

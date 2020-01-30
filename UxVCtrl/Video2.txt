@@ -1,0 +1,54 @@
+% camid (0..9) or a video filename or IP address and TCP port
+2
+%test3.wmv
+%127.0.0.1:4014
+%192.168.1.150:4014
+% videoimgwidth
+320
+% videoimgheight
+240
+% captureperiod (in ms)
+100
+% timeout for remote mode, otherwise estimation of delay due to computations (in ms)
+5
+% bForceSoftwareResize
+1
+% hcenter
+0
+% vcenter
+0
+% hscale
+1
+% vscale
+1
+% rotation angle (in deg)
+0
+% hshift
+0
+% vshift
+0
+% bFlip
+0
+% HorizontalBeam (in ]0..360] deg)
+70
+% VerticalBeam (in ]0..360] deg)
+50
+% x (in m, in robot coordinate system)
+0
+% y (in m, in robot coordinate system)
+0
+% z (in m, in robot coordinate system)
+0
+% phi (in rad, in robot coordinate system)
+0
+% theta (in rad, in robot coordinate system)
+0
+% psi (in rad, in robot coordinate system)
+0
+% nb_excluded_area_points
+0
+%3
+% excluded_area_points
+%0 240
+%320 240
+%160 120

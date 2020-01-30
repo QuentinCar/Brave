@@ -1,0 +1,79 @@
+% Server TCP port (e.g. :4001), client IP address and TCP port (e.g. 127.0.0.1:4001) or local RS232 port
+%127.0.0.1:4004
+COM2
+% BaudRate
+115200
+% Timeout (in ms)
+1000
+% threadperiod (in ms, require associated thread)
+50
+% bSaveRawData (require associated thread)
+1
+% channel 0
+% MinPW (in us)
+1000
+% MidPW (in us)
+1450
+% MaxPW (in us)
+1900
+% InitPW (in us)
+1450
+% ThresholdPW (in us)
+10
+% CoefPW (-1 or 1)
+-1
+% bProportionalPW (0 or 1)
+1
+% channel 1
+% MinPW (in us)
+1025
+% MidPW (in us)
+1475
+% MaxPW (in us)
+1925
+% InitPW (in us)
+1475
+% ThresholdPW (in us)
+10
+% CoefPW (-1 or 1)
+-1
+% bProportionalPW (0 or 1)
+1
+% channel 2
+% MinPW (in us)
+1000
+% MidPW (in us)
+1450
+% MaxPW (in us)
+1900
+% InitPW (in us)
+1450
+% ThresholdPW (in us)
+10
+% CoefPW (-1 or 1)
+1
+% bProportionalPW (0 or 1)
+1
+% channel 3
+% MinPW (in us)
+1025
+% MidPW (in us)
+1475
+% MaxPW (in us)
+1925
+% InitPW (in us)
+1475
+% ThresholdPW (in us)
+10
+% CoefPW (-1 or 1)
+1
+% bProportionalPW (0 or 1)
+1
+% rightthrusterchan
+3
+% leftthrusterchan
+2
+% frontthrusterchan
+0
+% rearthrusterchan
+1
