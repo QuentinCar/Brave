@@ -12,7 +12,7 @@
  ```
  Ublox correspond to the Furuno Weather Station.
  ### Topic
-Publisher : /ublox/GPRMC
+Publisher : /ublox/GPRMC<br/>
             /ublox/HCHDG
             /ublox/WIMDA
             /ublox/WIMWV
