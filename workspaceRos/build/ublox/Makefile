@@ -113,17 +113,6 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -134,6 +123,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -228,6 +228,21 @@ _ublox_generate_messages_check_deps_Meteo/fast:
 .PHONY : _ublox_generate_messages_check_deps_Meteo/fast
 
 # Convenience name for target.
+ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/rule:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/rule
+.PHONY : ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/rule
+
+# Convenience name for target.
+_ublox_generate_messages_check_deps_Wind: ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/rule
+
+.PHONY : _ublox_generate_messages_check_deps_Wind
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Wind/fast:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Wind/fast
+
+# Convenience name for target.
 ublox/CMakeFiles/ublox_generate_messages.dir/rule:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/ublox_generate_messages.dir/rule
 .PHONY : ublox/CMakeFiles/ublox_generate_messages.dir/rule
@@ -241,6 +256,21 @@ ublox_generate_messages: ublox/CMakeFiles/ublox_generate_messages.dir/rule
 ublox_generate_messages/fast:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/ublox_generate_messages.dir/build.make ublox/CMakeFiles/ublox_generate_messages.dir/build
 .PHONY : ublox_generate_messages/fast
+
+# Convenience name for target.
+ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
+.PHONY : ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
+
+# Convenience name for target.
+_ublox_generate_messages_check_deps_Gps: ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
+
+.PHONY : _ublox_generate_messages_check_deps_Gps
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Gps/fast:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Gps/fast
 
 # Convenience name for target.
 ublox/CMakeFiles/ublox_generate_messages_eus.dir/rule:
@@ -362,21 +392,6 @@ ublox_generate_messages_py/fast:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_py.dir/build.make ublox/CMakeFiles/ublox_generate_messages_py.dir/build
 .PHONY : ublox_generate_messages_py/fast
 
-# Convenience name for target.
-ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule:
-	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
-.PHONY : ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
-
-# Convenience name for target.
-_ublox_generate_messages_check_deps_Gps: ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/rule
-
-.PHONY : _ublox_generate_messages_check_deps_Gps
-
-# fast build rule for target.
-_ublox_generate_messages_check_deps_Gps/fast:
-	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build
-.PHONY : _ublox_generate_messages_check_deps_Gps/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -392,7 +407,10 @@ help:
 	@echo "... ublox_generate_messages_nodejs"
 	@echo "... _ublox_generate_messages_check_deps_Meteo"
 	@echo "... install/strip"
+	@echo "... _ublox_generate_messages_check_deps_Wind"
 	@echo "... ublox_generate_messages"
+	@echo "... edit_cache"
+	@echo "... _ublox_generate_messages_check_deps_Gps"
 	@echo "... ublox_generate_messages_eus"
 	@echo "... ublox_geneus"
 	@echo "... ublox_generate_messages_lisp"
@@ -402,8 +420,6 @@ help:
 	@echo "... _ublox_generate_messages_check_deps_Compass"
 	@echo "... ublox_generate_messages_py"
 	@echo "... test"
-	@echo "... _ublox_generate_messages_check_deps_Gps"
-	@echo "... edit_cache"
 .PHONY : help
 
 

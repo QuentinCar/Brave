@@ -42,6 +42,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Gps.msg"
     "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Compass.msg"
     "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Meteo.msg"
+    "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Wind.msg"
     )
 endif()
 

@@ -935,6 +935,19 @@ _ublox_generate_messages_check_deps_Meteo/fast:
 .PHONY : _ublox_generate_messages_check_deps_Meteo/fast
 
 #=============================================================================
+# Target rules for targets named _ublox_generate_messages_check_deps_Wind
+
+# Build rule for target.
+_ublox_generate_messages_check_deps_Wind: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _ublox_generate_messages_check_deps_Wind
+.PHONY : _ublox_generate_messages_check_deps_Wind
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Wind/fast:
+	$(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Wind.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Wind/fast
+
+#=============================================================================
 # Target rules for targets named ublox_generate_messages
 
 # Build rule for target.
@@ -946,6 +959,19 @@ ublox_generate_messages: cmake_check_build_system
 ublox_generate_messages/fast:
 	$(MAKE) -f ublox/CMakeFiles/ublox_generate_messages.dir/build.make ublox/CMakeFiles/ublox_generate_messages.dir/build
 .PHONY : ublox_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named _ublox_generate_messages_check_deps_Gps
+
+# Build rule for target.
+_ublox_generate_messages_check_deps_Gps: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _ublox_generate_messages_check_deps_Gps
+.PHONY : _ublox_generate_messages_check_deps_Gps
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Gps/fast:
+	$(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Gps/fast
 
 #=============================================================================
 # Target rules for targets named ublox_generate_messages_eus
@@ -1051,19 +1077,6 @@ ublox_generate_messages_py/fast:
 	$(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_py.dir/build.make ublox/CMakeFiles/ublox_generate_messages_py.dir/build
 .PHONY : ublox_generate_messages_py/fast
 
-#=============================================================================
-# Target rules for targets named _ublox_generate_messages_check_deps_Gps
-
-# Build rule for target.
-_ublox_generate_messages_check_deps_Gps: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _ublox_generate_messages_check_deps_Gps
-.PHONY : _ublox_generate_messages_check_deps_Gps
-
-# fast build rule for target.
-_ublox_generate_messages_check_deps_Gps/fast:
-	$(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Gps.dir/build
-.PHONY : _ublox_generate_messages_check_deps_Gps/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -1136,7 +1149,9 @@ help:
 	@echo "... ublox_genpy"
 	@echo "... ublox_generate_messages_nodejs"
 	@echo "... _ublox_generate_messages_check_deps_Meteo"
+	@echo "... _ublox_generate_messages_check_deps_Wind"
 	@echo "... ublox_generate_messages"
+	@echo "... _ublox_generate_messages_check_deps_Gps"
 	@echo "... ublox_generate_messages_eus"
 	@echo "... ublox_geneus"
 	@echo "... ublox_generate_messages_lisp"
@@ -1145,7 +1160,6 @@ help:
 	@echo "... ublox_gennodejs"
 	@echo "... _ublox_generate_messages_check_deps_Compass"
 	@echo "... ublox_generate_messages_py"
-	@echo "... _ublox_generate_messages_check_deps_Gps"
 .PHONY : help
 
 

@@ -1,0 +1,5 @@
+float64 wind_direction
+string reference
+float64 wind_speed
+string wind_speed_units
+string status
