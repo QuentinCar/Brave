@@ -10,7 +10,7 @@ from std_msgs.msg import String
 
 from ublox.msg import Gps
 from ublox.msg import Compass
-
+from ublox.msg import Meteo
 
 
 def getFrameType(frame):
@@ -29,7 +29,7 @@ def fillPublisher(frameType, line):
 		pub.latitude_indic = data[4]
 		pub.longitude = float(data[5])
 		pub.longitude_indic = data[6]
-		pub.speed = float(data[7])
+		pub.boat_speed = float(data[7])
 		pub.heading = float(data[8])
 		pub.date = float(data[9])
 		pub.magnetic_declination = float(data[10])
@@ -37,14 +37,22 @@ def fillPublisher(frameType, line):
 		pub.positionning_mode = data[12][0]
 
 	elif frameType == "HCHDG":#Compass
-		pub= Compass()
-		rospy.loginfo(data)
+		pub = Compass()
+		#rospy.loginfo(data)
 		pub.heading = float(data[1])
 		pub.heading_indic = data[3]
 		pub.magnetic_declination = float(data[4])
 
-	elif frameType == "WIMDA":
-		rospy.loginfo(data)
+	elif frameType == "WIMDA":#Meteo
+		#rospy.loginfo(data)
+		pub = Meteo()
+		pub.barometric_pressure_mercury = float(data[1])
+		pub.barometric_pressure_bars = float(data[3])
+		pub.temperature = float(data[5])
+		pub.true_wind_direction = float(data[13])
+		pub.magnetic_wind_direction = float(data[15])
+		pub.wind_speed = float(data[17])
+
 
 	elif frameType == "WIMWV":#Wind
 		rospy.loginfo(data)
@@ -68,7 +76,7 @@ def ublox_node():
 
 	GPRMC = rospy.Publisher('/ublox/GPRMC', Gps, queue_size=10)#GPS frame
 	HCHDG = rospy.Publisher('/ublox/HCHDG', Compass, queue_size=10)#Compass frame
-	WIMDA = rospy.Publisher('/ublox/WIMDA', Compass, queue_size=10)#Compass frame
+	WIMDA = rospy.Publisher('/ublox/WIMDA', Meteo, queue_size=10)#Meteorological frame
 	WIMWV = rospy.Publisher('/ublox/WIMWV', Compass, queue_size=10)#Compass frame
 
 	pubDict_raw = {}
@@ -100,7 +108,7 @@ def ublox_node():
 
 			pubDict_raw[frameType].publish(line[6::])
 
-			if frameType == "GPRMC" or frameType == "HCHDG":
+			if frameType == "GPRMC" or frameType == "HCHDG" or frameType == "WIMDA":
 				pubDict[frameType].publish(fillPublisher(frameType, line[6::]))
 
 
