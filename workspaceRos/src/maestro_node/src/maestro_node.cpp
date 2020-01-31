@@ -11,12 +11,13 @@ using namespace boost;
 
 std::string name_node = "maestro_node";
 double targetRudd, targetMSail, targetFSail;
-/*
- * 
- */
+
 void callbackCommand(const std_msgs::Float64::ConstPtr& msg)
 {
-    ROS_INFO("I heard: [%lf]", msg->data);
+    servo = msg.servo
+    pwm = msg.pwm
+
+    pololu.maestroSetAngle(servo, pwm)
 }
 
 int main(int argc, char** argv) {
@@ -39,7 +40,7 @@ int main(int argc, char** argv) {
     TimeoutSerial serial(serial_port, 9600);
     serial.setTimeout(posix_time::seconds(1));
 
-    ROS_INFO("Start");
+    ROS_INFO("Start maestro_node");
     /*
     ROSMaestroController controller(name_node, nh, &serial);
     controller.loadConfiguration();
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
 
     PololuController pololu(&serial);
 
-    ros::Subscriber sub = n.subscribe("command", 1000, callbackCommand);
+    ros::Subscriber sub = n.subscribe("command", 1, callbackCommand);
 
 	//pololu.maestroSetAngle(0, 1250);
 	//pololu.maestroSetAngle(1, 1460);
@@ -56,7 +57,7 @@ int main(int argc, char** argv) {
 
     ros::spin();
 
-    ROS_INFO("Close");
+    ROS_INFO("Close maestro_node");
 
     serial.close();
 
