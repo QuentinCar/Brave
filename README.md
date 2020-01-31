@@ -12,7 +12,7 @@
  ```
  Ublox correspond to the Furuno Weather Station.
  ### Topic
-Publisher :<br/>
+**Publisher** :<br/>
             /ublox/GPRMC<br/>
             /ublox/HCHDG<br/>
             /ublox/WIMDA<br/>
@@ -28,4 +28,7 @@ Publisher :<br/>
  ```
  Control the servo 
  ### Topic
- Subscriber : /Command
+ **Subscriber** : /Command
+ 
+ ## GoPro
+ Not implement yet, still need to find out how to create this node
