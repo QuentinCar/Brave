@@ -418,7 +418,7 @@ gtest_hide_internal_symbols:BOOL=OFF
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/melodic/lib/libtf2.so
+lib:FILEPATH=/opt/ros/melodic/lib/librostime.so
 
 //Value Computed by CMake
 maestro_node_BINARY_DIR:STATIC=/home/quentin/Documents/Brave/workspaceRos/build/maestro_node
