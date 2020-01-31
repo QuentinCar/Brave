@@ -22,6 +22,8 @@ def fillPublisher(frameType, line):
 	data = line.split(",")
 
 	if frameType == "GPRMC":#GPS
+		if data.count('') > 1: # no GPS Available
+			return None
 		pub = Gps()
 		#rospy.loginfo(data)
 		pub.timeStamp = float(data[1])
@@ -38,6 +40,8 @@ def fillPublisher(frameType, line):
 		pub.positionning_mode = data[12][0]
 
 	elif frameType == "HCHDG":#Compass
+		if data.count('') >1: # no compass available
+			return None
 		pub = Compass()
 		#rospy.loginfo(data)
 		pub.heading = float(data[1])
@@ -46,6 +50,8 @@ def fillPublisher(frameType, line):
 
 	elif frameType == "WIMDA":#Meteo
 		#rospy.loginfo(data)
+		if data.count('') > 1: #no weather data available
+			return None			
 		pub = Meteo()
 		pub.barometric_pressure_mercury = float(data[1])
 		pub.barometric_pressure_bars = float(data[3])
@@ -57,6 +63,9 @@ def fillPublisher(frameType, line):
 
 	elif frameType == "WIMWV":#Wind
 		#rospy.loginfo(data)
+		if data.count('') > 1: #no Wind data available
+			return None
+
 		pub = Wind()
 		pub.wind_direction = float(data[1])
 		pub.reference = data[2]
@@ -110,7 +119,9 @@ def ublox_node():
 		if frameType in pubDict_raw:
 
 			pubDict_raw[frameType].publish(line[6::])
-			pubDict[frameType].publish(fillPublisher(frameType, line[6::]))
+			pub = fillPublisher(frameType, line[6::])
+			if not pub is None:
+				pubDict[frameType].publish(pub)
 
 
 		rate.sleep()

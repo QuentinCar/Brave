@@ -1,5 +1,5 @@
 <launch> 
 
-	<node pkg="ublox" type="ublox_node" name="ublox_node" output='screen'/>
+	<node name="ublox_node" pkg="ublox" type="ublox_node.py" output="screen"/>
 
 </launch>
