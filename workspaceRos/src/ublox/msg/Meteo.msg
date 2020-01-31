@@ -1,0 +1,6 @@
+float64 barometric_pressure_mercury
+float64 barometric_pressure_bars
+float64 temperature
+float64 true_wind_direction
+float64 magnetic_wind_direction
+float64 wind_speed

@@ -41,6 +41,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox/msg" TYPE FILE FILES
     "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Gps.msg"
     "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Compass.msg"
+    "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Meteo.msg"
     )
 endif()
 
