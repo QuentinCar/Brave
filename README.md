@@ -12,14 +12,15 @@
  ```
  Ublox correspond to the Furuno Weather Station.
  ### Topic
-Publisher : /ublox/GPRMC<br/>
-            /ublox/HCHDG
-            /ublox/WIMDA
-            /ublox/WIMWV
-            /ublox/raw_GPRMC
-            /ublox/raw_HCHDG
-            /ublox/raw_WIMDA
-            /ublox/raw_WIMWV
+Publisher :<br/>
+            /ublox/GPRMC<br/>
+            /ublox/HCHDG<br/>
+            /ublox/WIMDA<br/>
+            /ublox/WIMWV<br/>
+            /ublox/raw_GPRMC<br/>
+            /ublox/raw_HCHDG<br/>
+            /ublox/raw_WIMDA<br/>
+            /ublox/raw_WIMWV<br/>
             
  ## Maestro
   ```shell
