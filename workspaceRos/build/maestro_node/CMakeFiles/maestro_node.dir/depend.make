@@ -73,6 +73,7 @@ maestro_node/CMakeFiles/maestro_node.dir/src/ROSMaestroController.cpp.o: /opt/ro
 maestro_node/CMakeFiles/maestro_node.dir/src/TimeoutSerial.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
 maestro_node/CMakeFiles/maestro_node.dir/src/TimeoutSerial.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/TimeoutSerial.cpp
 
+maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/devel/include/maestro_node/Command.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/PololuController.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/ROSMaestroController.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
@@ -134,7 +135,6 @@ maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodi
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/ros/wall_timer_options.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/sensor_msgs/JointState.h
-maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/std_msgs/Float64.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/std_msgs/Header.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcDecl.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /opt/ros/melodic/include/xmlrpcpp/XmlRpcValue.h

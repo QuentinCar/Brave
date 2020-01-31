@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(maestro_node_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include " STREQUAL " ")
+if(NOT "/home/quentin/Documents/Brave/workspaceRos/devel/include;/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include " STREQUAL " ")
   set(maestro_node_INCLUDE_DIRS "")
-  set(_include_dirs "/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include")
+  set(_include_dirs "/home/quentin/Documents/Brave/workspaceRos/devel/include;/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://www.officinerobotiche.it " STREQUAL " ")
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(maestro_node_EXPORTED_TARGETS "")
+set(maestro_node_EXPORTED_TARGETS "maestro_node_generate_messages_cpp;maestro_node_generate_messages_eus;maestro_node_generate_messages_lisp;maestro_node_generate_messages_nodejs;maestro_node_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${maestro_node_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -185,7 +185,7 @@ foreach(t ${maestro_node_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "roscpp;std_msgs")
+set(depends "roscpp;std_msgs;message_runtime")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   list(APPEND maestro_node_EXPORTED_TARGETS ${${maestro_node_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "maestro_node-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${maestro_node_DIR}/${extra})
