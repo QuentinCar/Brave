@@ -922,6 +922,19 @@ ublox_genpy/fast:
 .PHONY : ublox_genpy/fast
 
 #=============================================================================
+# Target rules for targets named ublox_generate_messages_nodejs
+
+# Build rule for target.
+ublox_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ublox_generate_messages_nodejs
+.PHONY : ublox_generate_messages_nodejs
+
+# fast build rule for target.
+ublox_generate_messages_nodejs/fast:
+	$(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build.make ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build
+.PHONY : ublox_generate_messages_nodejs/fast
+
+#=============================================================================
 # Target rules for targets named ublox_generate_messages
 
 # Build rule for target.
@@ -974,19 +987,6 @@ ublox_genlisp/fast:
 .PHONY : ublox_genlisp/fast
 
 #=============================================================================
-# Target rules for targets named ublox_generate_messages_nodejs
-
-# Build rule for target.
-ublox_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ublox_generate_messages_nodejs
-.PHONY : ublox_generate_messages_nodejs
-
-# fast build rule for target.
-ublox_generate_messages_nodejs/fast:
-	$(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build.make ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build
-.PHONY : ublox_generate_messages_nodejs/fast
-
-#=============================================================================
 # Target rules for targets named ublox_gencpp
 
 # Build rule for target.
@@ -1011,6 +1011,19 @@ ublox_gennodejs: cmake_check_build_system
 ublox_gennodejs/fast:
 	$(MAKE) -f ublox/CMakeFiles/ublox_gennodejs.dir/build.make ublox/CMakeFiles/ublox_gennodejs.dir/build
 .PHONY : ublox_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named _ublox_generate_messages_check_deps_Compass
+
+# Build rule for target.
+_ublox_generate_messages_check_deps_Compass: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _ublox_generate_messages_check_deps_Compass
+.PHONY : _ublox_generate_messages_check_deps_Compass
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Compass/fast:
+	$(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Compass/fast
 
 #=============================================================================
 # Target rules for targets named ublox_generate_messages_py
@@ -1109,13 +1122,14 @@ help:
 	@echo "... ublox_generate_messages_eus"
 	@echo "... ublox_generate_messages_cpp"
 	@echo "... ublox_genpy"
+	@echo "... ublox_generate_messages_nodejs"
 	@echo "... ublox_generate_messages"
 	@echo "... ublox_geneus"
 	@echo "... ublox_generate_messages_lisp"
 	@echo "... ublox_genlisp"
-	@echo "... ublox_generate_messages_nodejs"
 	@echo "... ublox_gencpp"
 	@echo "... ublox_gennodejs"
+	@echo "... _ublox_generate_messages_check_deps_Compass"
 	@echo "... ublox_generate_messages_py"
 	@echo "... _ublox_generate_messages_check_deps_Gps"
 .PHONY : help

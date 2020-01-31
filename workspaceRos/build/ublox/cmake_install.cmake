@@ -38,7 +38,10 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox/msg" TYPE FILE FILES "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Gps.msg")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ublox/msg" TYPE FILE FILES
+    "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Gps.msg"
+    "/home/quentin/Documents/Brave/workspaceRos/src/ublox/msg/Compass.msg"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

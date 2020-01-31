@@ -9,8 +9,8 @@ import rospy
 from std_msgs.msg import String
 
 from ublox.msg import Gps
+from ublox.msg import Compass
 
-#Global Publisher
 
 
 def getFrameType(frame):
@@ -22,7 +22,7 @@ def fillPublisher(frameType, line):
 
 	if frameType == "GPRMC":#GPS
 		pub = Gps()
-		rospy.loginfo(data)
+		#rospy.loginfo(data)
 		pub.timeStamp = float(data[1])
 		pub.validation = data[2]
 		pub.latitude = float(data[3])
@@ -37,7 +37,11 @@ def fillPublisher(frameType, line):
 		pub.positionning_mode = data[12][0]
 
 	elif frameType == "HCHDG":#Compass
+		pub= Compass()
 		rospy.loginfo(data)
+		pub.heading = float(data[1])
+		pub.heading_indic = data[3]
+		pub.magnetic_declination = float(data[4])
 
 	elif frameType == "WIMDA":
 		rospy.loginfo(data)
@@ -57,12 +61,15 @@ def ublox_node():
 
 	ublox = serial.Serial('/dev/ttyUSB0',4800, timeout = 5)
 
-	GPRMC_raw = rospy.Publisher('ublox_raw_GPRMC', String, queue_size=10)#GPS frame
-	HCHDG_raw = rospy.Publisher('ublox_raw_HCHDG', String, queue_size=10)#Compass frame
-	WIMDA_raw = rospy.Publisher('ublox_raw_WIMDA', String, queue_size=10)
-	WIMWV_raw = rospy.Publisher('ublox_raw_WIMWV', String, queue_size=10)# Wind Frame ??
+	GPRMC_raw = rospy.Publisher('/ublox/raw_GPRMC', String, queue_size=10)#GPS frame
+	HCHDG_raw = rospy.Publisher('/ublox/raw_HCHDG', String, queue_size=10)#Compass frame
+	WIMDA_raw = rospy.Publisher('/ublox/raw_WIMDA', String, queue_size=10)
+	WIMWV_raw = rospy.Publisher('/ublox/raw_WIMWV', String, queue_size=10)# Wind Frame ??
 
-	GPRMC = rospy.Publisher('ublox_GPRMC', Gps, queue_size=10)#GPS frame
+	GPRMC = rospy.Publisher('/ublox/GPRMC', Gps, queue_size=10)#GPS frame
+	HCHDG = rospy.Publisher('/ublox/HCHDG', Compass, queue_size=10)#Compass frame
+	WIMDA = rospy.Publisher('/ublox/WIMDA', Compass, queue_size=10)#Compass frame
+	WIMWV = rospy.Publisher('/ublox/WIMWV', Compass, queue_size=10)#Compass frame
 
 	pubDict_raw = {}
 	pubDict_raw["GPRMC"] = GPRMC_raw
@@ -72,9 +79,9 @@ def ublox_node():
 
 	pubDict = {}
 	pubDict["GPRMC"] = GPRMC
-	#pubDict["HCHDG"] = HCHDG
-	#pubDict["WIMDA"] = WIMDA
-	#pubDict["WIMWV"] = WIMWV
+	pubDict["HCHDG"] = HCHDG
+	pubDict["WIMDA"] = WIMDA
+	pubDict["WIMWV"] = WIMWV
 
 	rospy.init_node('ublox_node', anonymous=True)
 	rate = rospy.Rate(10) # 10hz
@@ -93,8 +100,7 @@ def ublox_node():
 
 			pubDict_raw[frameType].publish(line[6::])
 
-			if frameType == "GPRMC":
-				rospy.loginfo("Publish Topic")
+			if frameType == "GPRMC" or frameType == "HCHDG":
 				pubDict[frameType].publish(fillPublisher(frameType, line[6::]))
 
 

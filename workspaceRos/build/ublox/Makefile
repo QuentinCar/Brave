@@ -80,6 +80,16 @@ install/fast: preinstall/fast
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
@@ -91,16 +101,6 @@ install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # Special rule for the target rebuild_cache
 rebuild_cache:
@@ -213,6 +213,21 @@ ublox_genpy/fast:
 .PHONY : ublox_genpy/fast
 
 # Convenience name for target.
+ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
+.PHONY : ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+ublox_generate_messages_nodejs: ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
+
+.PHONY : ublox_generate_messages_nodejs
+
+# fast build rule for target.
+ublox_generate_messages_nodejs/fast:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build.make ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build
+.PHONY : ublox_generate_messages_nodejs/fast
+
+# Convenience name for target.
 ublox/CMakeFiles/ublox_generate_messages.dir/rule:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/ublox_generate_messages.dir/rule
 .PHONY : ublox/CMakeFiles/ublox_generate_messages.dir/rule
@@ -273,21 +288,6 @@ ublox_genlisp/fast:
 .PHONY : ublox_genlisp/fast
 
 # Convenience name for target.
-ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule:
-	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
-.PHONY : ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-ublox_generate_messages_nodejs: ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/rule
-
-.PHONY : ublox_generate_messages_nodejs
-
-# fast build rule for target.
-ublox_generate_messages_nodejs/fast:
-	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build.make ublox/CMakeFiles/ublox_generate_messages_nodejs.dir/build
-.PHONY : ublox_generate_messages_nodejs/fast
-
-# Convenience name for target.
 ublox/CMakeFiles/ublox_gencpp.dir/rule:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/ublox_gencpp.dir/rule
 .PHONY : ublox/CMakeFiles/ublox_gencpp.dir/rule
@@ -316,6 +316,21 @@ ublox_gennodejs: ublox/CMakeFiles/ublox_gennodejs.dir/rule
 ublox_gennodejs/fast:
 	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/ublox_gennodejs.dir/build.make ublox/CMakeFiles/ublox_gennodejs.dir/build
 .PHONY : ublox_gennodejs/fast
+
+# Convenience name for target.
+ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/rule:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f CMakeFiles/Makefile2 ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/rule
+.PHONY : ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/rule
+
+# Convenience name for target.
+_ublox_generate_messages_check_deps_Compass: ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/rule
+
+.PHONY : _ublox_generate_messages_check_deps_Compass
+
+# fast build rule for target.
+_ublox_generate_messages_check_deps_Compass/fast:
+	cd /home/quentin/Documents/Brave/workspaceRos/build && $(MAKE) -f ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/build.make ublox/CMakeFiles/_ublox_generate_messages_check_deps_Compass.dir/build
+.PHONY : _ublox_generate_messages_check_deps_Compass/fast
 
 # Convenience name for target.
 ublox/CMakeFiles/ublox_generate_messages_py.dir/rule:
@@ -355,19 +370,20 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... ublox_generate_messages_eus"
 	@echo "... ublox_generate_messages_cpp"
 	@echo "... ublox_genpy"
+	@echo "... ublox_generate_messages_nodejs"
 	@echo "... install/strip"
 	@echo "... ublox_generate_messages"
-	@echo "... list_install_components"
 	@echo "... ublox_geneus"
 	@echo "... ublox_generate_messages_lisp"
 	@echo "... ublox_genlisp"
-	@echo "... ublox_generate_messages_nodejs"
 	@echo "... ublox_gencpp"
 	@echo "... ublox_gennodejs"
 	@echo "... rebuild_cache"
+	@echo "... _ublox_generate_messages_check_deps_Compass"
 	@echo "... ublox_generate_messages_py"
 	@echo "... test"
 	@echo "... _ublox_generate_messages_check_deps_Gps"
