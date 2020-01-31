@@ -11,6 +11,7 @@ from std_msgs.msg import String
 from ublox.msg import Gps
 from ublox.msg import Compass
 from ublox.msg import Meteo
+from ublox.msg import Wind
 
 
 def getFrameType(frame):
@@ -55,11 +56,13 @@ def fillPublisher(frameType, line):
 
 
 	elif frameType == "WIMWV":#Wind
-		rospy.loginfo(data)
-
-	else:
-		rospy.loginfo("Not a good frame")
-		return None
+		#rospy.loginfo(data)
+		pub = Wind()
+		pub.wind_direction = float(data[1])
+		pub.reference = data[2]
+		pub.wind_speed = float(data[3])
+		pub.wind_speed_units = data[4]
+		pub.status = data[5][0]
 
 	return pub
 
@@ -72,12 +75,12 @@ def ublox_node():
 	GPRMC_raw = rospy.Publisher('/ublox/raw_GPRMC', String, queue_size=10)#GPS frame
 	HCHDG_raw = rospy.Publisher('/ublox/raw_HCHDG', String, queue_size=10)#Compass frame
 	WIMDA_raw = rospy.Publisher('/ublox/raw_WIMDA', String, queue_size=10)
-	WIMWV_raw = rospy.Publisher('/ublox/raw_WIMWV', String, queue_size=10)# Wind Frame ??
+	WIMWV_raw = rospy.Publisher('/ublox/raw_WIMWV', String, queue_size=10)# Wind Frame
 
 	GPRMC = rospy.Publisher('/ublox/GPRMC', Gps, queue_size=10)#GPS frame
 	HCHDG = rospy.Publisher('/ublox/HCHDG', Compass, queue_size=10)#Compass frame
 	WIMDA = rospy.Publisher('/ublox/WIMDA', Meteo, queue_size=10)#Meteorological frame
-	WIMWV = rospy.Publisher('/ublox/WIMWV', Compass, queue_size=10)#Compass frame
+	WIMWV = rospy.Publisher('/ublox/WIMWV', Wind, queue_size=10)#Wind frame
 
 	pubDict_raw = {}
 	pubDict_raw["GPRMC"] = GPRMC_raw
@@ -107,9 +110,7 @@ def ublox_node():
 		if frameType in pubDict_raw:
 
 			pubDict_raw[frameType].publish(line[6::])
-
-			if frameType == "GPRMC" or frameType == "HCHDG" or frameType == "WIMDA":
-				pubDict[frameType].publish(fillPublisher(frameType, line[6::]))
+			pubDict[frameType].publish(fillPublisher(frameType, line[6::]))
 
 
 		rate.sleep()

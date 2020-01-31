@@ -52,6 +52,7 @@ add_message_files(
     Gps.msg
     Compass.msg
     Meteo.msg
+    Wind.msg
 #   Message1.msg
 #   Message2.msg
 )
