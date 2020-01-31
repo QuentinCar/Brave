@@ -51,6 +51,7 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+workspaceRos/.catkin_workspace
 
 # Main CMakeLists.txt
 /workspaceRos/src/CMakeLists.txt

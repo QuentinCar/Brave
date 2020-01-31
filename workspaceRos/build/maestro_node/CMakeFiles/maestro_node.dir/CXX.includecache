@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/home/quentin/Documents/Brave/workspaceRos/devel/include/maestro_node/Command.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+
 /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/PololuController.h
 TimeoutSerial.h
 /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
@@ -61,8 +77,8 @@ ROSMaestroController.h
 /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/ROSMaestroController.h
 PololuController.h
 /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/PololuController.h
-std_msgs/Float64.h
-/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/std_msgs/Float64.h
+maestro_node/Command.h
+-
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
@@ -726,22 +742,6 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 std_msgs/Header.h
--
-
-/opt/ros/melodic/include/std_msgs/Float64.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
 -
 
 /opt/ros/melodic/include/std_msgs/Header.h
