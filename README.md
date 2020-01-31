@@ -12,14 +12,14 @@
  ```
  Ublox correspond to the Furuno Weather Station.
  ### Topic
-Publisher : /ublox/GPRMC
-            /ublox/HCHDG
-            /ublox/WIMDA
-            /ublox/WIMWV
-            /ublox/raw_GPRMC
-            /ublox/raw_HCHDG
-            /ublox/raw_WIMDA
-            /ublox/raw_WIMWV
+Publisher : /ublox/GPRMC.
+            /ublox/HCHDG.
+            /ublox/WIMDA.
+            /ublox/WIMWV.
+            /ublox/raw_GPRMC.
+            /ublox/raw_HCHDG.
+            /ublox/raw_WIMDA.
+            /ublox/raw_WIMWV.
             
  ## Maestro
   ```shell
@@ -27,4 +27,4 @@ Publisher : /ublox/GPRMC
  ```
  Control the servo 
  ### Topic
- Subscriber : /Command
+ Subscriber : /Command.
