@@ -73,7 +73,6 @@ maestro_node/CMakeFiles/maestro_node.dir/src/ROSMaestroController.cpp.o: /opt/ro
 maestro_node/CMakeFiles/maestro_node.dir/src/TimeoutSerial.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
 maestro_node/CMakeFiles/maestro_node.dir/src/TimeoutSerial.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/TimeoutSerial.cpp
 
-maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/devel/include/maestro_node/Command.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/PololuController.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/ROSMaestroController.h
 maestro_node/CMakeFiles/maestro_node.dir/src/maestro_node.cpp.o: /home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
