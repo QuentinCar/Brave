@@ -7,6 +7,11 @@ import constants
 
 from goprolib import GoPro
 
+from cv_bridge import CvBridge, CvBridgeError
+from sensor_msgs.msg import Image
+
+import rospy
+
 WRITE = False
 gpCam = GoPro()
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -17,7 +22,11 @@ gpCam.gpControlSet(constants.Stream.WINDOW_SIZE, constants.Stream.WindowSize.R72
 cap = cv2.VideoCapture("udp://10.5.5.9:8554", cv2.CAP_FFMPEG)
 counter = 0
 
-while True:
+bridge = CvBridge()
+image_pub = rospy.Publisher("/gopro/image",Image,queue_size=10)
+rospy.init_node('gopro_node', anonymous=True)
+
+while not rospy.is_shutdown():
     nmat, frame = cap.read()
     cv2.imshow("GoPro OpenCV", frame)
     if WRITE == True:
@@ -30,6 +39,8 @@ while True:
     if time.time() - t >= 2.5:
         sock.sendto("_GPHD_:0:0:2:0.000000\n".encode(), ("10.5.5.9", 8554))
         t=time.time()
+
+    image_pub.publish(bridge.cv2_to_imgmsg(frame, "bgr8"))
 # When everything is done, release the capture
 cap.release()
 cv2.destroyAllWindows()
