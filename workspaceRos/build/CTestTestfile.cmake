@@ -1,10 +1,12 @@
 # CMake generated Testfile for 
-# Source directory: /home/quentin/Documents/Brave/workspaceRos/src
-# Build directory: /home/quentin/Documents/Brave/workspaceRos/build
+# Source directory: /home/brave/workspaceRos/src
+# Build directory: /home/brave/workspaceRos/build
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("gtest")
-subdirs("gopro_node")
+subdirs("controller")
+subdirs("test_bench")
+subdirs("brave_2020_localisation")
 subdirs("maestro_node")
 subdirs("ublox")

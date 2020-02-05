@@ -1,4 +1,4 @@
-prefix=/home/quentin/Documents/Brave/workspaceRos/install
+prefix=/home/brave/workspaceRos/install
 
 Name: ublox
 Description: Description of ublox

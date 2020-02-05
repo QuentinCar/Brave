@@ -1,4 +1,4 @@
-prefix=/home/quentin/Documents/Brave/workspaceRos/install
+prefix=/home/brave/workspaceRos/install
 
 Name: maestro_node
 Description: Description of maestro_node

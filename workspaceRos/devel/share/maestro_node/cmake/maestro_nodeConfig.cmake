@@ -67,14 +67,14 @@ set(maestro_node_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(maestro_node_SOURCE_PREFIX /home/quentin/Documents/Brave/workspaceRos/src/maestro_node)
-  set(maestro_node_DEVEL_PREFIX /home/quentin/Documents/Brave/workspaceRos/devel)
+  set(maestro_node_SOURCE_PREFIX /home/brave/workspaceRos/src/maestro_node)
+  set(maestro_node_DEVEL_PREFIX /home/brave/workspaceRos/devel)
   set(maestro_node_INSTALL_PREFIX "")
   set(maestro_node_PREFIX ${maestro_node_DEVEL_PREFIX})
 else()
   set(maestro_node_SOURCE_PREFIX "")
   set(maestro_node_DEVEL_PREFIX "")
-  set(maestro_node_INSTALL_PREFIX /home/quentin/Documents/Brave/workspaceRos/install)
+  set(maestro_node_INSTALL_PREFIX /home/brave/workspaceRos/install)
   set(maestro_node_PREFIX ${maestro_node_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(maestro_node_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/quentin/Documents/Brave/workspaceRos/devel/include;/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include " STREQUAL " ")
+if(NOT "/home/brave/workspaceRos/devel/include;/home/brave/workspaceRos/src/maestro_node/include " STREQUAL " ")
   set(maestro_node_INCLUDE_DIRS "")
-  set(_include_dirs "/home/quentin/Documents/Brave/workspaceRos/devel/include;/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include")
+  set(_include_dirs "/home/brave/workspaceRos/devel/include;/home/brave/workspaceRos/src/maestro_node/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://www.officinerobotiche.it " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/quentin/Documents/Brave/workspaceRos/devel/include;/home/quentin/D
         message(FATAL_ERROR "Project 'maestro_node' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'maestro_node' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'maestro_node' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/brave/workspaceRos/src/maestro_node/${idir}'.  ${_report}")
     endif()
     _list_append_unique(maestro_node_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/quentin/Documents/Brave/workspaceRos/devel/lib;/home/quentin/catkin_build_ws/install/lib;/home/quentin/Documents/Brave/workspaceRos/devel/lib;/home/quentin/workspaceRos/devel/lib;/opt/ros/melodic/lib;/home/quentin/Documents/Brave/catkin_build_ws/devel/lib)
+    foreach(path /home/brave/workspaceRos/devel/lib;/home/brave/workspaceRos/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

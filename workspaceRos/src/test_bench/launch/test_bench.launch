@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<node name="buoy_detecter" pkg="test_bench" type="detectionBuoy.py" output='screen'/>
+
+	<!-- <node name="IMU_filter" pkg="test_bench" type="IMU_filter.py" output='screen'/> -->
+
+	<!-- <node name="Webcam" pkg="test_bench" type="webcamThread.py" output='screen'/> -->
+
+</launch>

@@ -270,7 +270,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = '/home/quentin/catkin_build_ws/install;/home/quentin/Documents/Brave/workspaceRos/devel;/home/quentin/workspaceRos/devel;/opt/ros/melodic;/home/quentin/Documents/Brave/catkin_build_ws/devel;/home/quentin/catkin_build_ws/devel'.split(';')
+            CMAKE_PREFIX_PATH = '/home/brave/workspaceRos/devel;/opt/ros/melodic'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

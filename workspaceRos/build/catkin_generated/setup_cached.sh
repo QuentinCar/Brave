@@ -7,4 +7,5 @@
 # new environment variables
 
 # modified environment variables
-export PWD="/home/quentin/Documents/Brave/workspaceRos/build"
+export PATH="/opt/ros/melodic/bin:/home/brave/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export PWD="/home/brave/workspaceRos/build"
