@@ -67,14 +67,14 @@ set(maestro_node_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(maestro_node_SOURCE_PREFIX /home/brave/workspaceRos/src/maestro_node)
-  set(maestro_node_DEVEL_PREFIX /home/brave/workspaceRos/devel)
+  set(maestro_node_SOURCE_PREFIX /home/quentin/Documents/Brave/workspaceRos/src/maestro_node)
+  set(maestro_node_DEVEL_PREFIX /home/quentin/Documents/Brave/workspaceRos/devel)
   set(maestro_node_INSTALL_PREFIX "")
   set(maestro_node_PREFIX ${maestro_node_DEVEL_PREFIX})
 else()
   set(maestro_node_SOURCE_PREFIX "")
   set(maestro_node_DEVEL_PREFIX "")
-  set(maestro_node_INSTALL_PREFIX /home/brave/workspaceRos/install)
+  set(maestro_node_INSTALL_PREFIX /home/quentin/Documents/Brave/workspaceRos/install)
   set(maestro_node_PREFIX ${maestro_node_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/brave/workspaceRos/install/lib;/home/brave/workspaceRos/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/quentin/Documents/Brave/workspaceRos/install/lib;/home/quentin/workspaceRos/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

@@ -41,7 +41,6 @@ while not rospy.is_shutdown():
         sock.sendto("_GPHD_:0:0:2:0.000000\n".encode(), ("10.5.5.9", 8554))
         t=time.time()
 
-    rate.sleep()
 
     image_pub.publish(bridge.cv2_to_imgmsg(frame, "bgr8"))
 # When everything is done, release the capture

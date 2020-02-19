@@ -6,37 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/home/brave/workspaceRos/devel/include/maestro_node/Command.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-
-/home/brave/workspaceRos/src/maestro_node/include/PololuController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/PololuController.h
 TimeoutSerial.h
-/home/brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
 boost/thread.hpp
 -
 
-/home/brave/workspaceRos/src/maestro_node/include/ROSMaestroController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/ROSMaestroController.h
 ros/ros.h
 -
 sensor_msgs/JointState.h
 -
 PololuController.h
-/home/brave/workspaceRos/src/maestro_node/include/PololuController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/PololuController.h
 
-/home/brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/include/TimeoutSerial.h
 stdexcept
 -
 boost/utility.hpp
@@ -44,17 +28,17 @@ boost/utility.hpp
 boost/asio.hpp
 -
 
-/home/brave/workspaceRos/src/maestro_node/src/PololuController.cpp
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/PololuController.cpp
 PololuController.h
-/home/brave/workspaceRos/src/maestro_node/src/PololuController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/PololuController.h
 
-/home/brave/workspaceRos/src/maestro_node/src/ROSMaestroController.cpp
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/ROSMaestroController.cpp
 ROSMaestroController.h
-/home/brave/workspaceRos/src/maestro_node/src/ROSMaestroController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/ROSMaestroController.h
 
-/home/brave/workspaceRos/src/maestro_node/src/TimeoutSerial.cpp
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/TimeoutSerial.cpp
 TimeoutSerial.h
-/home/brave/workspaceRos/src/maestro_node/src/TimeoutSerial.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/TimeoutSerial.h
 string
 -
 algorithm
@@ -64,7 +48,7 @@ iostream
 boost/bind.hpp
 -
 
-/home/brave/workspaceRos/src/maestro_node/src/maestro_node.cpp
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/maestro_node.cpp
 cstdlib
 -
 iostream
@@ -72,11 +56,11 @@ iostream
 ros/ros.h
 -
 TimeoutSerial.h
-/home/brave/workspaceRos/src/maestro_node/src/TimeoutSerial.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/TimeoutSerial.h
 ROSMaestroController.h
-/home/brave/workspaceRos/src/maestro_node/src/ROSMaestroController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/ROSMaestroController.h
 PololuController.h
-/home/brave/workspaceRos/src/maestro_node/src/PololuController.h
+/home/quentin/Documents/Brave/workspaceRos/src/maestro_node/src/PololuController.h
 maestro_node/Command.h
 -
 

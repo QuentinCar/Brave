@@ -1,2 +1,2 @@
-brave_2020_localisation:controller:maestro_node:test_bench:ublox
--DCATKIN_DEVEL_PREFIX=/home/brave/workspaceRos/devel -DCMAKE_INSTALL_PREFIX=/home/brave/workspaceRos/install -G Unix Makefiles
+controller:gopro_node:maestro_node:ublox
+-DCATKIN_DEVEL_PREFIX=/home/quentin/Documents/Brave/workspaceRos/devel -DCMAKE_INSTALL_PREFIX=/home/quentin/Documents/Brave/workspaceRos/install -G Unix Makefiles
