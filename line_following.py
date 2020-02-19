@@ -20,10 +20,14 @@ from controller.msg import Wind
 import math
 
 r,zeta = 10, pi/4
-rho = 6371000
 delta_rmax = pi/3
 EARTH_RADIUS = 6371000.
-lat0, lon0 = (48.198427, -3.014750)
+# Origine repere Guerledan
+#lat0, lon0 = (48.198427, -3.014750) 
+
+#Origine repere Ty Colo
+lat0, lon0 = (48.431775, -4.615529)
+
 
 class Controller():
 
@@ -81,6 +85,7 @@ class Controller():
 		string declination_indic
 		string positionning_mode
 		"""
+
 		if msg.latitude_indic == "N":
 			lat  = 1
 		else: 
@@ -96,9 +101,9 @@ class Controller():
 		lon_str = self.lon_str.split(".")
 
 		#conv degres.minute _> degres.decimal
-	
 		self.lym = lat*(float(lat_str[0][0:len(lat_str[0])-2]) + float(lat_str[0][len(lat_str[0])-2:])/60. + float(lat_str[1])/10**len(lat_str[1])/60.)
 		self.lxm = lon*(float(lon_str[0][0:len(lon_str[0])-2]) + float(lon_str[0][len(lon_str[0])-2:])/60. + float(lon_str[1])/10**len(lon_str[1])/60.)
+
 
 	def _callback_compass(self, msg):
 		"""
@@ -106,6 +111,7 @@ class Controller():
 		string heading_indic
 		float64 magnetic_declination
 		"""
+
 		self.heading = self.north2east( msg.heading )  
 
 
@@ -134,65 +140,21 @@ class Controller():
 
 
 	# def _callback_waypoints(self, msg):
-
+		"""
+		Non fonctionnel
+		"""
 	#     self.lxa, self.lya = msg.lxa, msg.lya
 	#     self.lxb, self.lyb = msg.lxb, msg.lyb
 		  
 
 	def control(self, a, b, m):
-		ke=0.5
-		# a = self.gps2cart(self.lxa, self.lya)
-		# b = self.gps2cart(self.lxb, self.lyb)
-		# m = self.gps2cart(self.lxm, self.lym)
-
-		# lxa, lya = -3.015067, 48.198905
-		# lxb, lyb = -3.015603, 48.198301
-		# lxc, lyc = -3.016049, 48.198762
-
-		# xa, ya = self.WGS84_to_cart(lya, lxa)
-		# xb, yb = self.WGS84_to_cart(lyb, lxb)
-		# xc, yc = self.WGS84_to_cart(lyc, lxc)
-		# xm, ym = self.WGS84_to_cart(self.lym, self.lxm)
-
-
-		# a = array([[xa],[ya]])
-		# b = array([[xb],[yb]])
-		# #c = array([[xc],[yc]])
-
-		# m = array([[xm],[ym]])
-
-		# print("m:",m)
-
-
-		
-
-		# print("theta", math.degrees(theta)+90)
 		"""
-		#print("theta",theta)
-		e = det(hstack((b-a,m-a)))/norm(b-a)
-		
-		if abs(e) > r:
-			self.q = sign(e)
+		Input: cartesian coordinates of points a and b to follow line a-b
+			cartesian coordinates of the boat, m.
 
-		phi = arctan2(b[1,0]-a[1,0],b[0,0]-a[0,0])
-		#print("e",e)
-		theta_bar = phi-ke*arctan(e/r)
-		#print("thetabar", theta_bar)
-		print("psi",self.psi)
-		#print("theta_bar", math.degrees(theta_bar)+90)
-		#print("psi: ", math.degrees(self.psi)+90)
-		#if (cos(self.psi-theta_bar) + cos(zeta) < 0) or ( (abs(e)<r) and (cos(self.psi-phi) + cos(zeta) < 0)):
-		#	theta_bar = pi + self.psi - self.q*zeta
+		Return: rudder angle in rad delta_r
+				sail angle in rad delta_s
 
-		if cos(theta-theta_bar) >= 0 :
-			delta_r = delta_rmax*sin(theta-theta_bar)
-		else :
-			delta_r = delta_rmax*sign(sin(theta-theta_bar))
-
-		# delta_r = (delta_rmax/pi)*self.sawtooth(theta-theta_bar)
-		delta_smax = (pi/2)*( (cos(self.psi-theta_bar)+1)/2 )
-
-		return  delta_r, delta_smax
 		"""
 
 		################ Controle Rudder ##############
@@ -205,6 +167,7 @@ class Controller():
 
 
 		#------------ Ajout ecart a la ligne --------
+		ke=0.5
 		e = det(hstack((b-a,m-a)))/norm(b-a)
 		thetaBar = phi - ke*arctan(e/r)
 		print("Ecart ligne : ", e)
@@ -222,7 +185,6 @@ class Controller():
 			thetaBar = pi + self.psi - self.q*zeta
 
 		
-
 		
 		delta_r = (delta_rmax/pi) * self.sawtooth(thetaBar-theta)#de -pi/3 a pi/3
 		
@@ -232,81 +194,6 @@ class Controller():
 		
 
 		return delta_r, delta_s
-
-
-
-
-	def control2(self):
-		a = self.gps2geographic2(self.lxa, self.lya)
-		b = self.gps2geographic2(self.lxb, self.lyb)
-		m = self.gps2geographic2(self.lxm, self.lym)
-		n = cross(a,b)/(norm(a)*norm(b))
-		e = np.dot(m,n.T)
-		#print(a)
-		#print(b)
-		print("e: ", e)
-		theta = self.heading
-		print("theta", theta)
-		if abs(e) > r/2 :
-			self.q = sign(e)
-
-		M = array([ [-sin(self.lxm), cos(self.lxm), 0],
-					[-cos(self.lxm)*sin(self.lym), -sin(self.lxm)*sin(self.lym), cos(self.lym)] ])
-		P = np.dot(M,(b-a).T)
-		phi = arctan2(P[1,0], P[0,0])
-		#print("phi", phi)
-		theta_bar = phi - arctan(e/r)
-		#print("theta_bar", theta_bar)
-
-		#if (cos(self.psi-theta_bar) + cos(zeta) < 0) or ( (abs(e)<r) and (cos(self.psi-phi) + cos(zeta) < 0)):
-		#	theta_bar = pi + self.psi - self.q*zeta
-
-		# if cos(theta-theta_bar) >= 0 :
-		# 	delta_r = delta_rmax*sin(theta-theta_bar)
-		# else :
-		# 	delta_r = delta_rmax*sign(sin(theta-theta_bar))
-
-		delta_r = (delta_rmax/pi)*self.sawtooth(theta-theta_bar)
-		delta_smax = (pi/2)*( (cos(self.psi-theta_bar)+1)/2 )
-	
-		#print("delta_r", delta_r)
-		#print("delta_smax", delta_smax)    
-
-		return delta_r, delta_smax
-
-
-	def gps2geographic(self, lx, ly): #lx : longitude, ly : latitude
-
-		(EASTING, NORTHING, ZONE_NUMBER, ZONE_LETTER) = utm.from_latlon(ly, lx)
-		return array([[EASTING], [NORTHING]])
-
-
-	def gps2geographic2(self, lx, ly): #lx : longitude, ly : latitude
-
-		return array([[rho*cos(ly)*cos(lx), rho*cos(ly)*sin(lx), rho*sin(ly)]]) 
-
-	def gps2cart(self, lx, ly):
-		x = rho*cos(ly)*cos(lx)
-		y = rho*cos(ly)*sin(lx)
-		return array([[x], [y]])
-		
-	def saturation(self, pwm, pwm_min, pwm_max):
-		"""Saturate command
-		
-		Input:
-		------
-		pwm: pwm from self.control 
-		
-		Return:
-		-------
-		pwm: int, published on '/Command'
-		"""
-
-		if pwm > pwm_max:
-			pwm = pwm_max
-		if pwm < pwm_min:
-			pwm = pwm_min
-		return pwm
 
 
 	def sawtooth (self, x):
@@ -320,7 +207,9 @@ class Controller():
 
 
 	def deg2rad(self, x):
-
+		"""
+		Conversion deg to rad
+		"""
 		return x*2*pi/360
 
 	def north2east(self, x):
@@ -339,11 +228,19 @@ class Controller():
 		return self.sawtooth(pi/2 - x)
 
 	def WGS84_to_cart(self, lat, lon):
+		"""
+		Input: gps coord decimal lat, lon
+		Return: cartesian coord x, y with (lat0, lon0) the origin
+		"""
 		x = (pi/180.)*EARTH_RADIUS*(lon-lon0)*cos((pi/180.)*lat)
 		y = (pi/180.)*EARTH_RADIUS*(lat-lat0)
 		return x, y
 
 	def cart_to_WGS84(self, x, y):
+		"""
+		Input: cartesian coord x, y with (lat0, lon0) the origin
+		Return: gps coord decimal lat, lon
+		"""
 		EPSILON=0.00000000001
 		lat = y*180./pi/EARTH_RADIUS+lat0
 		if abs(lat-90.) < EPSILON or abs(lat+90.) < EPSILON:
@@ -357,7 +254,7 @@ class Controller():
 	def rad2pwm(self, x, sail_name):
 		"""
 		Bijection de [0, pi/2] sur [pwm_min, pwm_max] pour les voiles.
-	[-pi/3,pi/3] pour rudder
+		[-pi/3,pi/3] pour rudder
 		"""
 		if sail_name == "main":
 			return (2/pi)*(self.pwm_max_main_sail - self.pwm_min_main_sail)*x + self.pwm_min_main_sail
@@ -393,18 +290,18 @@ class Controller():
 			self.FirstLine = False
 			self.pt1 = b
 			self.pt2 = c
-			#u1, u2 = self.control(b,c,m) 
+
 		elif abs(m[0]-c[0])<5 and abs(m[1]-c[1])<5:
 			print("ligne ca")
 			self.FirstLine = False
 			self.pt1 = c
 			self.pt2 = a
-			#u1, u2 = self.control(c,a,m) 
+
 		if self.FirstLine:
 			print("ligne ab")
 			self.pt1 = a
 			self.pt2 = b
-			#u1, u2 = self.control(a,b,m) 
+
 
 		u1, u2 = self.control(self.pt1,self.pt2,m) 
 
