@@ -1,0 +1,7 @@
+<launch> 
+	
+	<include file="$(find ublox)/launch/ublox.launch"/>
+	<include file="$(find maestro_node)/launch/maestro.launch"/>
+	<node name="controller_node" pkg="controller" type="line_following.py" output="screen"/>
+
+</launch>
