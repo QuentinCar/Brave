@@ -11,6 +11,32 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 
 import rospy
+import numpy as np
+import rospkg
+
+
+
+def undistort(img,mtx,newcameramtx,dist,roi):
+    
+#    print("Undistort image...")
+    # undistort
+    dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
+    
+#    print("Crop Image according to ROI...")
+    # crop the image
+    cv2.imshow('calib', dst)
+    print(roi)
+    x,y,w,h = roi
+    dst = dst[y:y+h, x:x+w]
+    print(len(dst))
+    return dst
+
+rospack = rospkg.RosPack()
+
+path = rospack.get_path('gopro_node')
+
+data = np.load(path + '/src/calib/param.npz')
+mtx,newcameramtx,dist,roi = data['Mi'], data['newMi'], data['dist'], data['roi']
 
 WRITE = False
 gpCam = GoPro()
@@ -23,9 +49,10 @@ cap = cv2.VideoCapture("udp://10.5.5.9:8554", cv2.CAP_FFMPEG)
 counter = 0
 
 bridge = CvBridge()
-image_pub = rospy.Publisher("/gopro/image",Image,queue_size=10)
+raw_image_pub = rospy.Publisher("/gopro/image_raw",Image,queue_size=2)
+und_image_pub = rospy.Publisher("/gopro/image_undistort",Image,queue_size=2)
+
 rospy.init_node('gopro_node', anonymous=True)
-rate = rospy.Rate(10) # 10hz
 
 while not rospy.is_shutdown():
     nmat, frame = cap.read()
@@ -42,7 +69,9 @@ while not rospy.is_shutdown():
         t=time.time()
 
 
-    image_pub.publish(bridge.cv2_to_imgmsg(frame, "bgr8"))
+    raw_image_pub.publish(bridge.cv2_to_imgmsg(frame, "bgr8"))
+    print(undistort(frame,mtx,newcameramtx,dist,roi))
+    #und_image_pub.publish(bridge.cv2_to_imgmsg(undistort(frame,mtx,newcameramtx,dist,roi), "bgr8"))
 # When everything is done, release the capture
 cap.release()
 cv2.destroyAllWindows()
