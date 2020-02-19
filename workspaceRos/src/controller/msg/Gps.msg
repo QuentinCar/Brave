@@ -1,0 +1,12 @@
+float64 timeStamp
+string validation
+float64 latitude
+string latitude_indic
+float64 longitude
+string longitude_indic
+float64 boat_speed
+float64 heading
+float64 date
+float64 magnetic_declination
+string declination_indic
+string positionning_mode
