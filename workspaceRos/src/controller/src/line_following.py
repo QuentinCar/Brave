@@ -263,9 +263,15 @@ class Controller():
 
 
 	def main(self):
-		lxa, lya = -3.015067, 48.198905
-		lxb, lyb = -3.015603, 48.198301
-		lxc, lyc = -3.016049, 48.198762
+		#Guerledan
+		# lxa, lya = -3.015067, 48.198905
+		# lxb, lyb = -3.015603, 48.198301
+		# lxc, lyc = -3.016049, 48.198762
+
+		#Ty Colo
+		lya, lxa = 48.431640, -4.615234
+		lyb, lxb = 48.431352, -4.614569
+		lyc, lxc = 48.431220, -4.615272 
 
 		xa, ya = self.WGS84_to_cart(lya, lxa)
 		xb, yb = self.WGS84_to_cart(lyb, lxb)
