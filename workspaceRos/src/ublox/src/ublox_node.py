@@ -50,8 +50,8 @@ def fillPublisher(frameType, line):
 
 	elif frameType == "WIMDA":#Meteo
 		#rospy.loginfo(data)
-		if data.count('') > 1: #no weather data available
-			return None			
+		#if data.count('') > 1: #no weather data available
+			#return None			
 		pub = Meteo()
 		pub.barometric_pressure_mercury = float(data[1])
 		pub.barometric_pressure_bars = float(data[3])

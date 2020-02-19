@@ -131,6 +131,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/quentin/Documents/Brave/workspaceRos/build/gtest/cmake_install.cmake")
+  include("/home/quentin/Documents/Brave/workspaceRos/build/controller/cmake_install.cmake")
   include("/home/quentin/Documents/Brave/workspaceRos/build/gopro_node/cmake_install.cmake")
   include("/home/quentin/Documents/Brave/workspaceRos/build/maestro_node/cmake_install.cmake")
   include("/home/quentin/Documents/Brave/workspaceRos/build/ublox/cmake_install.cmake")

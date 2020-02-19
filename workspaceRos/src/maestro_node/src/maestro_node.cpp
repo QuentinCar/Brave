@@ -12,7 +12,7 @@ using namespace boost;
 
 std::string name_node = "maestro_node";
 double targetRudd=1250;
-double targetMSail=1460; 
+double targetMSail=1460;
 double targetFSail=1710;
 
 
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
 
     /***************Subscribe*******************/
 
-    ros::Subscriber sub = n.subscribe("/Command", 1, callbackCommand);
+    ros::Subscriber sub = n.subscribe("/Command", 10, callbackCommand);
 
     ros::Rate loop_rate(10);
     while (ros::ok())

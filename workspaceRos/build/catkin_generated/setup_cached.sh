@@ -7,4 +7,10 @@
 # new environment variables
 
 # modified environment variables
+export CMAKE_PREFIX_PATH="/home/quentin/Documents/Brave/workspaceRos/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/quentin/Documents/Brave/workspaceRos/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/quentin/Documents/Brave/workspaceRos/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/quentin/Documents/Brave/workspaceRos/build"
+export PYTHONPATH="/home/quentin/Documents/Brave/workspaceRos/devel/lib/python2.7/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/quentin/Documents/Brave/workspaceRos/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/quentin/Documents/Brave/workspaceRos/src:$ROS_PACKAGE_PATH"

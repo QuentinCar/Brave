@@ -1,2 +1,2 @@
-gopro_node:maestro_node:ublox
+controller:gopro_node:maestro_node:ublox
 -DCATKIN_DEVEL_PREFIX=/home/quentin/Documents/Brave/workspaceRos/devel -DCMAKE_INSTALL_PREFIX=/home/quentin/Documents/Brave/workspaceRos/install -G Unix Makefiles

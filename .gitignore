@@ -1,8 +1,11 @@
 .idea/
-
 devel/
 logs/
 build/
+workspaceRos/devel/
+workspaceRos/logs/
+workspaceRos/build/
+
 bin/
 lib/
 msg_gen/
