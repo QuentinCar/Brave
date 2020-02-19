@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node name="interval_localiser" pkg="brave_2020_localisation" type="test_bench_intervals_ros.py" output='screen' />
+    <node name="image_getter" pkg="brave_2020_localisation" type="webcamNode.py" output='screen' />
+    <node name="mark_detection" pkg="brave_2020_localisation" type="detectionBuoy.py" output='screen' />
+    <node name="imu" pkg="brave_2020_localisation" type="IMU_filter.py" output='screen' />
+
+
+<!-- Interactive display-->
+    <arg name="display" default="False" />
+    <param name="display" type="bool" value="$(arg display)" />
+
+
+
+<!-- You can indicate here the coordinates of the different buoys, format: "['48.198924, -3.016511', '48.186924, -3.013811']" -->
+<!-- Leaving it empty will ask you later for the coordinates in a more interactive way (if display == True). -->
+    <arg name="marks_coordinates" default="[
+        '48.418187, -4.472699',
+        '48.418206, -4.471673',
+        '48.418757, -4.472295',
+        '48.418924, -4.472595']" />
+    <param name="marks_coordinates" type="str" value="$(arg marks_coordinates)" />
+
+
+
+<!-- Set the limits in local frame of the rectangular field in which the boat can be (if display == False)-->
+<!-- Origin of the local frame will be the first mark, then X:East, Y:North, Z:Up -->
+<!-- [X_lower_limit, X_upper_limit, Y_lower_limit, Y_upper_limit] -->
+    <arg name="field_limits" default="[-300, 300, -300, 300]" />
+    <param name="field_limits" type="str" value="$(arg field_limits)" />
+
+
+
+
+<!--     Choose wanted accuracy so that the number of boxes does not exceed what can be computed during integration step.-->
+
+<!-- Set the accuracy on the positions of marks-->
+    <arg name="mark_position_accuracy" default="2." />
+    <param name="mark_position_accuracy" type="double" value="$(arg mark_position_accuracy)" />
+
+
+<!-- integration step for dynamics estimation, equal to loop period-->
+    <arg name="integration_step" default="0.2" />
+    <param name="integration_step" type="double" value="$(arg integration_step)" />
+
+
+<!-- Accuracy on positioning-->
+    <arg name="pos_wanted_accuracy" default="0.5" />
+    <param name="pos_wanted_accuracy" type="double" value="$(arg pos_wanted_accuracy)" />
+
+
+
+
+<!-- Set the accuracies of the different sensors (angles in degrees)-->
+    <arg name="heading_accuracy" default="3." />
+    <param name="heading_accuracy" type="double" value="$(arg heading_accuracy)" />
+
+    <arg name="direction_accuracy" default="3." />
+    <param name="direction_accuracy" type="double" value="$(arg direction_accuracy)" />
+
+    <arg name="range_of_vision" default="15." />
+    <param name="range_of_vision" type="double" value="$(arg range_of_vision)" />
+
+    <arg name="angle_of_perception" default="50." />
+    <param name="angle_of_perception" type="double" value="$(arg angle_of_perception)" />
+
+    <arg name="speed_accuracy" default="0.2" />
+    <param name="speed_accuracy" type="double" value="$(arg speed_accuracy)" />
+
+
+
+<!-- Model approximation-->
+    <arg name="max_lateral_speed" default="0.2" />
+    <param name="max_lateral_speed" type="double" value="$(arg max_lateral_speed)" />
+
+
+
+<!-- Rosbag record-->
+    <arg name="record" default="false" /> 
+    <node name="record" pkg="rosbag" type="record" args="record -o $(find brave_2020_localisation)/rosbags/ -a" if="$(arg record)"/>
+
+
+</launch>
