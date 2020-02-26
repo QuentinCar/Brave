@@ -16,28 +16,20 @@ import rospkg
 
 
 
-def undistort(img,mtx,newcameramtx,dist,roi):
+def undistort(img,mapx,mapy):
     
-#    print("Undistort image...")
-    # undistort
-    dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
-    
-#    print("Crop Image according to ROI...")
-    # crop the image
-    cv2.imshow('calib', dst)
-    print(roi)
-    x,y,w,h = roi
-    dst = dst[y:y+h, x:x+w]
-    print(len(dst))
+    #dst = cv2.undistort(img, mtx, dist, None, newcameramtx)
+    dst = cv2.remap(img, mapx, mapy, cv2.INTER_LINEAR)
+
     return dst
 
+# Load undistortion data
 rospack = rospkg.RosPack()
-
 path = rospack.get_path('gopro_node')
+data = np.load(path + '/src/calib/calibration_data.npz')
+distCoeff,intrinsic_matrix,mapx,mapy, = data['distCoeff'], data['intrinsic_matrix'], data['mapx'], data['mapy']
 
-data = np.load(path + '/src/calib/param.npz')
-mtx,newcameramtx,dist,roi = data['Mi'], data['newMi'], data['dist'], data['roi']
-
+#launch gopro stream
 WRITE = False
 gpCam = GoPro()
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -48,6 +40,7 @@ gpCam.gpControlSet(constants.Stream.WINDOW_SIZE, constants.Stream.WindowSize.R72
 cap = cv2.VideoCapture("udp://10.5.5.9:8554", cv2.CAP_FFMPEG)
 counter = 0
 
+#create bridge opencv -> ros publisher
 bridge = CvBridge()
 raw_image_pub = rospy.Publisher("/gopro/image_raw",Image,queue_size=2)
 und_image_pub = rospy.Publisher("/gopro/image_undistort",Image,queue_size=2)
@@ -70,8 +63,7 @@ while not rospy.is_shutdown():
 
 
     raw_image_pub.publish(bridge.cv2_to_imgmsg(frame, "bgr8"))
-    print(undistort(frame,mtx,newcameramtx,dist,roi))
-    #und_image_pub.publish(bridge.cv2_to_imgmsg(undistort(frame,mtx,newcameramtx,dist,roi), "bgr8"))
+    und_image_pub.publish(bridge.cv2_to_imgmsg(undistort(frame,mapx,mapy), "bgr8"))
 # When everything is done, release the capture
 cap.release()
 cv2.destroyAllWindows()
