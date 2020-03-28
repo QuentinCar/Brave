@@ -13,10 +13,11 @@
  #brave's password : brave
  ```
 
- ## Launch the line following
+ ## Launch the line following (main mission)
   ```shell
- $ roslaunch controller controller.launch    
+ $ roslaunch controller controller.launch
  ```
+ This file will launch the maestro, ublox and line following nodes.
  ### Topic
  **Publisher**: /Command
 
@@ -24,35 +25,7 @@
                 /ublox/HCHDG <br/>
                 /ublox/WIMDA <br/>
                 /ublox/WIMWV <br/>
+ 
+
 
  
- ## Ublox
-  ```shell
- $ roslaunch ublox ublox.launch
- ```
- Ublox correspond to the Furuno Weather Station.
- ### Topic
-**Publisher**:  /ublox/GPRMC<br/>
-                /ublox/HCHDG<br/>
-                /ublox/WIMDA<br/>
-                /ublox/WIMWV<br/>
-                /ublox/raw_GPRMC<br/>
-                /ublox/raw_HCHDG<br/>
-                /ublox/raw_WIMDA<br/>
-                /ublox/raw_WIMWV<br/>
-            
- ## Maestro
-  ```shell
- $ roslaunch maestro_node maestro.launch
- ```
- Control the servo 
- ### Topic
- **Subscriber** : /Command
- 
- ## GoPro
-  ```shell
- $ roslaunch gopro_node gopro.launch
- ```
- Control the gopro and publish the image 
- ### Topic
- **Publisher** : /gopro/image
