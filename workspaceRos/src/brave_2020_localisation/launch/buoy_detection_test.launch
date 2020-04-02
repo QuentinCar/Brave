@@ -2,10 +2,9 @@
 <launch>
 
 	<!-- Interactive display-->
-	    <arg name="display" default="False" />
+	    <arg name="display" default="true" />
 	    <param name="display" type="bool" value="$(arg display)" />
 	    
-    <node name="image_getter" pkg="brave_2020_localisation" type="webcamNode.py" output='screen' />
     <node name="mark_detection" pkg="brave_2020_localisation" type="detectionBuoy.py" output='screen' />
 
 </launch>

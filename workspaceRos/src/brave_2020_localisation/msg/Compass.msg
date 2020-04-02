@@ -1,0 +1,3 @@
+float64 heading
+string heading_indic
+float64 magnetic_declination

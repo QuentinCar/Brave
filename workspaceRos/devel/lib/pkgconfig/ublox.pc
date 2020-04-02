@@ -1,8 +1,0 @@
-prefix=/home/quentin/Documents/Brave/workspaceRos/devel
-
-Name: ublox
-Description: Description of ublox
-Version: 0.0.0
-Cflags: -I/home/quentin/Documents/Brave/workspaceRos/devel/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <node name="interval_localiser" pkg="brave_2020_localisation" type="test_bench_intervals_ros.py" output='screen' />
+    <node name="interval_localiser" pkg="brave_2020_localisation" type="intervals_localiser.py" output='screen' />
     <node name="boat_simulation" pkg="brave_2020_localisation" type="test_bench_boat_simulation.py" output='screen'/>
     <node name="operator" pkg="brave_2020_localisation" type="test_bench_operator.py" output='screen' />
 
@@ -15,10 +15,8 @@
 <!-- You can indicate here the coordinates of the different buoys, format: "['48.198924, -3.016511', '48.186924, -3.013811']" -->
 <!-- Leaving it empty will ask you later for the coordinates in a more interactive way (if display == True). -->
     <arg name="marks_coordinates" default="[
-        '48.197502, -3.011869', 
-        '48.198926, -3.016511', 
-        '48.198817, -3.014126', 
-        '48.198874, -3.013994']" />
+        '48.431226, -4.616059', 
+        '48.431856, -4.613347']" />
     <param name="marks_coordinates" type="str" value="$(arg marks_coordinates)" />
 
 
