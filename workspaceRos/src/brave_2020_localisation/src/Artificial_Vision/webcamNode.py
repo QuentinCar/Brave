@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 
+## Example of node for image acquisition
+
 # import the necessary packages
 import rospy
 import rospkg

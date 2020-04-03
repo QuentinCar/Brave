@@ -2,7 +2,7 @@
 <launch>
 
     <node name="interval_localiser" pkg="brave_2020_localisation" type="intervals_localiser.py" output='screen' />
-    <node name="mark_detection" pkg="brave_2020_localisation" type="detectionBuoy.py" output='screen' />
+    <node name="mark_detection" pkg="brave_2020_localisation" type="buoy_detection.py" output='screen' />
     <!-- <node name="imu" pkg="brave_2020_localisation" type="IMU_filter.py" output='screen' /> -->
     <!-- <node name="image_getter" pkg="brave_2020_localisation" type="webcamNode.py" output='screen' /> -->
 

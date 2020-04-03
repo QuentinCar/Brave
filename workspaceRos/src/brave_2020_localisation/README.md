@@ -34,7 +34,7 @@ The principle is simple to understand. Given an initial area for the position of
 - Use `roslaunch brave_2020_localisation real_test_bench.launch display:=true`.
 - Your picture will pop up. You can double-click on it where you put each of your landmarks to give their coordinates.
 - You can read `real_test_bench.launch` under `/launch` to get more information and fill in more of your robot's characteristics.
-- Once you have validated the coordinates of your landmarks, the localisation algorith begins looping. It expects to headings of the marks, the heading of the robot and the speed of the robot respectively in topics "buoys_directions", "heading" and "speed". It outputs the areas where the robot can possibly be in topic "boat_possible_positions". Each of these areas is defined by its center (GPS coordinates), its length along WE axis and its length along NS axis. Feel free to read `src/Localisation/test_bench_intervals_ros.py` for a better understanding.  
+- Once you have validated the coordinates of your landmarks, the localisation algorithm begins looping. It expects to headings of the marks, the heading of the robot and the speed of the robot respectively in topics "buoys_directions", "heading" and "speed". It outputs the areas where the robot can possibly be in topic "boat_possible_positions". Each of these areas is defined by its center (GPS coordinates), its length along WE axis and its length along NS axis. Feel free to read `src/Localisation/test_bench_intervals_ros.py` for a better understanding.  
 Note: this usage is not recommended for live use in a robot, better for visualisation.
 
 ## Usage: coding way

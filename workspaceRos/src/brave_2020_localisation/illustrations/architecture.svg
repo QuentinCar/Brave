@@ -353,9 +353,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="1441.2158"
-     inkscape:cy="1520.2729"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="294.65638"
+     inkscape:cy="1327.9585"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -373,7 +373,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1067,7 +1067,7 @@
          id="tspan1164"
          x="175.08098"
          y="-38.837273"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Garamond;-inkscape-font-specification:'Garamond Bold';fill:#000000;fill-opacity:1;stroke-width:0.26499999">detectionBuoy</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Garamond;-inkscape-font-specification:'Garamond Bold';fill:#000000;fill-opacity:1;stroke-width:0.26499999">Buoy_Detection</tspan></text>
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -1129,7 +1129,7 @@
          sodipodi:role="line"
          id="tspan1203">la caméra</tspan></text>
     <g
-       transform="translate(-231.68761,-101.72787)"
+       transform="translate(-231.68761,-104.90289)"
        id="g1211"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -1152,7 +1152,7 @@
            style="fill:#ff0707;fill-opacity:1;stroke-width:0.26499999">Images brutes</tspan></text>
     </g>
     <g
-       transform="translate(-231.68761,-89.422815)"
+       transform="translate(-231.68761,-98.947821)"
        id="g1219"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
@@ -1181,14 +1181,14 @@
     </g>
     <text
        id="text1223"
-       y="-31.611458"
+       y="-41.136467"
        x="91.191055"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';text-align:center;text-anchor:middle;fill:#d8a542;fill-opacity:1;stroke:none;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        xml:space="preserve"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Garamond;-inkscape-font-specification:'Garamond Italic';fill:#d8a542;fill-opacity:1;stroke-width:0.26499999"
-         y="-31.611458"
+         y="-41.136467"
          x="91.191055"
          id="tspan1221"
          sodipodi:role="line">camera_info</tspan></text>
@@ -1196,14 +1196,50 @@
        xml:space="preserve"
        style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';text-align:center;text-anchor:middle;fill:#d8a542;fill-opacity:1;stroke:none;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        x="91.191055"
-       y="-53.836479"
+       y="-57.011482"
        id="text1227"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan1225"
          x="91.191055"
-         y="-53.836479"
+         y="-57.011482"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Garamond;-inkscape-font-specification:'Garamond Italic';fill:#d8a542;fill-opacity:1;stroke-width:0.26499999">image_raw</tspan></text>
+    <g
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
+       id="g393"
+       transform="translate(-231.68761,-75.269553)">
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path387"
+         d="m 303.21404,50.18837 h 42.76312"
+         style="fill:none;stroke:#000000;stroke-width:0.26499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Lend)" />
+      <text
+         id="text391"
+         y="51.315498"
+         x="250.77312"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Garamond;-inkscape-font-specification:'Garamond Bold';text-align:start;text-anchor:start;fill:#ff0707;fill-opacity:1;stroke:none;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="fill:#ff0707;fill-opacity:1;stroke-width:0.26499999"
+           y="51.315498"
+           x="250.77312"
+           id="tspan389"
+           sodipodi:role="line">Mesure de roulis</tspan></text>
+    </g>
+    <text
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
+       id="text397"
+       y="-27.378141"
+       x="93.307724"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';text-align:center;text-anchor:middle;fill:#d8a542;fill-opacity:1;stroke:none;stroke-width:0.26499999;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Garamond;-inkscape-font-specification:'Garamond Italic';fill:#d8a542;fill-opacity:1;stroke-width:0.26499999"
+         y="-27.378141"
+         x="93.307724"
+         id="tspan395"
+         sodipodi:role="line">currently unaffected</tspan></text>
   </g>
 </svg>

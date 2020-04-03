@@ -14,58 +14,9 @@ from geometry_msgs.msg import Vector3
 from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge, CvBridgeError
 
-# from skimage.segmentation import active_contour
 
 
-
-
-def detectBuoy(image, roll, dataCam):
-    Sf, resolution = dataCam[0], dataCam[1]
-    colorRange = getColorRange()
-
-    lower, upper = colorRange[0], colorRange[1]
-
-    # Convert BGR to HSV
-    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-    # Threshold the HSV image to get only yellow/green colors
-    mask1 = cv2.inRange(hsv, lower, upper)
-    mask1 = cv2.medianBlur(mask1, 5)
-
-
-    # Bitwise-AND mask and original image
-    res = cv2.bitwise_and(image,image, mask= mask1)
-
-    ret1,thresh1 = cv2.threshold(mask1,127,255,0)
-    im2,contours1,hierarchy1 = cv2.findContours(thresh1, cv2.RETR_EXTERNAL, 2)
-
-    contours = sorted(contours1, key = cv2.contourArea, reverse = True)
-
-    bearings = []
-    for cnt in contours[:3]:
-        if cv2.contourArea(cnt) > 15:  
-
-            (x1,y1),radius1 = cv2.minEnclosingCircle(cnt)
-            center1 = (int(x1),int(y1))
-            radius1 = int(radius1)
-
-            cv2.circle(image,center1,radius1,(255,0,0),1)
-            cv2.circle(image,center1,1,(255,0,0),2)
-
-            xBuoy = center1[0]*cos(roll)+center1[1]*sin(roll)  # roll in radians
-            headingBuoy = (xBuoy-resolution[0]/2)*Sf
-
-            bearings.append(headingBuoy)
-
-    return [], image
-    # return bearings[:1], image     ## WHILE DETECTION NOT RELIABLE
-    # return bearings, image
-
-
-
-
-
-def detectBuoy2(input_image, roll, dataCam):
+def detectBuoy(input_image, roll, dataCam):
     Sf, resolution = dataCam[0], dataCam[1]
     bearings = []
 
@@ -278,7 +229,7 @@ def horizonArea(image, horizon_prev):
 def run():
     global image, bridge, dataCam, calibration_data, horizon_prev
 
-    rospy.init_node('image_visualisation', anonymous=True)
+    rospy.init_node('buoy_detection', anonymous=True)
 
     rate = rospy.Rate(5)
 
@@ -331,6 +282,7 @@ def run():
     image, dataCam, horizon_prev = None, None, None
     bridge = CvBridge()
 
+    # wait for the topics to be published
     while (image is None or dataCam is None) and not rospy.is_shutdown():
         rospy.sleep(1)
 
@@ -340,7 +292,7 @@ def run():
 ######################################################################
 ######################################################################
 
-        bearings, detection_image = detectBuoy2(image, 0, dataCam)
+        bearings, detection_image = detectBuoy(image, 0, dataCam) #if available, replace 0 by roll
 
         buoys_bearings = String(data = str(bearings))
         pub_bearings.publish(buoys_bearings)

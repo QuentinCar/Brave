@@ -2,9 +2,8 @@
 <launch>
 
     <node name="interval_localiser" pkg="brave_2020_localisation" type="intervals_localiser.py" output='screen' />
-    <node name="mark_detection" pkg="brave_2020_localisation" type="detectionBuoy.py" output='screen' />
-    <!-- <node name="imu" pkg="brave_2020_localisation" type="IMU_filter.py" output='screen' /> -->
-    <!-- <node name="image_getter" pkg="brave_2020_localisation" type="webcamNode.py" output='screen' /> -->
+    <node name="boat_simulation" pkg="brave_2020_localisation" type="test_bench_boat_simulation.py" output='screen'/>
+    <node name="operator" pkg="brave_2020_localisation" type="test_bench_operator.py" output='screen' />
 
 
 <!-- Interactive display-->
@@ -17,8 +16,7 @@
 <!-- Leaving it empty will ask you later for the coordinates in a more interactive way (if display == True). -->
     <arg name="marks_coordinates" default="[
         '48.4312403, -4.6160006',
-        '48.4318486, -4.6133625',
-        '48.4309537, -4.6148527']" />
+        '48.4318486, -4.6133625']" />
     <param name="marks_coordinates" type="str" value="$(arg marks_coordinates)" />
 
 
